@@ -31,14 +31,14 @@ public final class ConsoleProgressMonitor implements ProgressMonitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.jmist.framework.ProgressMonitor#notifyCancelled()
+	 * @see ca.eandb.jmist.framework.ProgressMonitor#notifyCancelled()
 	 */
 	public void notifyCancelled() {
 		this.notifyStatusChanged("CANCELLED");
 	}
 
 	/* (non-Javadoc)
-	 * @see org.jmist.framework.ProgressMonitor#notifyComplete()
+	 * @see ca.eandb.jmist.framework.ProgressMonitor#notifyComplete()
 	 */
 	public void notifyComplete() {
 		this.progress = 1.0;
@@ -47,7 +47,7 @@ public final class ConsoleProgressMonitor implements ProgressMonitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.jmist.framework.ProgressMonitor#notifyProgress(double)
+	 * @see ca.eandb.jmist.framework.ProgressMonitor#notifyProgress(double)
 	 */
 	public boolean notifyProgress(double progress) {
 		this.value = 0;
@@ -58,7 +58,7 @@ public final class ConsoleProgressMonitor implements ProgressMonitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.jmist.framework.ProgressMonitor#notifyProgress(int, int)
+	 * @see ca.eandb.jmist.framework.ProgressMonitor#notifyProgress(int, int)
 	 */
 	public boolean notifyProgress(int value, int maximum) {
 		this.progress = (double) value / (double) maximum;
@@ -69,7 +69,7 @@ public final class ConsoleProgressMonitor implements ProgressMonitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.jmist.framework.ProgressMonitor#notifyIndeterminantProgress()
+	 * @see ca.eandb.jmist.framework.ProgressMonitor#notifyIndeterminantProgress()
 	 */
 	public boolean notifyIndeterminantProgress() {
 		this.progress = Double.NaN;
@@ -80,7 +80,7 @@ public final class ConsoleProgressMonitor implements ProgressMonitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.jmist.framework.ProgressMonitor#notifyStatusChanged(java.lang.String)
+	 * @see ca.eandb.jmist.framework.ProgressMonitor#notifyStatusChanged(java.lang.String)
 	 */
 	public void notifyStatusChanged(String status) {
 
@@ -99,14 +99,14 @@ public final class ConsoleProgressMonitor implements ProgressMonitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.jmist.framework.reporting.ProgressMonitor#isCancelPending()
+	 * @see ca.eandb.util.progress.ProgressMonitor#isCancelPending()
 	 */
 	public boolean isCancelPending() {
 		return false;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.jmist.framework.ProgressMonitor#createChildProgressMonitor()
+	 * @see ca.eandb.jmist.framework.ProgressMonitor#createChildProgressMonitor()
 	 */
 	public ProgressMonitor createChildProgressMonitor(String title) {
 		return DummyProgressMonitor.getInstance();

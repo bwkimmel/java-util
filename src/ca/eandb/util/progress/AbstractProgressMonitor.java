@@ -52,35 +52,35 @@ public abstract class AbstractProgressMonitor implements ProgressMonitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.jmist.framework.reporting.ProgressMonitor#createChildProgressMonitor(java.lang.String)
+	 * @see ca.eandb.util.progress.ProgressMonitor#createChildProgressMonitor(java.lang.String)
 	 */
 	public ProgressMonitor createChildProgressMonitor(String title) {
 		return DummyProgressMonitor.getInstance();
 	}
 
 	/* (non-Javadoc)
-	 * @see org.jmist.framework.reporting.ProgressMonitor#isCancelPending()
+	 * @see ca.eandb.util.progress.ProgressMonitor#isCancelPending()
 	 */
 	public boolean isCancelPending() {
 		return false;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.jmist.framework.reporting.ProgressMonitor#notifyCancelled()
+	 * @see ca.eandb.util.progress.ProgressMonitor#notifyCancelled()
 	 */
 	public void notifyCancelled() {
 		cancelled = true;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.jmist.framework.reporting.ProgressMonitor#notifyComplete()
+	 * @see ca.eandb.util.progress.ProgressMonitor#notifyComplete()
 	 */
 	public void notifyComplete() {
 		complete = true;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.jmist.framework.reporting.ProgressMonitor#notifyIndeterminantProgress()
+	 * @see ca.eandb.util.progress.ProgressMonitor#notifyIndeterminantProgress()
 	 */
 	public boolean notifyIndeterminantProgress() {
 		value = 0;
@@ -90,7 +90,7 @@ public abstract class AbstractProgressMonitor implements ProgressMonitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.jmist.framework.reporting.ProgressMonitor#notifyProgress(int, int)
+	 * @see ca.eandb.util.progress.ProgressMonitor#notifyProgress(int, int)
 	 */
 	public boolean notifyProgress(int value, int maximum) {
 		this.value = value;
@@ -100,7 +100,7 @@ public abstract class AbstractProgressMonitor implements ProgressMonitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.jmist.framework.reporting.ProgressMonitor#notifyProgress(double)
+	 * @see ca.eandb.util.progress.ProgressMonitor#notifyProgress(double)
 	 */
 	public boolean notifyProgress(double progress) {
 		this.value = 0;
@@ -110,7 +110,7 @@ public abstract class AbstractProgressMonitor implements ProgressMonitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.jmist.framework.reporting.ProgressMonitor#notifyStatusChanged(java.lang.String)
+	 * @see ca.eandb.util.progress.ProgressMonitor#notifyStatusChanged(java.lang.String)
 	 */
 	public void notifyStatusChanged(String status) {
 		this.status = status;

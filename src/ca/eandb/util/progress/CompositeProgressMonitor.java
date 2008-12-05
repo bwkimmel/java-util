@@ -31,7 +31,7 @@ public final class CompositeProgressMonitor implements ProgressMonitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.jmist.framework.reporting.ProgressMonitor#createChildProgressMonitor(java.lang.String)
+	 * @see ca.eandb.util.progress.ProgressMonitor#createChildProgressMonitor(java.lang.String)
 	 */
 	public ProgressMonitor createChildProgressMonitor(String title) {
 
@@ -57,7 +57,7 @@ public final class CompositeProgressMonitor implements ProgressMonitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.jmist.framework.reporting.ProgressMonitor#isCancelPending()
+	 * @see ca.eandb.util.progress.ProgressMonitor#isCancelPending()
 	 */
 	public boolean isCancelPending() {
 
@@ -72,7 +72,7 @@ public final class CompositeProgressMonitor implements ProgressMonitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.jmist.framework.reporting.ProgressMonitor#notifyCancelled()
+	 * @see ca.eandb.util.progress.ProgressMonitor#notifyCancelled()
 	 */
 	public void notifyCancelled() {
 		for (ProgressMonitor monitor : this.monitors) {
@@ -81,7 +81,7 @@ public final class CompositeProgressMonitor implements ProgressMonitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.jmist.framework.reporting.ProgressMonitor#notifyComplete()
+	 * @see ca.eandb.util.progress.ProgressMonitor#notifyComplete()
 	 */
 	public void notifyComplete() {
 		for (ProgressMonitor monitor : this.monitors) {
@@ -90,7 +90,7 @@ public final class CompositeProgressMonitor implements ProgressMonitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.jmist.framework.reporting.ProgressMonitor#notifyIndeterminantProgress()
+	 * @see ca.eandb.util.progress.ProgressMonitor#notifyIndeterminantProgress()
 	 */
 	public boolean notifyIndeterminantProgress() {
 
@@ -107,7 +107,7 @@ public final class CompositeProgressMonitor implements ProgressMonitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.jmist.framework.reporting.ProgressMonitor#notifyProgress(int, int)
+	 * @see ca.eandb.util.progress.ProgressMonitor#notifyProgress(int, int)
 	 */
 	public boolean notifyProgress(int value, int maximum) {
 
@@ -124,7 +124,7 @@ public final class CompositeProgressMonitor implements ProgressMonitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.jmist.framework.reporting.ProgressMonitor#notifyProgress(double)
+	 * @see ca.eandb.util.progress.ProgressMonitor#notifyProgress(double)
 	 */
 	public boolean notifyProgress(double progress) {
 
@@ -141,7 +141,7 @@ public final class CompositeProgressMonitor implements ProgressMonitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.jmist.framework.reporting.ProgressMonitor#notifyStatusChanged(java.lang.String)
+	 * @see ca.eandb.util.progress.ProgressMonitor#notifyStatusChanged(java.lang.String)
 	 */
 	public void notifyStatusChanged(String status) {
 		for (ProgressMonitor monitor : this.monitors) {

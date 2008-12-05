@@ -308,7 +308,7 @@ public final class ProgressPanel extends JPanel implements ProgressMonitor {
 			}
 
 			/* (non-Javadoc)
-			 * @see org.jmist.framework.reporting.AbstractProgressMonitor#createChildProgressMonitor(java.lang.String)
+			 * @see ca.eandb.util.progress.AbstractProgressMonitor#createChildProgressMonitor(java.lang.String)
 			 */
 			public ProgressMonitor createChildProgressMonitor(String title) {
 
@@ -323,7 +323,7 @@ public final class ProgressPanel extends JPanel implements ProgressMonitor {
 			}
 
 			/* (non-Javadoc)
-			 * @see org.jmist.framework.reporting.AbstractProgressMonitor#notifyCancelled()
+			 * @see ca.eandb.util.progress.AbstractProgressMonitor#notifyCancelled()
 			 */
 			@Override
 			public void notifyCancelled() {
@@ -332,7 +332,7 @@ public final class ProgressPanel extends JPanel implements ProgressMonitor {
 			}
 
 			/* (non-Javadoc)
-			 * @see org.jmist.framework.reporting.AbstractProgressMonitor#notifyComplete()
+			 * @see ca.eandb.util.progress.AbstractProgressMonitor#notifyComplete()
 			 */
 			@Override
 			public void notifyComplete() {
@@ -359,7 +359,7 @@ public final class ProgressPanel extends JPanel implements ProgressMonitor {
 			}
 
 			/* (non-Javadoc)
-			 * @see org.jmist.framework.reporting.AbstractProgressMonitor#notifyIndeterminantProgress()
+			 * @see ca.eandb.util.progress.AbstractProgressMonitor#notifyIndeterminantProgress()
 			 */
 			@Override
 			public boolean notifyIndeterminantProgress() {
@@ -369,7 +369,7 @@ public final class ProgressPanel extends JPanel implements ProgressMonitor {
 			}
 
 			/* (non-Javadoc)
-			 * @see org.jmist.framework.reporting.AbstractProgressMonitor#notifyProgress(double)
+			 * @see ca.eandb.util.progress.AbstractProgressMonitor#notifyProgress(double)
 			 */
 			@Override
 			public boolean notifyProgress(double progress) {
@@ -381,7 +381,7 @@ public final class ProgressPanel extends JPanel implements ProgressMonitor {
 			}
 
 			/* (non-Javadoc)
-			 * @see org.jmist.framework.reporting.AbstractProgressMonitor#notifyProgress(int, int)
+			 * @see ca.eandb.util.progress.AbstractProgressMonitor#notifyProgress(int, int)
 			 */
 			@Override
 			public boolean notifyProgress(int value, int maximum) {
@@ -393,7 +393,7 @@ public final class ProgressPanel extends JPanel implements ProgressMonitor {
 			}
 
 			/* (non-Javadoc)
-			 * @see org.jmist.framework.reporting.AbstractProgressMonitor#notifyStatusChanged(java.lang.String)
+			 * @see ca.eandb.util.progress.AbstractProgressMonitor#notifyStatusChanged(java.lang.String)
 			 */
 			@Override
 			public void notifyStatusChanged(String status) {
@@ -406,56 +406,56 @@ public final class ProgressPanel extends JPanel implements ProgressMonitor {
 	} // class ProgressModel
 
 	/* (non-Javadoc)
-	 * @see org.jmist.framework.reporting.ProgressMonitor#createChildProgressMonitor(java.lang.String)
+	 * @see ca.eandb.util.progress.ProgressMonitor#createChildProgressMonitor(java.lang.String)
 	 */
 	public ProgressMonitor createChildProgressMonitor(String title) {
 		return getProgressMonitor().createChildProgressMonitor(title);
 	}
 
 	/* (non-Javadoc)
-	 * @see org.jmist.framework.reporting.ProgressMonitor#isCancelPending()
+	 * @see ca.eandb.util.progress.ProgressMonitor#isCancelPending()
 	 */
 	public boolean isCancelPending() {
 		return getProgressMonitor().isCancelPending();
 	}
 
 	/* (non-Javadoc)
-	 * @see org.jmist.framework.reporting.ProgressMonitor#notifyCancelled()
+	 * @see ca.eandb.util.progress.ProgressMonitor#notifyCancelled()
 	 */
 	public void notifyCancelled() {
 		getProgressMonitor().notifyCancelled();
 	}
 
 	/* (non-Javadoc)
-	 * @see org.jmist.framework.reporting.ProgressMonitor#notifyComplete()
+	 * @see ca.eandb.util.progress.ProgressMonitor#notifyComplete()
 	 */
 	public void notifyComplete() {
 		getProgressMonitor().notifyComplete();
 	}
 
 	/* (non-Javadoc)
-	 * @see org.jmist.framework.reporting.ProgressMonitor#notifyIndeterminantProgress()
+	 * @see ca.eandb.util.progress.ProgressMonitor#notifyIndeterminantProgress()
 	 */
 	public boolean notifyIndeterminantProgress() {
 		return getProgressMonitor().notifyIndeterminantProgress();
 	}
 
 	/* (non-Javadoc)
-	 * @see org.jmist.framework.reporting.ProgressMonitor#notifyProgress(int, int)
+	 * @see ca.eandb.util.progress.ProgressMonitor#notifyProgress(int, int)
 	 */
 	public boolean notifyProgress(int value, int maximum) {
 		return getProgressMonitor().notifyProgress(value, maximum);
 	}
 
 	/* (non-Javadoc)
-	 * @see org.jmist.framework.reporting.ProgressMonitor#notifyProgress(double)
+	 * @see ca.eandb.util.progress.ProgressMonitor#notifyProgress(double)
 	 */
 	public boolean notifyProgress(double progress) {
 		return getProgressMonitor().notifyProgress(progress);
 	}
 
 	/* (non-Javadoc)
-	 * @see org.jmist.framework.reporting.ProgressMonitor#notifyStatusChanged(java.lang.String)
+	 * @see ca.eandb.util.progress.ProgressMonitor#notifyStatusChanged(java.lang.String)
 	 */
 	public void notifyStatusChanged(String status) {
 		getProgressMonitor().notifyStatusChanged(status);

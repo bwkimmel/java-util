@@ -11,56 +11,56 @@ package ca.eandb.util.progress;
 public final class DummyProgressMonitor implements ProgressMonitor {
 
 	/* (non-Javadoc)
-	 * @see org.jmist.framework.ProgressMonitor#notifyCancelled()
+	 * @see ca.eandb.jmist.framework.ProgressMonitor#notifyCancelled()
 	 */
 	public void notifyCancelled() {
 		// do nothing
 	}
 
 	/* (non-Javadoc)
-	 * @see org.jmist.framework.ProgressMonitor#notifyComplete()
+	 * @see ca.eandb.jmist.framework.ProgressMonitor#notifyComplete()
 	 */
 	public void notifyComplete() {
 		// do nothing
 	}
 
 	/* (non-Javadoc)
-	 * @see org.jmist.framework.ProgressMonitor#notifyProgress(int, int)
+	 * @see ca.eandb.jmist.framework.ProgressMonitor#notifyProgress(int, int)
 	 */
 	public boolean notifyProgress(int value, int maximum) {
 		return true;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.jmist.framework.ProgressMonitor#notifyProgress(double)
+	 * @see ca.eandb.jmist.framework.ProgressMonitor#notifyProgress(double)
 	 */
 	public boolean notifyProgress(double progress) {
 		return true;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.jmist.framework.ProgressMonitor#notifyIndeterminantProgress()
+	 * @see ca.eandb.jmist.framework.ProgressMonitor#notifyIndeterminantProgress()
 	 */
 	public boolean notifyIndeterminantProgress() {
 		return true;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.jmist.framework.ProgressMonitor#notifyStatusChanged(java.lang.String)
+	 * @see ca.eandb.jmist.framework.ProgressMonitor#notifyStatusChanged(java.lang.String)
 	 */
 	public void notifyStatusChanged(String status) {
 		// do nothing
 	}
 
 	/* (non-Javadoc)
-	 * @see org.jmist.framework.reporting.ProgressMonitor#isCancelPending()
+	 * @see ca.eandb.util.progress.ProgressMonitor#isCancelPending()
 	 */
 	public boolean isCancelPending() {
 		return false;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.jmist.framework.ProgressMonitor#createChildProgressMonitor()
+	 * @see ca.eandb.jmist.framework.ProgressMonitor#createChildProgressMonitor()
 	 */
 	public ProgressMonitor createChildProgressMonitor(String title) {
 

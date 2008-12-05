@@ -100,14 +100,14 @@ public class ProgressDialog extends javax.swing.JDialog implements ProgressMonit
 	}
 
 	/* (non-Javadoc)
-	 * @see org.jmist.framework.reporting.ProgressMonitor#isCancelPending()
+	 * @see ca.eandb.util.progress.ProgressMonitor#isCancelPending()
 	 */
 	public synchronized boolean isCancelPending() {
 		return this.cancelPending;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.jmist.framework.reporting.ProgressMonitor#notifyProgress(double)
+	 * @see ca.eandb.util.progress.ProgressMonitor#notifyProgress(double)
 	 */
 	public boolean notifyProgress(double progress) {
 		this.ensureVisible();
@@ -117,7 +117,7 @@ public class ProgressDialog extends javax.swing.JDialog implements ProgressMonit
 	}
 
 	/* (non-Javadoc)
-	 * @see org.jmist.framework.reporting.ProgressMonitor#notifyProgress(int, int)
+	 * @see ca.eandb.util.progress.ProgressMonitor#notifyProgress(int, int)
 	 */
 	public boolean notifyProgress(int value, int maximum) {
 		this.ensureVisible();
@@ -127,7 +127,7 @@ public class ProgressDialog extends javax.swing.JDialog implements ProgressMonit
 	}
 
 	/* (non-Javadoc)
-	 * @see org.jmist.framework.reporting.ProgressMonitor#notifyIndeterminantProgress()
+	 * @see ca.eandb.util.progress.ProgressMonitor#notifyIndeterminantProgress()
 	 */
 	public boolean notifyIndeterminantProgress() {
 		this.ensureVisible();
@@ -155,7 +155,7 @@ public class ProgressDialog extends javax.swing.JDialog implements ProgressMonit
 	}
 
 	/* (non-Javadoc)
-	 * @see org.jmist.framework.reporting.ProgressMonitor#notifyStatusChanged(java.lang.String)
+	 * @see ca.eandb.util.progress.ProgressMonitor#notifyStatusChanged(java.lang.String)
 	 */
 	public void notifyStatusChanged(String status) {
 		this.ensureVisible();
@@ -193,21 +193,21 @@ public class ProgressDialog extends javax.swing.JDialog implements ProgressMonit
 	}
 
 	/* (non-Javadoc)
-	 * @see org.jmist.framework.reporting.ProgressMonitor#notifyCancelled()
+	 * @see ca.eandb.util.progress.ProgressMonitor#notifyCancelled()
 	 */
 	public void notifyCancelled() {
 		this.setVisible(false);
 	}
 
 	/* (non-Javadoc)
-	 * @see org.jmist.framework.reporting.ProgressMonitor#notifyComplete()
+	 * @see ca.eandb.util.progress.ProgressMonitor#notifyComplete()
 	 */
 	public void notifyComplete() {
 		this.setVisible(false);
 	}
 
 	/* (non-Javadoc)
-	 * @see org.jmist.framework.reporting.ProgressMonitor#createChildProgressMonitor(java.lang.String)
+	 * @see ca.eandb.util.progress.ProgressMonitor#createChildProgressMonitor(java.lang.String)
 	 */
 	public ProgressMonitor createChildProgressMonitor(String title) {
 		return DummyProgressMonitor.getInstance();
