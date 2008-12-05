@@ -15,16 +15,45 @@ import org.selfip.bkimmel.util.ArrayQueue;
  */
 public final class ArgumentProcessor<T> {
 
-	private final Map<Character, Command<? super T>> handlersByShortKey = new HashMap<Character, Command<? super T>>();
-	private final Map<String, Command<? super T>> handlersByKey = new HashMap<String, Command<? super T>>();
+	private final Map<String, Command<? super T>> handlers = new HashMap<String, Command<? super T>>();
+	private final Map<Character, String> shortcuts = new HashMap<Character, String>();
 	private final Map<String, Command<? super T>> commands = new HashMap<String, Command<? super T>>();
 
 	private Command<? super T> defaultCommand = null;
 
+	public ArgumentProcessor() {
+		addCommand("help", new HelpCommand());
+	}
+
+	private class HelpCommand implements Command<Object> {
+
+		@Override
+		public void process(Queue<String> argq, Object state) {
+
+			System.out.println("Usage:  <java_cmd> [ <options> ] <command> <args>");
+			System.out.println();
+			System.out.println("Options:");
+			for (Map.Entry<Character, String> entry : shortcuts.entrySet()) {
+				System.out.printf("-%c, --%s", entry.getKey(), entry.getValue());
+				System.out.println();
+			}
+
+			System.out.println();
+			System.out.println("Commands:");
+			for (String cmd : commands.keySet()) {
+				System.out.println(cmd);
+			}
+
+			System.exit(0);
+
+		}
+
+	}
+
 	public void addOption(String key, char shortKey,
 			Command<? super T> handler) {
-		handlersByShortKey.put(shortKey, handler);
-		handlersByKey.put(key, handler);
+		handlers.put(key, handler);
+		shortcuts.put(shortKey, key);
 	}
 
 	public void addCommand(String key, Command<? super T> handler) {
@@ -45,7 +74,7 @@ public final class ArgumentProcessor<T> {
 			if (nextArg.startsWith("--")) {
 				argq.remove();
 				String key = nextArg.substring(2);
-				Command<? super T> command = handlersByKey.get(key);
+				Command<? super T> command = handlers.get(key);
 				if (command != null) {
 					command.process(argq, state);
 				}
@@ -53,7 +82,7 @@ public final class ArgumentProcessor<T> {
 				argq.remove();
 				for (int i = 1; i < nextArg.length(); i++) {
 					char key = nextArg.charAt(i);
-					Command<? super T> command = handlersByShortKey.get(key);
+					Command<? super T> command = handlers.get(shortcuts.get(key));
 					if (command != null) {
 						command.process(argq, state);
 					}
