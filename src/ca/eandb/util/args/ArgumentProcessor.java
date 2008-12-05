@@ -1,13 +1,13 @@
 /**
  *
  */
-package ca.eandb.util.util.args;
+package ca.eandb.util.args;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Queue;
 
-import ca.eandb.util.util.ArrayQueue;
+import ca.eandb.util.ArrayQueue;
 
 /**
  * @author brad

@@ -7,7 +7,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.rmi.RemoteException;
 
-import ca.eandb.util.util.ClassUtil;
+import ca.eandb.util.ClassUtil;
 
 /**
  * @author brad

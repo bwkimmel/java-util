@@ -1,7 +1,7 @@
 /**
  *
  */
-package ca.eandb.util.util.classloader;
+package ca.eandb.util.classloader;
 
 import java.nio.ByteBuffer;
 import java.util.HashMap;
@@ -34,7 +34,7 @@ public final class MapClassLoaderStrategy implements ClassLoaderStrategy {
 	}
 
 	/* (non-Javadoc)
-	 * @see ca.eandb.util.util.classloader.ClassLoaderStrategy#getClassDefinition(java.lang.String)
+	 * @see ca.eandb.util.classloader.ClassLoaderStrategy#getClassDefinition(java.lang.String)
 	 */
 	public ByteBuffer getClassDefinition(String name) {
 		return classDefs.get(name);

@@ -1,7 +1,7 @@
 /**
  *
  */
-package ca.eandb.util.util.args;
+package ca.eandb.util.args;
 
 import java.util.Queue;
 
@@ -12,7 +12,7 @@ import java.util.Queue;
 public abstract class AbstractCommand<T> implements Command<T> {
 
 	/* (non-Javadoc)
-	 * @see ca.eandb.util.util.args.Command#process(java.util.Queue, java.lang.Object)
+	 * @see ca.eandb.util.args.Command#process(java.util.Queue, java.lang.Object)
 	 */
 	public final void process(Queue<String> argq, T state) {
 		String[] args = argq.toArray(new String[argq.size()]);

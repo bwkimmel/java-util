@@ -1,7 +1,7 @@
 /**
  * 
  */
-package ca.eandb.util.util.classloader;
+package ca.eandb.util.classloader;
 
 import java.nio.ByteBuffer;
 

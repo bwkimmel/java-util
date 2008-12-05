@@ -24,7 +24,7 @@ import javax.jnlp.PersistenceService;
 import javax.jnlp.ServiceManager;
 import javax.jnlp.UnavailableServiceException;
 
-import ca.eandb.util.util.UnexpectedException;
+import ca.eandb.util.UnexpectedException;
 
 /**
  * A <code>Map</code> to be used by Java Web Start applications that

@@ -10,8 +10,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+import ca.eandb.util.UnexpectedException;
 import ca.eandb.util.io.AlternateClassLoaderObjectInputStream;
-import ca.eandb.util.util.UnexpectedException;
 
 /**
  * Represents an object that is serialized.  When constructed using the

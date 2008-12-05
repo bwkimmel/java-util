@@ -1,7 +1,7 @@
 /**
  *
  */
-package ca.eandb.util.util;
+package ca.eandb.util;
 
 /**
  * An <code>UnexpectedException</code> is thrown to indicate that a checked

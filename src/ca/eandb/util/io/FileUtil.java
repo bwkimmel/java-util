@@ -13,7 +13,7 @@ import java.nio.ByteBuffer;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import ca.eandb.util.util.UnexpectedException;
+import ca.eandb.util.UnexpectedException;
 
 /**
  * File I/O utility methods.

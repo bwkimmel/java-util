@@ -1,12 +1,12 @@
 /**
  *
  */
-package ca.eandb.util.util.args;
+package ca.eandb.util.args;
 
 import java.lang.reflect.Field;
 import java.util.Queue;
 
-import ca.eandb.util.util.UnexpectedException;
+import ca.eandb.util.UnexpectedException;
 
 /**
  * @author brad
@@ -21,7 +21,7 @@ public abstract class AbstractFieldOption<T> implements Command<T> {
 	}
 
 	/* (non-Javadoc)
-	 * @see ca.eandb.util.util.args.Command#process(java.util.Queue, java.lang.Object)
+	 * @see ca.eandb.util.args.Command#process(java.util.Queue, java.lang.Object)
 	 */
 	public final void process(Queue<String> argq, T state) {
 		try {

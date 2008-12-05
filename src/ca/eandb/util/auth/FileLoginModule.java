@@ -18,7 +18,7 @@ import javax.security.auth.callback.UnsupportedCallbackException;
 import javax.security.auth.login.FailedLoginException;
 import javax.security.auth.login.LoginException;
 
-import ca.eandb.util.util.StringUtil;
+import ca.eandb.util.StringUtil;
 
 /**
  * A <code>LoginModule</code> that reads user names, password hashes, and roles

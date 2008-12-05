@@ -1,7 +1,7 @@
 /**
  *
  */
-package ca.eandb.util.util;
+package ca.eandb.util;
 
 /**
  * Utility methods for working with strings.

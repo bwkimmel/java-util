@@ -9,8 +9,8 @@ import java.io.OutputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import ca.eandb.util.util.ClassUtil;
-import ca.eandb.util.util.UnexpectedException;
+import ca.eandb.util.ClassUtil;
+import ca.eandb.util.UnexpectedException;
 
 /**
  * TODO: Implement this class.

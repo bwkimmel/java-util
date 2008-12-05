@@ -14,7 +14,7 @@ import javax.jnlp.BasicService;
 import javax.jnlp.ServiceManager;
 import javax.jnlp.UnavailableServiceException;
 
-import ca.eandb.util.util.classloader.ClassLoaderStrategy;
+import ca.eandb.util.classloader.ClassLoaderStrategy;
 
 /**
  * @author brad
@@ -51,7 +51,7 @@ public final class RMIClassLoaderStrategy implements ClassLoaderStrategy {
 	}
 
 	/* (non-Javadoc)
-	 * @see ca.eandb.util.util.classloader.ClassLoaderStrategy#getClassDefinition(java.lang.String)
+	 * @see ca.eandb.util.classloader.ClassLoaderStrategy#getClassDefinition(java.lang.String)
 	 */
 	public ByteBuffer getClassDefinition(String name) {
 

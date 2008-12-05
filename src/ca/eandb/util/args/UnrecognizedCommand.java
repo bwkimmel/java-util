@@ -1,7 +1,7 @@
 /**
  *
  */
-package ca.eandb.util.util.args;
+package ca.eandb.util.args;
 
 import java.util.Queue;
 
@@ -28,7 +28,7 @@ public final class UnrecognizedCommand implements Command<Object> {
 	}
 
 	/* (non-Javadoc)
-	 * @see ca.eandb.util.util.args.Command#process(java.util.Queue, java.lang.Object)
+	 * @see ca.eandb.util.args.Command#process(java.util.Queue, java.lang.Object)
 	 */
 	public void process(Queue<String> argq, Object state) {
 		String command = argq.peek();

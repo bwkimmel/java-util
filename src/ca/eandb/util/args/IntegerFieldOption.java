@@ -1,7 +1,7 @@
 /**
  *
  */
-package ca.eandb.util.util.args;
+package ca.eandb.util.args;
 
 import java.util.Queue;
 
@@ -19,7 +19,7 @@ public class IntegerFieldOption<T> extends AbstractFieldOption<T> {
 	}
 
 	/* (non-Javadoc)
-	 * @see ca.eandb.util.util.args.AbstractFieldOption#getOptionValue(java.util.Queue)
+	 * @see ca.eandb.util.args.AbstractFieldOption#getOptionValue(java.util.Queue)
 	 */
 	@Override
 	protected Object getOptionValue(Queue<String> argq) {

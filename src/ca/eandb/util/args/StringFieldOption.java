@@ -1,7 +1,7 @@
 /**
  *
  */
-package ca.eandb.util.util.args;
+package ca.eandb.util.args;
 
 import java.util.Queue;
 

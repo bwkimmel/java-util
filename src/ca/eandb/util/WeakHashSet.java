@@ -1,7 +1,7 @@
 /**
  *
  */
-package ca.eandb.util.util;
+package ca.eandb.util;
 
 import java.util.AbstractSet;
 import java.util.Collection;
