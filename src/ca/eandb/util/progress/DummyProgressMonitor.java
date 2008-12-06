@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2008 Bradley W. Kimmel
- * 
+ *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -9,10 +9,10 @@
  * copies of the Software, and to permit persons to whom the
  * Software is furnished to do so, subject to the following
  * conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
  * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,42 +33,42 @@ package ca.eandb.util.progress;
 public final class DummyProgressMonitor implements ProgressMonitor {
 
 	/* (non-Javadoc)
-	 * @see ca.eandb.jmist.framework.ProgressMonitor#notifyCancelled()
+	 * @see ca.eandb.util.progress.ProgressMonitor#notifyCancelled()
 	 */
 	public void notifyCancelled() {
 		// do nothing
 	}
 
 	/* (non-Javadoc)
-	 * @see ca.eandb.jmist.framework.ProgressMonitor#notifyComplete()
+	 * @see ca.eandb.util.progress.ProgressMonitor#notifyComplete()
 	 */
 	public void notifyComplete() {
 		// do nothing
 	}
 
 	/* (non-Javadoc)
-	 * @see ca.eandb.jmist.framework.ProgressMonitor#notifyProgress(int, int)
+	 * @see ca.eandb.util.progress.ProgressMonitor#notifyProgress(int, int)
 	 */
 	public boolean notifyProgress(int value, int maximum) {
 		return true;
 	}
 
 	/* (non-Javadoc)
-	 * @see ca.eandb.jmist.framework.ProgressMonitor#notifyProgress(double)
+	 * @see ca.eandb.util.progress.ProgressMonitor#notifyProgress(double)
 	 */
 	public boolean notifyProgress(double progress) {
 		return true;
 	}
 
 	/* (non-Javadoc)
-	 * @see ca.eandb.jmist.framework.ProgressMonitor#notifyIndeterminantProgress()
+	 * @see ca.eandb.util.progress.ProgressMonitor#notifyIndeterminantProgress()
 	 */
 	public boolean notifyIndeterminantProgress() {
 		return true;
 	}
 
 	/* (non-Javadoc)
-	 * @see ca.eandb.jmist.framework.ProgressMonitor#notifyStatusChanged(java.lang.String)
+	 * @see ca.eandb.util.progress.ProgressMonitor#notifyStatusChanged(java.lang.String)
 	 */
 	public void notifyStatusChanged(String status) {
 		// do nothing
@@ -82,7 +82,7 @@ public final class DummyProgressMonitor implements ProgressMonitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see ca.eandb.jmist.framework.ProgressMonitor#createChildProgressMonitor()
+	 * @see ca.eandb.util.progress.ProgressMonitor#createChildProgressMonitor()
 	 */
 	public ProgressMonitor createChildProgressMonitor(String title) {
 
