@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2008 Bradley W. Kimmel
- * 
+ *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -9,10 +9,10 @@
  * copies of the Software, and to permit persons to whom the
  * Software is furnished to do so, subject to the following
  * conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
  * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,6 +33,7 @@ import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
+import javax.swing.SwingUtilities;
 import javax.swing.tree.TreePath;
 
 import org.jdesktop.swingx.JXTreeTable;
@@ -108,8 +109,12 @@ public final class ProgressPanel extends JPanel implements ProgressMonitor {
 	 * Sets a value indicating whether the root progress node is visible.
 	 * @param visible true to make the root node visible, false otherwise.
 	 */
-	public void setRootVisible(boolean visible) {
-		getProgressTree().setRootVisible(visible);
+	public void setRootVisible(final boolean visible) {
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				getProgressTree().setRootVisible(visible);
+			}
+		});
 	}
 
 	/**
@@ -334,11 +339,15 @@ public final class ProgressPanel extends JPanel implements ProgressMonitor {
 			 */
 			public ProgressMonitor createChildProgressMonitor(String title) {
 
-				int index = children.size();
-				Node child = new Node(title, this);
-				children.add(child);
+				final int index = children.size();
+				final Node child = new Node(title, this);
 
-				model.modelSupport.fireChildAdded(getPath(), index, child);
+				SwingUtilities.invokeLater(new Runnable() {
+					public void run() {
+						children.add(child);
+						model.modelSupport.fireChildAdded(getPath(), index, child);
+					}
+				});
 
 				return child;
 
@@ -367,16 +376,22 @@ public final class ProgressPanel extends JPanel implements ProgressMonitor {
 			 */
 			private void detach() {
 
-				if (parent != null) {
+				SwingUtilities.invokeLater(new Runnable() {
+					public void run() {
 
-					int index = parent.children.indexOf(this);
-					parent.children.remove(index);
+						if (parent != null) {
 
-					model.modelSupport.fireChildRemoved(parent.getPath(), index, this);
+							int index = parent.children.indexOf(this);
+							parent.children.remove(index);
 
-					parent = null;
+							model.modelSupport.fireChildRemoved(parent.getPath(), index, this);
 
-				}
+							parent = null;
+
+						}
+
+					}
+				});
 
 			}
 
@@ -385,8 +400,12 @@ public final class ProgressPanel extends JPanel implements ProgressMonitor {
 			 */
 			@Override
 			public boolean notifyIndeterminantProgress() {
-				progressBar.setIndeterminate(true);
-				model.modelSupport.firePathChanged(getPath());
+				SwingUtilities.invokeLater(new Runnable() {
+					public void run() {
+						progressBar.setIndeterminate(true);
+						model.modelSupport.firePathChanged(getPath());
+					}
+				});
 				return super.notifyIndeterminantProgress();
 			}
 
@@ -394,11 +413,15 @@ public final class ProgressPanel extends JPanel implements ProgressMonitor {
 			 * @see ca.eandb.util.progress.AbstractProgressMonitor#notifyProgress(double)
 			 */
 			@Override
-			public boolean notifyProgress(double progress) {
-				progressBar.setIndeterminate(false);
-				progressBar.setMaximum(100);
-				progressBar.setValue((int) (100.0 * progress));
-				model.modelSupport.firePathChanged(getPath());
+			public boolean notifyProgress(final double progress) {
+				SwingUtilities.invokeLater(new Runnable() {
+					public void run() {
+						progressBar.setIndeterminate(false);
+						progressBar.setMaximum(100);
+						progressBar.setValue((int) (100.0 * progress));
+						model.modelSupport.firePathChanged(getPath());
+					}
+				});
 				return super.notifyProgress(progress);
 			}
 
@@ -406,11 +429,15 @@ public final class ProgressPanel extends JPanel implements ProgressMonitor {
 			 * @see ca.eandb.util.progress.AbstractProgressMonitor#notifyProgress(int, int)
 			 */
 			@Override
-			public boolean notifyProgress(int value, int maximum) {
-				progressBar.setIndeterminate(false);
-				progressBar.setMaximum(maximum);
-				progressBar.setValue(value);
-				model.modelSupport.firePathChanged(getPath());
+			public boolean notifyProgress(final int value, final int maximum) {
+				SwingUtilities.invokeLater(new Runnable() {
+					public void run() {
+						progressBar.setIndeterminate(false);
+						progressBar.setMaximum(maximum);
+						progressBar.setValue(value);
+						model.modelSupport.firePathChanged(getPath());
+					}
+				});
 				return super.notifyProgress(value, maximum);
 			}
 
@@ -420,7 +447,11 @@ public final class ProgressPanel extends JPanel implements ProgressMonitor {
 			@Override
 			public void notifyStatusChanged(String status) {
 				super.notifyStatusChanged(status);
-				model.modelSupport.firePathChanged(getPath());
+				SwingUtilities.invokeLater(new Runnable() {
+					public void run() {
+						model.modelSupport.firePathChanged(getPath());
+					}
+				});
 			}
 
 		} // class Node
