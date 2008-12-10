@@ -71,17 +71,12 @@ public final class ProgressTableModel extends AbstractTableModel implements
 		final TableRowProgressMonitor monitor = new TableRowProgressMonitor(title);
 		final int row = monitors.size();
 		monitors.add(monitor);
-		if (SwingUtilities.isEventDispatchThread()) {
-			monitor.setProgressBar(new JProgressBar());
-			fireTableRowsInserted(row, row);
-		} else {
-			SwingUtilities.invokeLater(new Runnable() {
-				public void run() {
-					monitor.setProgressBar(new JProgressBar());
-					fireTableRowsInserted(row, row);
-				}
-			});
-		}
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				monitor.setProgressBar(new JProgressBar());
+				fireTableRowsInserted(row, row);
+			}
+		});
 		return monitor;
 	}
 
