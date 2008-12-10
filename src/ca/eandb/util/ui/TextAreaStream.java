@@ -32,7 +32,7 @@ import javax.swing.JTextArea;
 
 /**
  * An <code>OutputStream</code> that writes to a <code>JTextArea</code>.
- * @author brad
+ * @author Brad Kimmel
  */
 public final class TextAreaStream extends OutputStream {
 

@@ -33,7 +33,7 @@ package ca.eandb.util.progress;
 
 /**
  * A dialog for indicating the progress of an operation.
- * @author  bkimmel
+ * @author Brad Kimmel
  */
 public class ProgressDialog extends javax.swing.JDialog implements ProgressMonitor {
 

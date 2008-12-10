@@ -32,7 +32,7 @@ import java.util.Queue;
 import ca.eandb.util.ArrayQueue;
 
 /**
- * @author brad
+ * @author Brad Kimmel
  *
  */
 public final class ArgumentProcessor<T> {

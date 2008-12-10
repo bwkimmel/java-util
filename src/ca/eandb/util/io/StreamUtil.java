@@ -32,7 +32,7 @@ import java.nio.ByteBuffer;
 
 /**
  * Utility methods for working with streams.
- * @author brad
+ * @author Brad Kimmel
  */
 public final class StreamUtil {
 

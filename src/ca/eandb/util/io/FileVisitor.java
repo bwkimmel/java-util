@@ -28,7 +28,7 @@ package ca.eandb.util.io;
 import java.io.File;
 
 /**
- * @author brad
+ * @author Brad Kimmel
  *
  */
 public interface FileVisitor {

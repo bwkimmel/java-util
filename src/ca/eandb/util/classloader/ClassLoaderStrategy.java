@@ -29,7 +29,7 @@ import java.nio.ByteBuffer;
 
 /**
  * Obtains the class definition for a given binary class name.
- * @author brad
+ * @author Brad Kimmel
  */
 public interface ClassLoaderStrategy {
 	

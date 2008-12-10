@@ -27,7 +27,7 @@ package ca.eandb.util;
 
 /**
  * Utility methods for working with strings.
- * @author brad
+ * @author Brad Kimmel
  */
 public final class StringUtil {
 

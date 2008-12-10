@@ -29,7 +29,7 @@ import java.security.Principal;
 
 /**
  * A <code>Principal</code> that represents an individual user.
- * @author brad
+ * @author Brad Kimmel
  */
 public final class UserPrincipal implements Principal {
 

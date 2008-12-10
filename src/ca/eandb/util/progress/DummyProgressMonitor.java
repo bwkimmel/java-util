@@ -28,7 +28,7 @@ package ca.eandb.util.progress;
 /**
  * A dummy progress monitor that does not report the progress to
  * anything.  This class is a singleton.
- * @author bkimmel
+ * @author Brad Kimmel
  */
 public final class DummyProgressMonitor implements ProgressMonitor {
 

@@ -29,7 +29,7 @@ import ca.eandb.util.progress.ProgressMonitor;
 
 /**
  * Represents a job.
- * @author bkimmel
+ * @author Brad Kimmel
  */
 public interface Job {
 

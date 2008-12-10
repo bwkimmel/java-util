@@ -32,7 +32,7 @@ import java.rmi.RemoteException;
 import ca.eandb.util.ClassUtil;
 
 /**
- * @author brad
+ * @author Brad Kimmel
  *
  */
 public final class ClassLoaderServer implements ClassLoaderService {

@@ -38,7 +38,7 @@ import javax.swing.table.TableCellRenderer;
  *
  * This class is a singleton.
  *
- * @author brad
+ * @author Brad Kimmel
  */
 public final class ProgressBarRenderer implements TableCellRenderer {
 

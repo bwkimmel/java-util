@@ -29,7 +29,7 @@ import java.security.Principal;
 
 /**
  * A <code>Principal</code> that represents a role.
- * @author brad
+ * @author Brad Kimmel
  */
 public final class RolePrincipal implements Principal {
 

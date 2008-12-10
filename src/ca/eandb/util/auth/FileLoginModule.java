@@ -51,7 +51,7 @@ import ca.eandb.util.StringUtil;
  *
  * name:password[:role1...:rolen]
  *
- * @author brad
+ * @author Brad Kimmel
  */
 public final class FileLoginModule extends AbstractLoginModule {
 

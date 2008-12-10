@@ -39,7 +39,7 @@ import javax.jnlp.UnavailableServiceException;
 import ca.eandb.util.classloader.ClassLoaderStrategy;
 
 /**
- * @author brad
+ * @author Brad Kimmel
  *
  */
 public final class RMIClassLoaderStrategy implements ClassLoaderStrategy {

@@ -30,7 +30,7 @@ import java.security.AccessController;
 import java.security.PrivilegedAction;
 
 /**
- * @author brad
+ * @author Brad Kimmel
  *
  */
 public class StrategyClassLoader extends ClassLoader {

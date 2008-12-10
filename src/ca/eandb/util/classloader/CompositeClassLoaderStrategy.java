@@ -29,7 +29,7 @@ import java.nio.ByteBuffer;
 import java.util.Collection;
 
 /**
- * @author brad
+ * @author Brad Kimmel
  *
  */
 public final class CompositeClassLoaderStrategy implements ClassLoaderStrategy {

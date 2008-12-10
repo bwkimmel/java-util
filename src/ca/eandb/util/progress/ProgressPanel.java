@@ -44,7 +44,7 @@ import ca.eandb.util.ui.renderer.ProgressBarRenderer;
 
 /**
  * Displays a hierarchy of <code>ProgressMonitor</code>s in a tree table.
- * @author brad
+ * @author Brad Kimmel
  */
 public final class ProgressPanel extends JPanel implements ProgressMonitor {
 
@@ -130,7 +130,7 @@ public final class ProgressPanel extends JPanel implements ProgressMonitor {
 
 	/**
 	 * Provides a model for displaying the progress tree.
-	 * @author brad
+	 * @author Brad Kimmel
 	 */
 	private static final class ProgressModel extends AbstractTreeTableModel {
 
@@ -240,7 +240,7 @@ public final class ProgressPanel extends JPanel implements ProgressMonitor {
 
 		/**
 		 * Represents a single node in a progress tree.
-		 * @author brad
+		 * @author Brad Kimmel
 		 */
 		private static final class Node extends AbstractProgressMonitor {
 

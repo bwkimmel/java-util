@@ -34,7 +34,7 @@ import javax.security.auth.callback.UnsupportedCallbackException;
 /**
  * A <code>CallbackHandler</code> that uses a predefined user name and
  * password.
- * @author brad
+ * @author Brad Kimmel
  */
 public final class FixedCallbackHandler implements CallbackHandler {
 

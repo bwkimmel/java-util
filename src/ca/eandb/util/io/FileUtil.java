@@ -39,7 +39,7 @@ import ca.eandb.util.UnexpectedException;
 
 /**
  * File I/O utility methods.
- * @author brad
+ * @author Brad Kimmel
  */
 public final class FileUtil {
 

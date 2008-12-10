@@ -40,7 +40,7 @@ import javax.security.auth.spi.LoginModule;
 
 /**
  * A partial implementation of a <code>LoginModule</code> for convenience.
- * @author brad
+ * @author Brad Kimmel
  *
  */
 public abstract class AbstractLoginModule implements LoginModule {

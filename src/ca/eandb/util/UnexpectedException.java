@@ -35,7 +35,7 @@ package ca.eandb.util;
  * statement throwing an <code>UnexpectedException</code> is essentially an
  * assertion declaring that that line of code will not be reached.
  *
- * @author brad
+ * @author Brad Kimmel
  */
 public class UnexpectedException extends RuntimeException {
 

@@ -36,7 +36,7 @@ import java.util.HashSet;
  * the individual <code>ProgressMonitor</code>s.  Child
  * <code>ProgressMonitor</code>s are created by aggregating child monitors
  * from each individual monitor.
- * @author bkimmel
+ * @author Brad Kimmel
  */
 public final class CompositeProgressMonitor implements ProgressMonitor {
 

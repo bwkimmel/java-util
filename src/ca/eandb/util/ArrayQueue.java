@@ -31,7 +31,7 @@ import java.util.NoSuchElementException;
 
 /**
  * A fixed <code>Queue</code> backed by an array.
- * @author brad
+ * @author Brad Kimmel
  */
 public final class ArrayQueue<T> extends AbstractQueue<T> {
 

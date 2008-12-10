@@ -30,7 +30,7 @@ import java.io.PrintStream;
 
 /**
  * A progress monitor that displays the status on the console.
- * @author bkimmel
+ * @author Brad Kimmel
  *
  */
 public final class ConsoleProgressMonitor implements ProgressMonitor {

@@ -36,7 +36,7 @@ import ca.eandb.util.io.StreamUtil;
 
 /**
  * Utility methods for working with classes.
- * @author brad
+ * @author Brad Kimmel
  */
 public final class ClassUtil {
 

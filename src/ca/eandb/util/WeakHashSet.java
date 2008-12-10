@@ -33,7 +33,7 @@ import java.util.WeakHashMap;
 
 /**
  * A hash set that holds weak references to its contents.
- * @author brad
+ * @author Brad Kimmel
  */
 public final class WeakHashSet<T> extends AbstractSet<T> implements Set<T> {
 

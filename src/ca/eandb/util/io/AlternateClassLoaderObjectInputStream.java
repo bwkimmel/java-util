@@ -31,7 +31,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectStreamClass;
 
 /**
- * @author brad
+ * @author Brad Kimmel
  *
  */
 public final class AlternateClassLoaderObjectInputStream extends

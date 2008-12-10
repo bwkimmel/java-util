@@ -28,7 +28,7 @@ package ca.eandb.util.args;
 import java.util.Queue;
 
 /**
- * @author brad
+ * @author Brad Kimmel
  *
  */
 public class StringFieldOption<T> extends AbstractFieldOption<T> {

@@ -30,7 +30,7 @@ import java.io.OutputStream;
 /**
  * An <code>OutputStream</code> that ignores everything written to it.  This
  * class is a singleton.
- * @author brad
+ * @author Brad Kimmel
  */
 public final class NullOutputStream extends OutputStream {
 

@@ -29,7 +29,7 @@ package ca.eandb.util.progress;
  * A <code>ProgressMonitor</code> that synchronizes all operations on itself
  * and its descendant <code>ProgressMonitor</code>s.  This class is a
  * decorator.
- * @author brad
+ * @author Brad Kimmel
  */
 public final class SynchronizedProgressMonitor implements ProgressMonitor {
 

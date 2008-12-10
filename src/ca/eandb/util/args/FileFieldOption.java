@@ -29,7 +29,7 @@ import java.io.File;
 import java.util.Queue;
 
 /**
- * @author brad
+ * @author Brad Kimmel
  *
  */
 public class FileFieldOption<T> extends AbstractFieldOption<T> {

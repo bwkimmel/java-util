@@ -32,7 +32,7 @@ import java.util.Map;
 /**
  * A <code>ClassLoaderStrategy</code> that loads class definitions from a
  * <code>Map</code>.
- * @author brad
+ * @author Brad Kimmel
  */
 public final class MapClassLoaderStrategy implements ClassLoaderStrategy {
 

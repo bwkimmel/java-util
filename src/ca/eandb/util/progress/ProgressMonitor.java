@@ -28,7 +28,7 @@ package ca.eandb.util.progress;
 /**
  * Receives progress updates from a long running job, and potentially requests
  * that the job be cancelled.
- * @author bkimmel
+ * @author Brad Kimmel
  */
 public interface ProgressMonitor {
 

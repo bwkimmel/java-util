@@ -31,7 +31,7 @@ import java.util.Queue;
 import ca.eandb.util.UnexpectedException;
 
 /**
- * @author brad
+ * @author Brad Kimmel
  *
  */
 public abstract class AbstractFieldOption<T> implements Command<T> {

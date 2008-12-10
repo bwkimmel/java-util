@@ -29,7 +29,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 /**
- * @author brad
+ * @author Brad Kimmel
  *
  */
 public interface ClassLoaderService extends Remote {

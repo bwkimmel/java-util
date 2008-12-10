@@ -40,7 +40,7 @@ import ca.eandb.util.io.AlternateClassLoaderObjectInputStream;
  * constructor, the object remains deserialized.  However, when constructed
  * by deserialization, it remains in a serialized state until explicitly
  * asked to deserialize (via the {@link #deserialize()} method).
- * @author brad
+ * @author Brad Kimmel
  */
 public final class Serialized<T> implements Serializable {
 

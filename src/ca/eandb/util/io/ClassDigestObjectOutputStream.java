@@ -36,7 +36,7 @@ import ca.eandb.util.UnexpectedException;
 
 /**
  * TODO: Implement this class.
- * @author brad
+ * @author Brad Kimmel
  * 
  */
 public final class ClassDigestObjectOutputStream extends ObjectOutputStream {

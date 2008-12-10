@@ -28,7 +28,7 @@ package ca.eandb.util.progress;
 /**
  * A <code>ProgressMonitor</code> decorator that ignores complete and cancelled
  * notifications.
- * @author brad
+ * @author Brad Kimmel
  */
 public final class PermanentProgressMonitor implements ProgressMonitor {
 

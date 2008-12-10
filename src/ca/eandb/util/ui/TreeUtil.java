@@ -33,7 +33,7 @@ import org.jdesktop.swingx.JXTreeTable;
 
 /**
  * Provides static utility methods for working with trees.
- * @author brad
+ * @author Brad Kimmel
  */
 public final class TreeUtil {
 

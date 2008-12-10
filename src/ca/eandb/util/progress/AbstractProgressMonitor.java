@@ -27,7 +27,7 @@ package ca.eandb.util.progress;
 
 /**
  * An abstract base class for <code>ProgressMonitor</code>s.
- * @author brad
+ * @author Brad Kimmel
  */
 public abstract class AbstractProgressMonitor implements ProgressMonitor {
 

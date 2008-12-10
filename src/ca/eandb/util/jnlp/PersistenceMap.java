@@ -52,7 +52,7 @@ import ca.eandb.util.UnexpectedException;
  * A <code>Map</code> to be used by Java Web Start applications that
  * persists its entries across invocations of the application using the JNLP
  * <code>PersistenceService</code> service.
- * @author brad
+ * @author Brad Kimmel
  */
 public final class PersistenceMap extends AbstractMap<String, ByteBuffer> {
 
@@ -294,7 +294,7 @@ public final class PersistenceMap extends AbstractMap<String, ByteBuffer> {
 
 	/**
 	 * The <code>Set</code> of entries in a <code>PersistenceMap</code>.
-	 * @author brad
+	 * @author Brad Kimmel
 	 */
 	private final class EntrySet extends AbstractSet<Map.Entry<String, ByteBuffer>> {
 
@@ -384,7 +384,7 @@ public final class PersistenceMap extends AbstractMap<String, ByteBuffer> {
 
 	/**
 	 * A map entry in a <code>PersistenceMap</code>.
-	 * @author brad
+	 * @author Brad Kimmel
 	 */
 	private final class Entry implements Map.Entry<String, ByteBuffer> {
 

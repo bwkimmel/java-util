@@ -32,7 +32,7 @@ import java.io.ObjectStreamClass;
 
 /**
  * TODO: Implement this class.
- * @author brad
+ * @author Brad Kimmel
  *
  */
 public final class ClassDigestObjectInputStream extends ObjectInputStream {
