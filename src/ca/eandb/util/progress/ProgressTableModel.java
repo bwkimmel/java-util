@@ -67,16 +67,21 @@ public final class ProgressTableModel extends AbstractTableModel implements
 	 * @see ca.eandb.util.progress.ProgressMonitorFactory#createProgressMonitor(java.lang.String)
 	 */
 	@Override
-	public synchronized ProgressMonitor createProgressMonitor(String title) {
-		TableRowProgressMonitor monitor = new TableRowProgressMonitor(
-				title, new JProgressBar());
+	public synchronized ProgressMonitor createProgressMonitor(final String title) {
+		final TableRowProgressMonitor monitor = new TableRowProgressMonitor(title);
 		final int row = monitors.size();
 		monitors.add(monitor);
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				fireTableRowsInserted(row, row);
-			}
-		});
+		if (SwingUtilities.isEventDispatchThread()) {
+			monitor.setProgressBar(new JProgressBar());
+			fireTableRowsInserted(row, row);
+		} else {
+			SwingUtilities.invokeLater(new Runnable() {
+				public void run() {
+					monitor.setProgressBar(new JProgressBar());
+					fireTableRowsInserted(row, row);
+				}
+			});
+		}
 		return monitor;
 	}
 
@@ -180,7 +185,7 @@ public final class ProgressTableModel extends AbstractTableModel implements
 		private final String title;
 
 		/** The <code>JProgressBar</code> used to indicate the progress. */
-		private final JProgressBar progressBar;
+		private JProgressBar progressBar;
 
 		/** The status of this <code>ProgressMonitor</code>. */
 		private String status = "";
@@ -191,9 +196,8 @@ public final class ProgressTableModel extends AbstractTableModel implements
 		 * @param progressBar The <code>JProgressBar</code> to use to indicate
 		 * 		the progress.
 		 */
-		public TableRowProgressMonitor(String title, JProgressBar progressBar) {
+		public TableRowProgressMonitor(String title) {
 			this.title = title;
-			this.progressBar = progressBar;
 		}
 
 		/**
@@ -211,6 +215,15 @@ public final class ProgressTableModel extends AbstractTableModel implements
 		 */
 		public JProgressBar getProgressBar() {
 			return progressBar;
+		}
+
+		/**
+		 * Sets the <code>JProgressBar</code> to use to indicate the progress.
+		 * @param progressBar The <code>JProgressBar</code> to use to indicate
+		 * 		the progress.
+		 */
+		public void setProgressBar(JProgressBar progressBar) {
+			this.progressBar = progressBar;
 		}
 
 		/**
