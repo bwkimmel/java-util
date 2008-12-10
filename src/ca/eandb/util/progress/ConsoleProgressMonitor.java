@@ -127,13 +127,6 @@ public final class ConsoleProgressMonitor implements ProgressMonitor {
 		return false;
 	}
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.progress.ProgressMonitor#createChildProgressMonitor()
-	 */
-	public ProgressMonitor createChildProgressMonitor(String title) {
-		return DummyProgressMonitor.getInstance();
-	}
-
 	/**
 	 * Writes the progress bar to the stream.
 	 * @param progress

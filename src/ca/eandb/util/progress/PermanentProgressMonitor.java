@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2008 Bradley W. Kimmel
- * 
+ *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -9,10 +9,10 @@
  * copies of the Software, and to permit persons to whom the
  * Software is furnished to do so, subject to the following
  * conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
  * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,37 +36,12 @@ public final class PermanentProgressMonitor implements ProgressMonitor {
 	private final ProgressMonitor monitor;
 
 	/**
-	 * A value indicating whether permanency should be inherited by children of
-	 * this <code>ProgressMonitor</code>.
-	 */
-	private final boolean inherit;
-
-	/**
 	 * Creates a new <code>PermanentProgressMonitor</code>.  Descendants of
 	 * this <code>ProgressMonitor</code> will not be made permanent.
 	 * @param monitor The <code>ProgressMonitor</code> to decorate.
 	 */
 	public PermanentProgressMonitor(ProgressMonitor monitor) {
-		this(monitor, false);
-	}
-
-	/**
-	 * Creates a new <code>PermanentProgressMonitor</code>.
-	 * @param monitor The <code>ProgressMonitor</code> to decorate.
-	 * @param inherit A value indicating whether descendants of this
-	 * 		<code>ProgressMonitor</code> should be made permanent.
-	 */
-	public PermanentProgressMonitor(ProgressMonitor monitor, boolean inherit) {
 		this.monitor = monitor;
-		this.inherit = inherit;
-	}
-
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.progress.ProgressMonitor#createChildProgressMonitor(java.lang.String)
-	 */
-	public ProgressMonitor createChildProgressMonitor(String title) {
-		ProgressMonitor child = monitor.createChildProgressMonitor(title);
-		return inherit ? new PermanentProgressMonitor(child, true) : child;
 	}
 
 	/* (non-Javadoc)

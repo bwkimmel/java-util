@@ -81,16 +81,6 @@ public final class DummyProgressMonitor implements ProgressMonitor {
 		return false;
 	}
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.progress.ProgressMonitor#createChildProgressMonitor()
-	 */
-	public ProgressMonitor createChildProgressMonitor(String title) {
-
-		/* Report progress to subtasks to the same monitor. */
-		return this;
-
-	}
-
 	/**
 	 * Creates a new <code>DummyProgressMonitor</code>.  This constructor is
 	 * private because this class is a singleton.

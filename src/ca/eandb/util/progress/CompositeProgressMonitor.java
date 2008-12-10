@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2008 Bradley W. Kimmel
- * 
+ *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -9,10 +9,10 @@
  * copies of the Software, and to permit persons to whom the
  * Software is furnished to do so, subject to the following
  * conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
  * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -50,32 +50,6 @@ public final class CompositeProgressMonitor implements ProgressMonitor {
 	public CompositeProgressMonitor addProgressMonitor(ProgressMonitor monitor) {
 		this.monitors.add(monitor);
 		return this;
-	}
-
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.progress.ProgressMonitor#createChildProgressMonitor(java.lang.String)
-	 */
-	public ProgressMonitor createChildProgressMonitor(String title) {
-
-		CompositeProgressMonitor result = new CompositeProgressMonitor();
-
-		/* Create a child progress monitor for each of this composite's
-		 * monitors and add it to the resulting composite progress
-		 * monitor.
-		 */
-		for (ProgressMonitor monitor : this.monitors) {
-
-			ProgressMonitor child = monitor.createChildProgressMonitor(title);
-
-			/* Don't bother adding dummy progress monitors. */
-			if (!(child instanceof DummyProgressMonitor)) {
-				result.addProgressMonitor(child);
-			}
-
-		}
-
-		return result;
-
 	}
 
 	/* (non-Javadoc)
