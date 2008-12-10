@@ -8,6 +8,5 @@
 			<attribute name="javadoc_location" value="http://java.sun.com/products/javawebstart/1.0.1/javadoc/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="lib/swingx.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

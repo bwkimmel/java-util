@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2008 Bradley W. Kimmel
- * 
+ *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -9,10 +9,10 @@
  * copies of the Software, and to permit persons to whom the
  * Software is furnished to do so, subject to the following
  * conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
  * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,8 +28,6 @@ package ca.eandb.util.ui;
 import javax.swing.JTree;
 import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
-
-import org.jdesktop.swingx.JXTreeTable;
 
 /**
  * Provides static utility methods for working with trees.
@@ -58,35 +56,6 @@ public final class TreeUtil {
 
 			public void treeNodesInserted(TreeModelEvent e) {
 				tree.expandPath(e.getTreePath());
-			}
-
-			public void treeNodesRemoved(TreeModelEvent e) {
-				// nothing to do
-			}
-
-			public void treeStructureChanged(TreeModelEvent e) {
-				// nothing to do
-			}
-
-		});
-
-	}
-
-	/**
-	 * Adds a <code>TreeModelListener</code> that will automatically expand
-	 * the tree as new nodes are inserted.
-	 * @param tree The <code>JXTreeTable</code>.
-	 */
-	public static void enableAutoExpansion(final JXTreeTable treeTable) {
-
-		treeTable.getTreeTableModel().addTreeModelListener(new TreeModelListener() {
-
-			public void treeNodesChanged(TreeModelEvent e) {
-				// nothing to do
-			}
-
-			public void treeNodesInserted(TreeModelEvent e) {
-				treeTable.expandPath(e.getTreePath());
 			}
 
 			public void treeNodesRemoved(TreeModelEvent e) {
