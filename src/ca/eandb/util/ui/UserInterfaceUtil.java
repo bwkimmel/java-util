@@ -25,9 +25,6 @@
 
 package ca.eandb.util.ui;
 
-import java.awt.Component;
-import java.awt.Container;
-
 import javax.swing.JTree;
 import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
