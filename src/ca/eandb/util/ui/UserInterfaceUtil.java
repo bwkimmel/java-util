@@ -25,6 +25,9 @@
 
 package ca.eandb.util.ui;
 
+import java.awt.Component;
+import java.awt.Container;
+
 import javax.swing.JTree;
 import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
@@ -33,13 +36,13 @@ import javax.swing.event.TreeModelListener;
  * Provides static utility methods for working with trees.
  * @author Brad Kimmel
  */
-public final class TreeUtil {
+public final class UserInterfaceUtil {
 
 	/**
 	 * Default constructor.  This constructor is private because this is a
 	 * utility class.
 	 */
-	private TreeUtil() {}
+	private UserInterfaceUtil() {}
 
 	/**
 	 * Adds a <code>TreeModelListener</code> that will automatically expand
@@ -68,6 +71,16 @@ public final class TreeUtil {
 
 		});
 
+	}
+
+	public static boolean containsComponent(Container container, Component component) {
+		while (component != null) {
+			if (component == container) {
+				return true;
+			}
+			component = component.getParent();
+		}
+		return false;
 	}
 
 }
