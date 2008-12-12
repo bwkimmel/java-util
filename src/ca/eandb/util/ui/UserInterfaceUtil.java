@@ -73,14 +73,4 @@ public final class UserInterfaceUtil {
 
 	}
 
-	public static boolean containsComponent(Container container, Component component) {
-		while (component != null) {
-			if (component == container) {
-				return true;
-			}
-			component = component.getParent();
-		}
-		return false;
-	}
-
 }
