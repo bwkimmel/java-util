@@ -126,4 +126,11 @@ public final class ProgressPanel extends JPanel implements
 		return getModel().createProgressMonitor(title);
 	}
 
+	/**
+	 * Removes all <code>ProgressMonitor</code>s from the table.
+	 */
+	public void clear() {
+		getModel().clear();
+	}
+
 }

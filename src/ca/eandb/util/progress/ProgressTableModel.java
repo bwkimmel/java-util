@@ -131,6 +131,14 @@ public final class ProgressTableModel extends AbstractTableModel implements
 	}
 
 	/**
+	 * Removes all <code>ProgressMonitor</code>s from the table.
+	 */
+	public void clear() {
+		monitors.clear();
+		fireTableDataChanged();
+	}
+
+	/**
 	 * Indicate that the progress for a particular monitor has been updated.
 	 * @param source The <code>TableRowProgressMonitor</code> whose progress
 	 * 		has been updated.
