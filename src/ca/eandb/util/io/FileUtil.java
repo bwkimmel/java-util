@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2008 Bradley W. Kimmel
- * 
+ *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -9,10 +9,10 @@
  * copies of the Software, and to permit persons to whom the
  * Software is furnished to do so, subject to the following
  * conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
  * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -184,6 +184,18 @@ public final class FileUtil {
 		}
 	}
 
+	/**
+	 * Walks a directory tree using post-order traversal.  The contents of a
+	 * directory are visited before the directory itself is visited.
+	 * @param root The <code>File</code> indicating the file or directory to
+	 * 		walk.
+	 * @param visitor The <code>FileVisitor</code> to use to visit files and
+	 * 		directories while walking the tree.
+	 * @return A value indicating whether the tree walk was completed without
+	 * 		{@link FileVisitor#visit(File)} ever returning false.
+	 * @throws Exception If {@link FileVisitor#visit(File)} threw an exception.
+	 * @see FileVisitor#visit(File)
+	 */
 	public static boolean postOrderTraversal(File root, FileVisitor visitor) throws Exception {
 		if (root.isDirectory()) {
 			for (File child : root.listFiles()) {
@@ -195,6 +207,18 @@ public final class FileUtil {
 		return visitor.visit(root);
 	}
 
+	/**
+	 * Walks a directory tree using pre-order traversal.  The contents of a
+	 * directory are visited after the directory itself is visited.
+	 * @param root The <code>File</code> indicating the file or directory to
+	 * 		walk.
+	 * @param visitor The <code>FileVisitor</code> to use to visit files and
+	 * 		directories while walking the tree.
+	 * @return A value indicating whether the tree walk was completed without
+	 * 		{@link FileVisitor#visit(File)} ever returning false.
+	 * @throws Exception If {@link FileVisitor#visit(File)} threw an exception.
+	 * @see FileVisitor#visit(File)
+	 */
 	public static boolean preOrderTraversal(File root, FileVisitor visitor) throws Exception {
 		if (!visitor.visit(root)) {
 			return false;
@@ -209,6 +233,13 @@ public final class FileUtil {
 		return true;
 	}
 
+	/**
+	 * Zips the contents of a directory.
+	 * @param zipFile The <code>File</code> indicating the zip file to create.
+	 * @param contents The <code>File</code> indicating the directory to zip.
+	 * @throws IOException If the contents could not be read or if the zip file
+	 * 		could not be written.
+	 */
 	public static void zip(File zipFile, final File contents) throws IOException {
 
 		OutputStream os = new FileOutputStream(zipFile);
@@ -243,6 +274,16 @@ public final class FileUtil {
 
 	}
 
+	/**
+	 * Gets the <code>String</code> representing the path to a file relative to
+	 * a given directory.
+	 * @param file The <code>File</code> for which to obtain the relative path.
+	 * @param base The <code>File</code> representing the directory that the
+	 * 		resulting path should be relative to.
+	 * @return The <code>String</code> representing the relative path.
+	 * @throws IOException If a directory along the walk from <code>base</code>
+	 * 		to <code>file</code> could not be read.
+	 */
 	public static String getRelativePath(File file, File base) throws IOException {
 		StringWriter path = new StringWriter();
 

@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2008 Bradley W. Kimmel
- * 
+ *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -9,10 +9,10 @@
  * copies of the Software, and to permit persons to whom the
  * Software is furnished to do so, subject to the following
  * conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
  * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,11 +28,21 @@ package ca.eandb.util.io;
 import java.io.File;
 
 /**
+ * An interface used to visit a <code>File</code> while walking a directory
+ * tree.
+ * @see FileUtil#postOrderTraversal(File, FileVisitor)
+ * @see FileUtil#preOrderTraversal(File, FileVisitor)
  * @author Brad Kimmel
- *
  */
 public interface FileVisitor {
 
+	/**
+	 * Visits a <code>File</code> while walking a directory tree.
+	 * @param file The <code>File</code> being visited.
+	 * @return A value indicating whether the tree walk should continue.
+	 * @see FileUtil#postOrderTraversal(File, FileVisitor)
+	 * @see FileUtil#preOrderTraversal(File, FileVisitor)
+	 */
 	boolean visit(File file) throws Exception;
 
 }
