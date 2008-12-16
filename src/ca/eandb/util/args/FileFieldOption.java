@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2008 Bradley W. Kimmel
- * 
+ *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -9,10 +9,10 @@
  * copies of the Software, and to permit persons to whom the
  * Software is furnished to do so, subject to the following
  * conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
  * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,23 +29,33 @@ import java.io.File;
 import java.util.Queue;
 
 /**
+ * Represents a command line option which is assigned a <code>File</code>
+ * value.
  * @author Brad Kimmel
- *
  */
 public class FileFieldOption<T> extends AbstractFieldOption<T> {
 
+	/**
+	 * A value indicating whether the file specified on the command line must
+	 * exist in the file system.
+	 */
 	private final boolean mustExist;
 
 	/**
-	 * @param fieldName
+	 * Creates a new <code>FileFieldOption</code>.
+	 * @param fieldName The name of the field to assign to in the application
+	 * 		state object.
 	 */
 	public FileFieldOption(String fieldName) {
 		this(fieldName, false);
 	}
 
 	/**
-	 * @param fieldName
-	 * @param mustExist
+	 * Creates a new <code>FileFieldOption</code>.
+	 * @param fieldName The name of the field to assign to in the application
+	 * 		state object.
+	 * @param mustExist A value indicating whether the file specified on the
+	 * 		command line must exist in the file system.
 	 */
 	public FileFieldOption(String fieldName, boolean mustExist) {
 		super(fieldName);
