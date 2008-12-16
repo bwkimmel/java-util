@@ -38,7 +38,7 @@ import ca.eandb.util.ArrayQueue;
 public final class ArgumentProcessor<T> {
 
 	/**
-	 * A <code>Map</code> for looking up option <code>Command</code> handlers,
+	 * A <code>Map</code> for looking up option <code>Command</code> options,
 	 * keyed by the option name.  A command line argument of the form
 	 * <code>--&lt;option_name&gt;</code> is used to trigger a given option
 	 * handler.
@@ -49,7 +49,7 @@ public final class ArgumentProcessor<T> {
 	 * is tranferred to that command and no further options or commands are
 	 * processed by this <code>ArgumentProcessor</code>.
 	 */
-	private final Map<String, Command<? super T>> handlers = new HashMap<String, Command<? super T>>();
+	private final Map<String, Command<? super T>> options = new HashMap<String, Command<? super T>>();
 
 	/**
 	 * A <code>Map</code> for looking up the full option name associated with
@@ -59,12 +59,12 @@ public final class ArgumentProcessor<T> {
 	private final Map<Character, String> shortcuts = new HashMap<Character, String>();
 
 	/**
-	 * A <code>Map</code> for looking up <code>Command</code> handlers, keyed
+	 * A <code>Map</code> for looking up <code>Command</code> options, keyed
 	 * by the command name.  A command line option of the form
 	 * <code>&lt;command_name&gt;</code> is used to trigger a given command
 	 * handler.
 	 *
-	 * The difference between an option (stored in {@link #handlers} and a
+	 * The difference between an option (stored in {@link #options} and a
 	 * command (stored in {@link #commands} is that multiple options may be
 	 * specified.  Only a single command may be specified.  When a command is
 	 * encountered, control is tranferred to that command and no further
@@ -134,7 +134,7 @@ public final class ArgumentProcessor<T> {
 	 */
 	public void addOption(String key, char shortKey,
 			Command<? super T> handler) {
-		handlers.put(key, handler);
+		options.put(key, handler);
 		shortcuts.put(shortKey, key);
 	}
 
@@ -181,17 +181,17 @@ public final class ArgumentProcessor<T> {
 			if (nextArg.startsWith("--")) {
 				argq.remove();
 				String key = nextArg.substring(2);
-				Command<? super T> command = handlers.get(key);
-				if (command != null) {
-					command.process(argq, state);
+				Command<? super T> option = options.get(key);
+				if (option != null) {
+					option.process(argq, state);
 				}
 			} else if (nextArg.startsWith("-")) {
 				argq.remove();
 				for (int i = 1; i < nextArg.length(); i++) {
 					char key = nextArg.charAt(i);
-					Command<? super T> command = handlers.get(shortcuts.get(key));
-					if (command != null) {
-						command.process(argq, state);
+					Command<? super T> option = options.get(shortcuts.get(key));
+					if (option != null) {
+						option.process(argq, state);
 					}
 				}
 			} else {
