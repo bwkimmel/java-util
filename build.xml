@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ======================================================================
+     Dec 20, 2008 11:23:58 PM
+
+     eandb
+     A collection of utility classes
+
+     Brad Kimmel
+     ====================================================================== -->
+<project name="eandb" default="default">
+	<description>
+            A collection of utility classes
+    </description>
+
+	<property name="src.dir" value="src" />
+	<property name="lib.dir" value="lib" />
+	<property name="build.dir" value="build" />
+	<property name="classes.dir" value="${build.dir}/classes" />
+	<property name="jar.dir" value="${build.dir}/jar" />
+
+	<path id="classpath">
+		<fileset dir="${lib.dir}" includes="**/*.jar" />
+	</path>
+
+	<!-- =================================
+          target: default
+         ================================= -->
+	<target name="default" depends="jar" description="--> A collection of utility classes">
+
+	</target>
+
+	<!-- - - - - - - - - - - - - - - - - -
+          target: jar
+         - - - - - - - - - - - - - - - - - -->
+	<target name="jar" depends="compile">
+		<mkdir dir="${jar.dir}"/>
+	    <jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}"/>
+	</target>
+
+	<target name="compile">
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${classes.dir}" />
+		<javac target="1.5" srcdir="${src.dir}" destdir="${classes.dir}" classpathref="classpath" />
+	</target>
+
+	<target name="clean">
+		<delete dir="${build.dir}" />
+	</target>
+</project>
