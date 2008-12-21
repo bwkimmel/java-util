@@ -40,7 +40,6 @@ public final class DummyProgressMonitorFactory implements
 	/* (non-Javadoc)
 	 * @see ca.eandb.util.progress.ProgressMonitorFactory#createProgressMonitor(java.lang.String)
 	 */
-	@Override
 	public ProgressMonitor createProgressMonitor(String title) {
 		return DummyProgressMonitor.getInstance();
 	}

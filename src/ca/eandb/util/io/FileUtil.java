@@ -248,7 +248,6 @@ public final class FileUtil {
 		try {
 			preOrderTraversal(contents, new FileVisitor() {
 
-				@Override
 				public boolean visit(File file) throws IOException {
 					if (file.isFile()) {
 						String name = getRelativePath(file, contents);

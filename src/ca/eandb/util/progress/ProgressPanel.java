@@ -121,7 +121,6 @@ public final class ProgressPanel extends JPanel implements
 	/* (non-Javadoc)
 	 * @see ca.eandb.util.progress.ProgressMonitorFactory#createProgressMonitor(java.lang.String)
 	 */
-	@Override
 	public ProgressMonitor createProgressMonitor(String title) {
 		return getModel().createProgressMonitor(title);
 	}

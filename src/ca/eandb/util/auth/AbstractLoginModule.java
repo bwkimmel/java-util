@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2008 Bradley W. Kimmel
- * 
+ *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -9,10 +9,10 @@
  * copies of the Software, and to permit persons to whom the
  * Software is furnished to do so, subject to the following
  * conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
  * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -91,7 +91,6 @@ public abstract class AbstractLoginModule implements LoginModule {
 	/* (non-Javadoc)
 	 * @see javax.security.auth.spi.LoginModule#abort()
 	 */
-	@Override
 	public boolean abort() {
 		this.principals.clear();
 		this.publicCredentials.clear();
@@ -102,7 +101,6 @@ public abstract class AbstractLoginModule implements LoginModule {
 	/* (non-Javadoc)
 	 * @see javax.security.auth.spi.LoginModule#commit()
 	 */
-	@Override
 	public boolean commit() {
 		subject.getPrincipals().addAll(principals);
 		subject.getPrivateCredentials().addAll(privateCredentials);
@@ -113,7 +111,6 @@ public abstract class AbstractLoginModule implements LoginModule {
 	/* (non-Javadoc)
 	 * @see javax.security.auth.spi.LoginModule#initialize(javax.security.auth.Subject, javax.security.auth.callback.CallbackHandler, java.util.Map, java.util.Map)
 	 */
-	@Override
 	public void initialize(Subject subject, CallbackHandler callbackHandler,
 			Map<String, ?> sharedState, Map<String, ?> options) {
 		this.subject = subject;
@@ -134,7 +131,6 @@ public abstract class AbstractLoginModule implements LoginModule {
 	/* (non-Javadoc)
 	 * @see javax.security.auth.spi.LoginModule#logout()
 	 */
-	@Override
 	public boolean logout() {
 		subject.getPrincipals().removeAll(principals);
 		subject.getPrivateCredentials().removeAll(privateCredentials);

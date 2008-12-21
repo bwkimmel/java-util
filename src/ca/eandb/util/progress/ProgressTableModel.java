@@ -66,7 +66,6 @@ public final class ProgressTableModel extends AbstractTableModel implements
 	/* (non-Javadoc)
 	 * @see ca.eandb.util.progress.ProgressMonitorFactory#createProgressMonitor(java.lang.String)
 	 */
-	@Override
 	public synchronized ProgressMonitor createProgressMonitor(final String title) {
 		final TableRowProgressMonitor monitor = new TableRowProgressMonitor(title);
 		final int row = monitors.size();
@@ -83,7 +82,6 @@ public final class ProgressTableModel extends AbstractTableModel implements
 	/* (non-Javadoc)
 	 * @see javax.swing.table.AbstractTableModel#getColumnClass(int)
 	 */
-	@Override
 	public Class<?> getColumnClass(int columnIndex) {
 		return COLUMN_CLASS[columnIndex];
 	}
@@ -91,7 +89,6 @@ public final class ProgressTableModel extends AbstractTableModel implements
 	/* (non-Javadoc)
 	 * @see javax.swing.table.AbstractTableModel#getColumnName(int)
 	 */
-	@Override
 	public String getColumnName(int column) {
 		return COLUMN_NAME[column];
 	}
@@ -99,7 +96,6 @@ public final class ProgressTableModel extends AbstractTableModel implements
 	/* (non-Javadoc)
 	 * @see javax.swing.table.TableModel#getColumnCount()
 	 */
-	@Override
 	public int getColumnCount() {
 		return COLUMN_NAME.length;
 	}
@@ -107,7 +103,6 @@ public final class ProgressTableModel extends AbstractTableModel implements
 	/* (non-Javadoc)
 	 * @see javax.swing.table.TableModel#getRowCount()
 	 */
-	@Override
 	public synchronized int getRowCount() {
 		return monitors.size();
 	}
@@ -115,7 +110,6 @@ public final class ProgressTableModel extends AbstractTableModel implements
 	/* (non-Javadoc)
 	 * @see javax.swing.table.TableModel#getValueAt(int, int)
 	 */
-	@Override
 	public synchronized Object getValueAt(int rowIndex, int columnIndex) {
 		TableRowProgressMonitor monitor = monitors.get(rowIndex);
 		switch (columnIndex) {
@@ -240,7 +234,6 @@ public final class ProgressTableModel extends AbstractTableModel implements
 		/* (non-Javadoc)
 		 * @see ca.eandb.util.progress.ProgressMonitor#isCancelPending()
 		 */
-		@Override
 		public boolean isCancelPending() {
 			return false;
 		}
@@ -248,7 +241,6 @@ public final class ProgressTableModel extends AbstractTableModel implements
 		/* (non-Javadoc)
 		 * @see ca.eandb.util.progress.ProgressMonitor#notifyCancelled()
 		 */
-		@Override
 		public void notifyCancelled() {
 			remove(this);
 		}
@@ -256,7 +248,6 @@ public final class ProgressTableModel extends AbstractTableModel implements
 		/* (non-Javadoc)
 		 * @see ca.eandb.util.progress.ProgressMonitor#notifyComplete()
 		 */
-		@Override
 		public void notifyComplete() {
 			remove(this);
 		}
@@ -264,7 +255,6 @@ public final class ProgressTableModel extends AbstractTableModel implements
 		/* (non-Javadoc)
 		 * @see ca.eandb.util.progress.ProgressMonitor#notifyIndeterminantProgress()
 		 */
-		@Override
 		public boolean notifyIndeterminantProgress() {
 			SwingUtilities.invokeLater(new Runnable() {
 				public void run() {
@@ -278,7 +268,6 @@ public final class ProgressTableModel extends AbstractTableModel implements
 		/* (non-Javadoc)
 		 * @see ca.eandb.util.progress.ProgressMonitor#notifyProgress(int, int)
 		 */
-		@Override
 		public boolean notifyProgress(final int value, final int maximum) {
 			SwingUtilities.invokeLater(new Runnable() {
 				public void run() {
@@ -296,7 +285,6 @@ public final class ProgressTableModel extends AbstractTableModel implements
 		/* (non-Javadoc)
 		 * @see ca.eandb.util.progress.ProgressMonitor#notifyProgress(double)
 		 */
-		@Override
 		public boolean notifyProgress(final double progress) {
 			SwingUtilities.invokeLater(new Runnable() {
 				public void run() {
@@ -314,7 +302,6 @@ public final class ProgressTableModel extends AbstractTableModel implements
 		/* (non-Javadoc)
 		 * @see ca.eandb.util.progress.ProgressMonitor#notifyStatusChanged(java.lang.String)
 		 */
-		@Override
 		public void notifyStatusChanged(final String status) {
 			SwingUtilities.invokeLater(new Runnable() {
 				public void run() {
