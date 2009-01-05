@@ -29,6 +29,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.StringWriter;
 import java.nio.ByteBuffer;
@@ -148,6 +150,34 @@ public final class FileUtil {
 		FileOutputStream stream = new FileOutputStream(file);
 		StreamUtil.writeBytes(contents, stream);
 		stream.close();
+	}
+
+	/**
+	 * Writes a single object to a file.
+	 * @param file The <code>File</code> to write to.
+	 * @param object The <code>Object</code> to write.
+	 * @throws IOException If the file could not be written.
+	 */
+	public static void writeObjectToFile(File file, Object object) throws IOException {
+		FileOutputStream fs = new FileOutputStream(file);
+		ObjectOutputStream os = new ObjectOutputStream(fs);
+		os.writeObject(object);
+		os.close();
+	}
+
+	/**
+	 * Reads a single object from a file.
+	 * @param file The <code>File</code> to read from.
+	 * @return The <code>Object</code> read from the file.
+	 * @throws IOException If the file could not be read.
+	 * @throws ClassNotFoundException If the object's class could not be found.
+	 */
+	public static Object readObjectFromFile(File file) throws IOException, ClassNotFoundException {
+		FileInputStream fs = new FileInputStream(file);
+		ObjectInputStream os = new ObjectInputStream(fs);
+		Object object = os.readObject();
+		os.close();
+		return object;
 	}
 
 	/**
