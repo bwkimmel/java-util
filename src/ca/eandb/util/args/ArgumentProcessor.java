@@ -25,6 +25,9 @@
 
 package ca.eandb.util.args;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Queue;
@@ -81,10 +84,27 @@ public final class ArgumentProcessor<T> {
 	private Command<? super T> defaultCommand = null;
 
 	/**
+	 * The <code>Command</code> to execute to enter shell mode.
+	 */
+	private Command<? super T> shellCommand = null;
+
+	/**
+	 * Creates a new <code>ArgumentProcessor</code>.
+	 * @param shell A value indicating whether a shell should be started if no
+	 * 		commands are provided on the command line.
+	 */
+	public ArgumentProcessor(boolean shell) {
+		addCommand("help", new HelpCommand());
+		if (shell) {
+			shellCommand = new ShellCommand();
+		}
+	}
+
+	/**
 	 * Creates a new <code>ArgumentProcessor</code>.
 	 */
 	public ArgumentProcessor() {
-		addCommand("help", new HelpCommand());
+		this(false);
 	}
 
 	/**
@@ -114,8 +134,59 @@ public final class ArgumentProcessor<T> {
 				System.out.println(cmd);
 			}
 
-			System.exit(0);
+		}
 
+	}
+
+	/**
+	 * A <code>Command</code> for starting a shell.
+	 * @author Brad
+	 */
+	private class ShellCommand implements Command<T> {
+
+		/** A flag indicating whether the shell should exit. */
+		private boolean exit = false;
+
+		/** A flag indicating whether the shell is currently running. */
+		private boolean running = false;
+
+		/* (non-Javadoc)
+		 * @see ca.eandb.util.args.Command#process(java.util.Queue, java.lang.Object)
+		 */
+		public void process(Queue<String> argq, T state) {
+			if (running) {
+				return;
+			}
+
+			running = true;
+			addCommand("exit", new Command<Object>() {
+				public void process(Queue<String> argq, Object state) {
+					exit = true;
+				}
+			});
+
+			BufferedReader shell = new BufferedReader(new InputStreamReader(System.in));
+
+			do {
+				System.out.print(">> ");
+				String cmd = null;
+				try {
+					cmd = shell.readLine();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				if (cmd == null) {
+					break;
+				}
+				String[] args = cmd.trim().split("\\s+");
+				try {
+					ArgumentProcessor.this.process(args, state);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			} while (!exit);
+
+			running = false;
 		}
 
 	}
@@ -205,6 +276,9 @@ public final class ArgumentProcessor<T> {
 		}
 		if (defaultCommand != null) {
 			defaultCommand.process(argq, state);
+		}
+		if (shellCommand != null) {
+			shellCommand.process(argq, state);
 		}
 	}
 
