@@ -97,13 +97,21 @@ public final class ArgumentProcessor<T> implements Command<T> {
 	private Command<? super T> shellCommand = null;
 
 	/**
-	 * Creates a new <code>ArgumentProcessor</code>.
-	 * @param shell A value indicating whether a shell should be started if no
-	 * 		commands are provided on the command line.
+	 * The <code>String</code> to prompt the user for input with.
 	 */
-	public ArgumentProcessor(boolean shell) {
+	private final String prompt;
+
+	/**
+	 * Creates a new <code>ArgumentProcessor</code>.
+	 * @param prompt If specified, a shell will be started if no commands are
+	 * 		provided on the command line.  This <code>String</code> will be
+	 * 		used to prompt the user for input.  Specify <code>null</code> to
+	 * 		indicate that no shell should be started.
+	 */
+	public ArgumentProcessor(String prompt) {
 		addCommand("help", new HelpCommand());
-		if (shell) {
+		this.prompt = prompt;
+		if (prompt != null) {
 			shellCommand = new ShellCommand();
 		}
 	}
@@ -112,7 +120,7 @@ public final class ArgumentProcessor<T> implements Command<T> {
 	 * Creates a new <code>ArgumentProcessor</code>.
 	 */
 	public ArgumentProcessor() {
-		this(false);
+		this(null);
 	}
 
 	/**
@@ -176,7 +184,7 @@ public final class ArgumentProcessor<T> implements Command<T> {
 			BufferedReader shell = new BufferedReader(new InputStreamReader(System.in));
 
 			do {
-				System.out.print(">> ");
+				System.out.printf("%s>> ", prompt);
 				String cmd = null;
 				try {
 					cmd = shell.readLine();
@@ -224,19 +232,17 @@ public final class ArgumentProcessor<T> implements Command<T> {
 	 * Adds an option for the specified field having the given
 	 * {@link OptionArgument} annotation.
 	 * @param field The <code>Field</code> to add the option for.
-	 * @param annotation The <code>OptionArgument</code> annotation on the
-	 * 		field.
+	 * @param key The key that triggers the option.
+	 * @param shortKey the shorthand alternative key that triggers the option.
 	 */
-	private void processField(Field field, OptionArgument annotation) {
+	private void processOptionField(Field field, String key, char shortKey) {
 		String name = field.getName();
 		Class<?> type = field.getType();
 
-		String key = annotation.value();
 		if (key.isEmpty()) {
 			key = name;
 		}
 
-		char shortKey = annotation.shortKey();
 		if (shortKey == '\0') {
 			shortKey = key.charAt(0);
 		}
@@ -248,19 +254,24 @@ public final class ArgumentProcessor<T> implements Command<T> {
 	/**
 	 * Adds a command that passes control to the specified field.
 	 * @param field The <code>Field</code> to pass control to.
-	 * @param annotation The <code>CommandArgument</code> annotation on the
-	 * 		field.
+	 * @param key The key that triggers the command.
+	 * @param prompt The <code>String</code> to use to prompt the user for
+	 * 		input, or <code>null</code> if no shell should be used.
 	 */
-	private void processField(final Field field, CommandArgument annotation) {
+	private void processCommandField(final Field field, String key, String prompt) {
 		String name = field.getName();
 		Class<?> type = field.getType();
 
-		String key = annotation.value();
 		if (key.isEmpty()) {
 			key = name;
 		}
 
-		final ArgumentProcessor<Object> argProcessor = new ArgumentProcessor<Object>();
+		if (prompt != null && prompt.isEmpty()) {
+			prompt = key;
+		}
+
+		final ArgumentProcessor<Object> argProcessor = new ArgumentProcessor<Object>(prompt);
+		argProcessor.setDefaultCommand(UnrecognizedCommand.getInstance());
 		argProcessor.processAnnotations(type);
 
 		addCommand(key, new Command<T>() {
@@ -285,11 +296,16 @@ public final class ArgumentProcessor<T> implements Command<T> {
 	private void processField(Field field) {
 		OptionArgument optAnnotation = field.getAnnotation(OptionArgument.class);
 		if (optAnnotation != null) {
-			processField(field, optAnnotation);
+			processOptionField(field, optAnnotation.value(), optAnnotation.shortKey());
 		} else {
 			CommandArgument cmdAnnotation = field.getAnnotation(CommandArgument.class);
 			if (cmdAnnotation != null) {
-				processField(field, cmdAnnotation);
+				processCommandField(field, cmdAnnotation.value(), null);
+			} else {
+				ShellArgument shellAnnotation = field.getAnnotation(ShellArgument.class);
+				if (shellAnnotation != null) {
+					processCommandField(field, shellAnnotation.value(), shellAnnotation.prompt());
+				}
 			}
 		}
 	}
