@@ -414,6 +414,9 @@ public final class ArgumentProcessor<T> implements Command<T> {
 			argProcessor.setDefaultCommand(new Command<Object[]>() {
 				public void process(Queue<String> argq, Object[] state) {
 					for (int index : positionalParams) {
+						if (argq.isEmpty()) {
+							break;
+						}
 						Class<?> paramType = paramTypes[index];
 						if (paramType == Integer.class || paramType == int.class) {
 							state[index] = Integer.parseInt(argq.remove());
