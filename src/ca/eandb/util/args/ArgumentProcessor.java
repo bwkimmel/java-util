@@ -26,19 +26,27 @@
 package ca.eandb.util.args;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 
 import ca.eandb.util.ArrayQueue;
+import ca.eandb.util.UnexpectedException;
 
 /**
  * An object that processes command line arguments.
  * @author Brad Kimmel
  */
-public final class ArgumentProcessor<T> {
+public final class ArgumentProcessor<T> implements Command<T> {
 
 	/**
 	 * A <code>Map</code> for looking up option <code>Command</code> options,
@@ -189,6 +197,258 @@ public final class ArgumentProcessor<T> {
 			running = false;
 		}
 
+	}
+
+	/**
+	 * Creates an option for the specified field and type.
+	 * @param fieldName The name of the field to create the option handler for.
+	 * @param type The type of the field to create the option handler for.
+	 * @return The <code>Command</code> to process the option.
+	 */
+	private Command<? super T> createOption(String fieldName, Class<?> type) {
+		if (type == Integer.class || type == int.class) {
+			return new IntegerFieldOption<T>(fieldName);
+		} else if (type == Boolean.class || type == boolean.class) {
+			return new BooleanFieldOption<T>(fieldName);
+		} else if (type == String.class) {
+			return new StringFieldOption<T>(fieldName);
+		} else if (type == Double.class || type == double.class) {
+			return new DoubleFieldOption<T>(fieldName);
+		} else if (type == File.class) {
+			return new FileFieldOption<T>(fieldName);
+		}
+		throw new IllegalArgumentException("Cannot create option for parameter of type `" + type.getName() + "'");
+	}
+
+	/**
+	 * Adds an option for the specified field having the given
+	 * {@link OptionArgument} annotation.
+	 * @param field The <code>Field</code> to add the option for.
+	 * @param annotation The <code>OptionArgument</code> annotation on the
+	 * 		field.
+	 */
+	private void processField(Field field, OptionArgument annotation) {
+		String name = field.getName();
+		Class<?> type = field.getType();
+
+		String key = annotation.value();
+		if (key.isEmpty()) {
+			key = name;
+		}
+
+		char shortKey = annotation.shortKey();
+		if (shortKey == '\0') {
+			shortKey = key.charAt(0);
+		}
+
+		Command<? super T> option = createOption(name, type);
+		addOption(key, shortKey, option);
+	}
+
+	/**
+	 * Adds a command that passes control to the specified field.
+	 * @param field The <code>Field</code> to pass control to.
+	 * @param annotation The <code>CommandArgument</code> annotation on the
+	 * 		field.
+	 */
+	private void processField(final Field field, CommandArgument annotation) {
+		String name = field.getName();
+		Class<?> type = field.getType();
+
+		String key = annotation.value();
+		if (key.isEmpty()) {
+			key = name;
+		}
+
+		final ArgumentProcessor<Object> argProcessor = new ArgumentProcessor<Object>();
+		argProcessor.processAnnotations(type);
+
+		addCommand(key, new Command<T>() {
+			public void process(Queue<String> argq, T state) {
+				try {
+					Object value = field.get(state);
+					argProcessor.process(argq, value);
+				} catch (IllegalArgumentException e) {
+					throw new UnexpectedException(e);
+				} catch (IllegalAccessException e) {
+					throw new UnexpectedException(e);
+				}
+			}
+		});
+	}
+
+	/**
+	 * Processes the relevant annotations on the given field and adds the
+	 * required options or commands.
+	 * @param field The <code>Field</code> to process.
+	 */
+	private void processField(Field field) {
+		OptionArgument optAnnotation = field.getAnnotation(OptionArgument.class);
+		if (optAnnotation != null) {
+			processField(field, optAnnotation);
+		} else {
+			CommandArgument cmdAnnotation = field.getAnnotation(CommandArgument.class);
+			if (cmdAnnotation != null) {
+				processField(field, cmdAnnotation);
+			}
+		}
+	}
+
+	/**
+	 * Processes the relevant annotations on the given method and adds the
+	 * required command.
+	 * @param method The <code>Method</code> to process.
+	 */
+	private void processMethod(final Method method) {
+		CommandArgument annotation = method.getAnnotation(CommandArgument.class);
+		if (annotation != null) {
+			final String name = method.getName();
+			final Class<?>[] paramTypes = method.getParameterTypes();
+			final Annotation[][] paramAnnotations = method.getParameterAnnotations();
+			final ArgumentProcessor<Object[]> argProcessor = new ArgumentProcessor<Object[]>();
+			final Object[] defaultParams = new Object[paramTypes.length];
+			final List<Integer> positionalParams = new ArrayList<Integer>();
+
+			String key = annotation.value();
+			if (key.isEmpty()) {
+				key = name;
+			}
+
+			for (int i = 0; i < paramAnnotations.length; i++) {
+				Class<?> paramType = paramTypes[i];
+				if (paramType == Integer.class || paramType == int.class) {
+					defaultParams[i] = 0;
+				} else if (paramType == Double.class || paramType == double.class) {
+					defaultParams[i] = 0.0;
+				} else if (paramType == String.class) {
+					defaultParams[i] = "";
+				} else if (paramType == File.class) {
+					defaultParams[i] = null;
+				} else if (paramType == Boolean.class || paramType == boolean.class) {
+					defaultParams[i] = false;
+				} else {
+					throw new IllegalArgumentException("Invalid type (" + paramType.getCanonicalName() + ") for option parameter: method=" + method.getDeclaringClass().getCanonicalName() + "." + name);
+				}
+
+				for (int j = 0; j < paramAnnotations.length; j++) {
+					if (paramAnnotations[i][j] instanceof OptionArgument) {
+						OptionArgument optAnnotation = (OptionArgument) paramAnnotations[i][j];
+						String optKey = optAnnotation.value();
+						if (optKey.isEmpty()) {
+							throw new IllegalArgumentException("OptionArgument on parameter requires key (method=`" + method.getDeclaringClass().getCanonicalName() + "." + name + "').");
+						}
+
+						char optShortKey = optAnnotation.shortKey();
+						if (optShortKey == '\0') {
+							optShortKey = optKey.charAt(0);
+						}
+
+						final int index = i;
+						if (paramType == Integer.class || paramType == int.class) {
+							argProcessor.addOption(optKey, optShortKey, new Command<Object[]>() {
+								public void process(Queue<String> argq,
+										Object[] state) {
+									state[index] = Integer.parseInt(argq.remove());
+								}
+							});
+						} else if (paramType == Boolean.class || paramType == boolean.class) {
+							argProcessor.addOption(optKey, optShortKey, new Command<Object[]>() {
+								public void process(Queue<String> argq,
+										Object[] state) {
+									state[index] = true;
+								}
+							});
+						} else if (paramType == String.class) {
+							argProcessor.addOption(optKey, optShortKey, new Command<Object[]>() {
+								public void process(Queue<String> argq,
+										Object[] state) {
+									state[index] = argq.remove();
+								}
+							});
+						} else if (paramType == Double.class || paramType == double.class) {
+							argProcessor.addOption(optKey, optShortKey, new Command<Object[]>() {
+								public void process(Queue<String> argq,
+										Object[] state) {
+									state[index] = Double.parseDouble(argq.remove());
+								}
+							});
+						} else if (paramType == File.class) {
+							argProcessor.addOption(optKey, optShortKey, new Command<Object[]>() {
+								public void process(Queue<String> argq,
+										Object[] state) {
+									state[index] = new File(argq.remove());
+								}
+							});
+						}
+
+						break;
+					}
+
+					// There is no OptionArgument annotation, so treat it as a
+					// positional parameter.
+					positionalParams.add(i);
+				}
+			}
+
+			// The default command will parse out all the positional parameters
+			// from what's left over after all the options have been processed.
+			argProcessor.setDefaultCommand(new Command<Object[]>() {
+				public void process(Queue<String> argq, Object[] state) {
+					for (int index : positionalParams) {
+						Class<?> paramType = paramTypes[index];
+						if (paramType == Integer.class || paramType == int.class) {
+							state[index] = Integer.parseInt(argq.remove());
+						} else if (paramType == Double.class || paramType == double.class) {
+							state[index] = Double.parseDouble(argq.remove());
+						} else if (paramType == String.class) {
+							state[index] = argq.remove();
+						} else if (paramType == File.class) {
+							state[index] = new File(argq.remove());
+						} else if (paramType == Boolean.class || paramType == boolean.class) {
+							state[index] = Boolean.parseBoolean(argq.remove());
+						} else {
+							throw new UnexpectedException();
+						}
+					}
+				}
+			});
+
+			// Add the command that processes its arguments and invokes the
+			// method.
+			addCommand(key, new Command<T>(){
+				public void process(Queue<String> argq, T state) {
+					Object[] params = defaultParams.clone();
+					argProcessor.process(argq, params);
+					try {
+						method.invoke(state, params);
+					} catch (IllegalArgumentException e) {
+						throw new UnexpectedException(e);
+					} catch (IllegalAccessException e) {
+						throw new UnexpectedException(e);
+					} catch (InvocationTargetException e) {
+						throw new UnexpectedException(e);
+					}
+				}
+			});
+		}
+	}
+
+	/**
+	 * Processes <code>CommandArgument</code> and <code>OptionArgument</code>
+	 * annotations and creates adds the corresponding commands or options to
+	 * this <code>ArgumentProcessor</code> for setting fields or calling
+	 * methods.
+	 * @param cl The <code>Class</code> whose fields and methods are to be
+	 * 		processed.
+	 */
+	public void processAnnotations(Class<?> cl) {
+		for (Field field : cl.getFields()) {
+			processField(field);
+		}
+
+		for (Method method : cl.getMethods()) {
+			processMethod(method);
+		}
 	}
 
 	/**
