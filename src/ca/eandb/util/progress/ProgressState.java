@@ -141,6 +141,13 @@ public class ProgressState implements ProgressMonitor {
 		return status;
 	}
 
+	/**
+	 * Tells the task that this progress is monitoring that it should abort.
+	 */
+	public void setCancelPending() {
+		cancelPending = true;
+	}
+
 	/* (non-Javadoc)
 	 * @see ca.eandb.util.progress.ProgressMonitor#isCancelPending()
 	 */
