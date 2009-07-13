@@ -330,7 +330,8 @@ public final class ArgumentProcessor<T> implements Command<T> {
 					throw new IllegalArgumentException("Invalid type (" + paramType.getCanonicalName() + ") for option parameter: method=" + method.getDeclaringClass().getCanonicalName() + "." + name);
 				}
 
-				for (int j = 0; j < paramAnnotations[i].length; j++) {
+				int j;
+				for (j = 0; j < paramAnnotations[i].length; j++) {
 					if (paramAnnotations[i][j] instanceof OptionArgument) {
 						OptionArgument optAnnotation = (OptionArgument) paramAnnotations[i][j];
 						String optKey = optAnnotation.value();
@@ -385,9 +386,11 @@ public final class ArgumentProcessor<T> implements Command<T> {
 					}
 				}
 
-				// There is no OptionArgument annotation, so treat it as a
+				// If there is no OptionArgument annotation, treat it as a
 				// positional parameter.
-				positionalParams.add(i);
+				if (j >= paramAnnotations[i].length) {
+					positionalParams.add(i);
+				}
 			}
 
 			// The default command will parse out all the positional parameters
