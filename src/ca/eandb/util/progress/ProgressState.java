@@ -151,7 +151,6 @@ public class ProgressState implements ProgressMonitor {
 	/* (non-Javadoc)
 	 * @see ca.eandb.util.progress.ProgressMonitor#isCancelPending()
 	 */
-	@Override
 	public boolean isCancelPending() {
 		return cancelPending;
 	}
@@ -159,7 +158,6 @@ public class ProgressState implements ProgressMonitor {
 	/* (non-Javadoc)
 	 * @see ca.eandb.util.progress.ProgressMonitor#notifyCancelled()
 	 */
-	@Override
 	public void notifyCancelled() {
 		cancelled = true;
 	}
@@ -167,7 +165,6 @@ public class ProgressState implements ProgressMonitor {
 	/* (non-Javadoc)
 	 * @see ca.eandb.util.progress.ProgressMonitor#notifyComplete()
 	 */
-	@Override
 	public void notifyComplete() {
 		complete = true;
 	}
@@ -175,7 +172,6 @@ public class ProgressState implements ProgressMonitor {
 	/* (non-Javadoc)
 	 * @see ca.eandb.util.progress.ProgressMonitor#notifyIndeterminantProgress()
 	 */
-	@Override
 	public boolean notifyIndeterminantProgress() {
 		indeterminant = true;
 		return !cancelPending;
@@ -184,7 +180,6 @@ public class ProgressState implements ProgressMonitor {
 	/* (non-Javadoc)
 	 * @see ca.eandb.util.progress.ProgressMonitor#notifyProgress(int, int)
 	 */
-	@Override
 	public boolean notifyProgress(int value, int maximum) {
 		this.indeterminant = false;
 		this.value = value;
@@ -196,7 +191,6 @@ public class ProgressState implements ProgressMonitor {
 	/* (non-Javadoc)
 	 * @see ca.eandb.util.progress.ProgressMonitor#notifyProgress(double)
 	 */
-	@Override
 	public boolean notifyProgress(double progress) {
 		this.indeterminant = false;
 		this.value = this.maximum = 0;
@@ -207,7 +201,6 @@ public class ProgressState implements ProgressMonitor {
 	/* (non-Javadoc)
 	 * @see ca.eandb.util.progress.ProgressMonitor#notifyStatusChanged(java.lang.String)
 	 */
-	@Override
 	public void notifyStatusChanged(String status) {
 		this.status = status;
 	}

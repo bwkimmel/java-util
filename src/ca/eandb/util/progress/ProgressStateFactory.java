@@ -69,7 +69,6 @@ public class ProgressStateFactory implements ProgressMonitorFactory {
 	/* (non-Javadoc)
 	 * @see ca.eandb.util.progress.ProgressMonitorFactory#createProgressMonitor(java.lang.String)
 	 */
-	@Override
 	public ProgressMonitor createProgressMonitor(String title) {
 		ProgressState state = new ProgressState(title);
 		states.add(state);
