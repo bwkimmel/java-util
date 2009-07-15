@@ -222,6 +222,8 @@ public final class ArgumentProcessor<T> implements Command<T> {
 			return new StringFieldOption<T>(fieldName);
 		} else if (type == Double.class || type == double.class) {
 			return new DoubleFieldOption<T>(fieldName);
+		} else if (type == Float.class || type == float.class) {
+			return new FloatFieldOption<T>(fieldName);
 		} else if (type == File.class) {
 			return new FileFieldOption<T>(fieldName);
 		}
@@ -336,6 +338,8 @@ public final class ArgumentProcessor<T> implements Command<T> {
 					defaultParams[i] = 0;
 				} else if (paramType == Double.class || paramType == double.class) {
 					defaultParams[i] = 0.0;
+				} else if (paramType == Float.class || paramType == float.class) {
+					defaultParams[i] = (float) 0.0;
 				} else if (paramType == String.class) {
 					defaultParams[i] = "";
 				} else if (paramType == File.class) {
@@ -389,6 +393,13 @@ public final class ArgumentProcessor<T> implements Command<T> {
 									state[index] = Double.parseDouble(argq.remove());
 								}
 							});
+						} else if (paramType == Float.class || paramType == float.class) {
+							argProcessor.addOption(optKey, optShortKey, new Command<Object[]>() {
+								public void process(Queue<String> argq,
+										Object[] state) {
+									state[index] = Float.parseFloat(argq.remove());
+								}
+							});
 						} else if (paramType == File.class) {
 							argProcessor.addOption(optKey, optShortKey, new Command<Object[]>() {
 								public void process(Queue<String> argq,
@@ -422,6 +433,8 @@ public final class ArgumentProcessor<T> implements Command<T> {
 							state[index] = Integer.parseInt(argq.remove());
 						} else if (paramType == Double.class || paramType == double.class) {
 							state[index] = Double.parseDouble(argq.remove());
+						} else if (paramType == Float.class || paramType == float.class) {
+							state[index] = Float.parseFloat(argq.remove());
 						} else if (paramType == String.class) {
 							state[index] = argq.remove();
 						} else if (paramType == File.class) {
