@@ -239,7 +239,7 @@ public final class ArgumentProcessor<T> implements Command<T> {
 		String name = field.getName();
 		Class<?> type = field.getType();
 
-		if (key.isEmpty()) {
+		if (key.equals("")) {
 			key = name;
 		}
 
@@ -262,11 +262,11 @@ public final class ArgumentProcessor<T> implements Command<T> {
 		String name = field.getName();
 		Class<?> type = field.getType();
 
-		if (key.isEmpty()) {
+		if (key.equals("")) {
 			key = name;
 		}
 
-		if (prompt != null && prompt.isEmpty()) {
+		if (prompt != null && prompt.equals("")) {
 			prompt = key;
 		}
 
@@ -326,7 +326,7 @@ public final class ArgumentProcessor<T> implements Command<T> {
 			final List<Integer> positionalParams = new ArrayList<Integer>();
 
 			String key = annotation.value();
-			if (key.isEmpty()) {
+			if (key.equals("")) {
 				key = name;
 			}
 
@@ -351,7 +351,7 @@ public final class ArgumentProcessor<T> implements Command<T> {
 					if (paramAnnotations[i][j] instanceof OptionArgument) {
 						OptionArgument optAnnotation = (OptionArgument) paramAnnotations[i][j];
 						String optKey = optAnnotation.value();
-						if (optKey.isEmpty()) {
+						if (optKey.equals("")) {
 							throw new IllegalArgumentException("OptionArgument on parameter requires key (method=`" + method.getDeclaringClass().getCanonicalName() + "." + name + "').");
 						}
 
