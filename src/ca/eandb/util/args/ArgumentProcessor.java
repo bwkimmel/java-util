@@ -102,6 +102,12 @@ public final class ArgumentProcessor<T> implements Command<T> {
 	private final String prompt;
 
 	/**
+	 * A value indicating whether the shell should be started even if a command
+	 * was supplied on the command line.
+	 */
+	private boolean enterShell = false;
+
+	/**
 	 * Creates a new <code>ArgumentProcessor</code>.
 	 * @param prompt If specified, a shell will be started if no commands are
 	 * 		provided on the command line.  This <code>String</code> will be
@@ -113,6 +119,11 @@ public final class ArgumentProcessor<T> implements Command<T> {
 		this.prompt = prompt;
 		if (prompt != null) {
 			shellCommand = new ShellCommand();
+			addOption("shell", '$', new Command<Object>() {
+				public void process(Queue<String> argq, Object state) {
+					enterShell = true;
+				}
+			});
 		}
 	}
 
@@ -564,6 +575,9 @@ public final class ArgumentProcessor<T> implements Command<T> {
 				if (command != null) {
 					argq.remove();
 					command.process(argq, state);
+					if (enterShell && shellCommand != null) {
+						shellCommand.process(argq, state);
+					}
 					return;
 				}
 				break;
