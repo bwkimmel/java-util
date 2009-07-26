@@ -227,6 +227,8 @@ public final class ArgumentProcessor<T> implements Command<T> {
 	private Command<? super T> createOption(String fieldName, Class<?> type) {
 		if (type == Integer.class || type == int.class) {
 			return new IntegerFieldOption<T>(fieldName);
+		} else if (type == Long.class || type == long.class) {
+			return new LongFieldOption<T>(fieldName);
 		} else if (type == Boolean.class || type == boolean.class) {
 			return new BooleanFieldOption<T>(fieldName);
 		} else if (type == String.class) {
@@ -347,6 +349,8 @@ public final class ArgumentProcessor<T> implements Command<T> {
 				Class<?> paramType = paramTypes[i];
 				if (paramType == Integer.class || paramType == int.class) {
 					defaultParams[i] = 0;
+				} else if (paramType == Long.class || paramType == long.class) {
+						defaultParams[i] = 0L;
 				} else if (paramType == Double.class || paramType == double.class) {
 					defaultParams[i] = 0.0;
 				} else if (paramType == Float.class || paramType == float.class) {
@@ -381,6 +385,13 @@ public final class ArgumentProcessor<T> implements Command<T> {
 								public void process(Queue<String> argq,
 										Object[] state) {
 									state[index] = Integer.parseInt(argq.remove());
+								}
+							});
+						} else if (paramType == Long.class || paramType == long.class) {
+							argProcessor.addOption(optKey, optShortKey, new Command<Object[]>() {
+								public void process(Queue<String> argq,
+										Object[] state) {
+									state[index] = Long.parseLong(argq.remove());
 								}
 							});
 						} else if (paramType == Boolean.class || paramType == boolean.class) {
@@ -442,6 +453,8 @@ public final class ArgumentProcessor<T> implements Command<T> {
 						Class<?> paramType = paramTypes[index];
 						if (paramType == Integer.class || paramType == int.class) {
 							state[index] = Integer.parseInt(argq.remove());
+						} else if (paramType == Long.class || paramType == long.class) {
+							state[index] = Long.parseLong(argq.remove());
 						} else if (paramType == Double.class || paramType == double.class) {
 							state[index] = Double.parseDouble(argq.remove());
 						} else if (paramType == Float.class || paramType == float.class) {
