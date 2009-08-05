@@ -31,6 +31,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.GZIPOutputStream;
 
 import ca.eandb.util.UnexpectedException;
 import ca.eandb.util.io.AlternateClassLoaderObjectInputStream;
@@ -47,7 +49,7 @@ public final class Serialized<T> implements Serializable {
 	/**
 	 * Serialization version ID.
 	 */
-	private static final long serialVersionUID = 222718136239175900L;
+	private static final long serialVersionUID = -6120896446795084977L;
 
 	/** The serialized object. */
 	private final byte[] data;
@@ -63,9 +65,11 @@ public final class Serialized<T> implements Serializable {
 		this.object = obj;
 		try {
 			ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
-			ObjectOutputStream objectStream = new ObjectOutputStream(byteStream);
+			GZIPOutputStream gzipStream = new GZIPOutputStream(byteStream);
+			ObjectOutputStream objectStream = new ObjectOutputStream(gzipStream);
 			objectStream.writeObject(obj);
 			objectStream.flush();
+			gzipStream.finish();
 			data = byteStream.toByteArray();
 			objectStream.close();
 		} catch (IOException e) {
@@ -124,9 +128,14 @@ public final class Serialized<T> implements Serializable {
 	public T deserialize() throws ClassNotFoundException {
 		try {
 			ByteArrayInputStream byteStream = new ByteArrayInputStream(data);
-			ObjectInputStream objectStream = new ObjectInputStream(byteStream);
-			object = (T) objectStream.readObject();
-			return object;
+			GZIPInputStream gzipStream = new GZIPInputStream(byteStream);
+			try {
+				ObjectInputStream objectStream = new ObjectInputStream(gzipStream);
+				object = (T) objectStream.readObject();
+				return object;
+			} finally {
+				gzipStream.close();
+			}
 		} catch (IOException e) {
 			throw new UnexpectedException(e);
 		}
@@ -144,10 +153,15 @@ public final class Serialized<T> implements Serializable {
 	public T deserialize(ClassLoader loader) throws ClassNotFoundException {
 		try {
 			ByteArrayInputStream byteStream = new ByteArrayInputStream(data);
-			ObjectInputStream objectStream = new AlternateClassLoaderObjectInputStream(
-					byteStream, loader);
-			object = (T) objectStream.readObject();
-			return object;
+			GZIPInputStream gzipStream = new GZIPInputStream(byteStream);
+			try {
+				ObjectInputStream objectStream = new AlternateClassLoaderObjectInputStream(
+						byteStream, loader);
+				object = (T) objectStream.readObject();
+				return object;
+			} finally {
+				gzipStream.close();
+			}
 		} catch (IOException e) {
 			throw new UnexpectedException(e);
 		}
