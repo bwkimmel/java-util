@@ -366,6 +366,19 @@ public final class FileUtil {
         return workingDirectory;
     }
 
+	/**
+	 * Gets the extension part of the specified file name.
+	 * @param fileName The name of the file to get the extension of.
+	 * @return The extension of the file name.
+	 */
+	public static String getExtension(String fileName) {
+		int pos = fileName.lastIndexOf('.');
+		if (pos < 0) {
+			return "";
+		}
+		return fileName.substring(pos + 1);
+	}
+
 	/** Declared private to prevent this class from being instantiated. */
 	private FileUtil() {}
 
