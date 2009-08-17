@@ -196,6 +196,7 @@ public final class ArgumentProcessor<T> implements Command<T> {
 
 			do {
 				System.out.printf("%s>> ", prompt);
+				System.out.flush();
 				String cmd = null;
 				try {
 					cmd = shell.readLine();
