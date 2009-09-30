@@ -122,7 +122,7 @@ public final class ShortArray extends AbstractList<Short> implements
 	 * @see java.lang.Object#clone()
 	 */
 	@Override
-	public ShortArray clone() throws CloneNotSupportedException {
+	public ShortArray clone() {
 		return new ShortArray(this);
 	}
 

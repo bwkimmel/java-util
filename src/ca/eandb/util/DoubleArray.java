@@ -122,7 +122,7 @@ public final class DoubleArray extends AbstractList<Double> implements
 	 * @see java.lang.Object#clone()
 	 */
 	@Override
-	public DoubleArray clone() throws CloneNotSupportedException {
+	public DoubleArray clone() {
 		return new DoubleArray(this);
 	}
 

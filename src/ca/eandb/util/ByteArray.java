@@ -122,7 +122,7 @@ public final class ByteArray extends AbstractList<Byte> implements
 	 * @see java.lang.Object#clone()
 	 */
 	@Override
-	public ByteArray clone() throws CloneNotSupportedException {
+	public ByteArray clone() {
 		return new ByteArray(this);
 	}
 

@@ -122,7 +122,7 @@ public final class LongArray extends AbstractList<Long> implements
 	 * @see java.lang.Object#clone()
 	 */
 	@Override
-	public LongArray clone() throws CloneNotSupportedException {
+	public LongArray clone() {
 		return new LongArray(this);
 	}
 

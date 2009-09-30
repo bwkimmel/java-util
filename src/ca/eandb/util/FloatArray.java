@@ -122,7 +122,7 @@ public final class FloatArray extends AbstractList<Float> implements
 	 * @see java.lang.Object#clone()
 	 */
 	@Override
-	public FloatArray clone() throws CloneNotSupportedException {
+	public FloatArray clone() {
 		return new FloatArray(this);
 	}
 

@@ -122,7 +122,7 @@ public final class IntegerArray extends AbstractList<Integer> implements
 	 * @see java.lang.Object#clone()
 	 */
 	@Override
-	public IntegerArray clone() throws CloneNotSupportedException {
+	public IntegerArray clone() {
 		return new IntegerArray(this);
 	}
 

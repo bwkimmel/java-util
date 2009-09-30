@@ -124,7 +124,7 @@ public final class CharacterArray extends AbstractList<Character> implements
 	 * @see java.lang.Object#clone()
 	 */
 	@Override
-	public CharacterArray clone() throws CloneNotSupportedException {
+	public CharacterArray clone() {
 		return new CharacterArray(this);
 	}
 
