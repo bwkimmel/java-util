@@ -156,7 +156,7 @@ public final class Serialized<T> implements Serializable {
 			GZIPInputStream gzipStream = new GZIPInputStream(byteStream);
 			try {
 				ObjectInputStream objectStream = new AlternateClassLoaderObjectInputStream(
-						byteStream, loader);
+						gzipStream, loader);
 				object = (T) objectStream.readObject();
 				return object;
 			} finally {
