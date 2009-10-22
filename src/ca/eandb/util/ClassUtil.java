@@ -61,6 +61,7 @@ public final class ClassUtil {
 	public static void writeClassToStream(Class<?> cl, OutputStream out) throws IOException {
 		InputStream in = getClassAsStream(cl);
 		StreamUtil.writeStream(in, out);
+		out.flush();
 	}
 
 	/**
