@@ -55,14 +55,14 @@ public final class PermanentProgressMonitor implements ProgressMonitor {
 	 * @see ca.eandb.util.progress.ProgressMonitor#notifyCancelled()
 	 */
 	public void notifyCancelled() {
-		/* This request is intentionally ignored. */
+		monitor.notifyIndeterminantProgress();
 	}
 
 	/* (non-Javadoc)
 	 * @see ca.eandb.util.progress.ProgressMonitor#notifyComplete()
 	 */
 	public void notifyComplete() {
-		/* This request is intentionally ignored. */
+		monitor.notifyProgress(1.0);
 	}
 
 	/* (non-Javadoc)
