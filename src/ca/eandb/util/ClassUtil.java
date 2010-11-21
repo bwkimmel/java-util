@@ -39,6 +39,32 @@ import ca.eandb.util.io.StreamUtil;
  * @author Brad Kimmel
  */
 public final class ClassUtil {
+	
+	/**
+	 * Gets the class name associated with a given resource name.  If the
+	 * full path to the resource is given, the fully qualified name is
+	 * returned. 
+	 * @param resourceName The name of the resource.
+	 * @return The name of the associated class.
+	 */
+	public static String getClassName(String resourceName) {
+		if (!resourceName.endsWith(".class")) {
+			throw new IllegalArgumentException("resourceName does not refer to a class");
+		}
+		int len = resourceName.length();
+		return resourceName.substring(0, len - 6).replace('/', '.');
+	}
+	
+	/**
+	 * Gets the resource name associated with a given class name.  If the fully
+	 * qualified class name is given, the full path to the resource is
+	 * returned.
+	 * @param className The class name.
+	 * @return The name of the associated resource.
+	 */
+	public static String getResourceName(String className) {
+		return className.replace('.', '/').concat(".class");
+	}
 
 	/**
 	 * Gets an <code>InputStream</code> from which the specified class'
