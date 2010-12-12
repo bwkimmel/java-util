@@ -235,6 +235,29 @@ public final class IntegerArray extends AbstractList<Integer> implements
 			elements[i] = items[j];
 		}
 	}
+	
+	/**
+	 * Sets a range of elements of this array.
+	 *
+	 * @param index
+	 *            The index of the first element to set.
+	 * @param items
+	 *            The array containing the values to set.
+	 * @param start
+	 * 			  The index into <code>items</code> at which the values to
+	 * 			  insert start.
+	 * @param length
+	 *            The number of items to insert.
+	 * @throws IndexOutOfBoundsException
+	 *             if
+	 *             <code>index &lt; 0 || index + items.length &gt; size()</code>.
+	 */
+	public void set(int index, int[] items, int start, int length) {
+		rangeCheck(index, index + length);
+		for (int i = 0; i < length; i++) {
+			elements[index + i] = items[start + i];
+		}
+	}
 
 	/**
 	 * Sets a range of elements of this array.
@@ -308,6 +331,25 @@ public final class IntegerArray extends AbstractList<Integer> implements
 			elements[size++] = items[i];
 		}
 		return items.length > 0;
+	}
+	
+	/**
+	 * Appends a range of values to the end of this array.
+	 *
+	 * @param items
+	 *            The array containing the values to append.
+	 * @param start
+	 *            The index into <code>items</code> of the first item to add.
+	 * @param length
+	 * 			  The number of items to add.
+	 * @return A value indicating if the array has changed.
+	 */
+	public boolean add(int[] items, int start, int length) {
+		ensureCapacity(size + length);
+		for (int i = start, n = start + length; i < n; i++) {
+			elements[size++] = items[i];
+		}
+		return length > 0;
 	}
 
 	/**
