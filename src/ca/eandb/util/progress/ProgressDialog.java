@@ -74,7 +74,7 @@ public class ProgressDialog extends javax.swing.JDialog implements ProgressMonit
 		});
 
 		/** TODO: Redo using Java 5 supported classes. */
-		/*
+		
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);
 		layout.setHorizontalGroup(
@@ -98,7 +98,7 @@ public class ProgressDialog extends javax.swing.JDialog implements ProgressMonit
 				.addComponent(cancelButton)
 				.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
-		*/
+		
 		pack();
 	}// </editor-fold>//GEN-END:initComponents
 
