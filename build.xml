@@ -12,6 +12,9 @@
             A collection of utility classes
     </description>
 
+    <property name="version" value="0.1.1"/>
+	<property name="label" value="${ant.project.name}-${version}" />
+
 	<property name="src.dir" value="src" />
 	<property name="lib.dir" value="lib" />
 	<property name="build.dir" value="build" />
@@ -34,7 +37,7 @@
          - - - - - - - - - - - - - - - - - -->
 	<target name="jar" depends="compile">
 		<mkdir dir="${jar.dir}"/>
-	    <jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}"/>
+	    <jar destfile="${jar.dir}/${label}.jar" basedir="${classes.dir}"/>
 	</target>
 
 	<target name="compile">
