@@ -25,6 +25,9 @@
 
 package ca.eandb.util.io;
 
+import java.io.DataInput;
+import java.io.DataInputStream;
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -35,6 +38,38 @@ import java.nio.ByteBuffer;
  * @author Brad Kimmel
  */
 public final class StreamUtil {
+
+	/**
+	 * Reads a null-terminated string of bytes from the specified input stream.
+	 * @param in The <code>InputStream</code> to read from.
+	 * @return The <code>String</string> read from the file.
+	 * @throws IOException If an I/O error occurs
+	 * @throws EOFException If the end of the file is reached before a null
+	 * 		byte is read.
+	 */
+	public static String readNullTerminatedString(InputStream in) throws IOException, EOFException {
+		return readNullTerminatedString((DataInput) new DataInputStream(in));
+	}
+	
+	/**
+	 * Reads a null-terminated string of bytes from the specified input.
+	 * @param in The <code>DataInput</code> to read from.
+	 * @return The <code>String</string> read from the file.
+	 * @throws IOException If an I/O error occurs
+	 * @throws EOFException If the end of the file is reached before a null
+	 * 		byte is read.
+	 */
+	public static String readNullTerminatedString(DataInput in) throws IOException, EOFException {
+		StringBuilder s = new StringBuilder();
+		while (true) {
+			int b = in.readByte();
+			if (b == 0) {
+				break;
+			}
+			s.append((char) b);
+		}
+		return s.toString();
+	}
 
 	/**
 	 * Copies the contents of an <code>InputStream</code> to an
