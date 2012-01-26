@@ -116,5 +116,20 @@ public final class LimitedInputStream extends InputStream {
 	public int remaining() {
 		return remaining;
 	}
+	
+	/**
+	 * Skips over the remainder of the available bytes.
+	 * @throws IOException
+	 */
+	public void moveToEnd() throws IOException {
+		int bytes;
+		do {
+			bytes = (int) inner.skip(remaining);
+			if (bytes < 0) {
+				break;
+			}
+			remaining -= bytes;
+		} while (remaining > 0);
+	}
 
 }
