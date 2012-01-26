@@ -108,5 +108,13 @@ public final class LimitedInputStream extends InputStream {
 	public long skip(long n) throws IOException {
 		return n > 0 ? (long) inner.skip(Math.min(n, remaining)) : 0;
 	}
+	
+	/**
+	 * Gets the number of bytes remaining.
+	 * @return The number of bytes remaining.
+	 */
+	public int remaining() {
+		return remaining;
+	}
 
 }
