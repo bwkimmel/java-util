@@ -123,13 +123,13 @@ public final class LimitedInputStream extends InputStream {
 	 */
 	public void moveToEnd() throws IOException {
 		int bytes;
-		do {
+		while (remaining > 0) {
 			bytes = (int) inner.skip(remaining);
 			if (bytes < 0) {
 				break;
 			}
 			remaining -= bytes;
-		} while (remaining > 0);
+		}
 	}
 
 }
