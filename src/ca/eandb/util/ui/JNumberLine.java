@@ -373,6 +373,62 @@ public class JNumberLine extends JComponent {
 		repaint();
 	}
 
+	/**
+	 * @return the disabledBackgroundColor
+	 */
+	public Color getDisabledBackgroundColor() {
+		return disabledBackgroundColor;
+	}
+
+	/**
+	 * @param disabledBackgroundColor the disabledBackgroundColor to set
+	 */
+	public void setDisabledBackgroundColor(Color disabledBackgroundColor) {
+		this.disabledBackgroundColor = disabledBackgroundColor;
+	}
+
+	/**
+	 * @return the disabledBorderColor
+	 */
+	public Color getDisabledBorderColor() {
+		return disabledBorderColor;
+	}
+
+	/**
+	 * @param disabledBorderColor the disabledBorderColor to set
+	 */
+	public void setDisabledBorderColor(Color disabledBorderColor) {
+		this.disabledBorderColor = disabledBorderColor;
+	}
+
+	/**
+	 * @return the disabledTickColor
+	 */
+	public Color getDisabledTickColor() {
+		return disabledTickColor;
+	}
+
+	/**
+	 * @param disabledTickColor the disabledTickColor to set
+	 */
+	public void setDisabledTickColor(Color disabledTickColor) {
+		this.disabledTickColor = disabledTickColor;
+	}
+
+	/**
+	 * @return the disabledTextColor
+	 */
+	public Color getDisabledTextColor() {
+		return disabledTextColor;
+	}
+
+	/**
+	 * @param disabledTextColor the disabledTextColor to set
+	 */
+	public void setDisabledTextColor(Color disabledTextColor) {
+		this.disabledTextColor = disabledTextColor;
+	}
+
 	public void setValue(double value) {
 		this.value = value;
 		
