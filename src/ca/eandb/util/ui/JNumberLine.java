@@ -31,6 +31,8 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -73,6 +75,8 @@ public class JNumberLine extends JComponent {
 	
 	private Color disabledTextColor = Color.DARK_GRAY;
 	
+	private Color focusOutlineColor = Color.LIGHT_GRAY;
+	
 	private double value;
 
 	private double minimumVisible;
@@ -105,6 +109,14 @@ public class JNumberLine extends JComponent {
 		setFocusable(true);
 		setMinimumSize(new Dimension(100, 25));
 		setPreferredSize(new Dimension(200, 25));
+		addFocusListener(new FocusListener() {
+			public void focusGained(FocusEvent e) {
+				onFocusGained(e);
+			}
+			public void focusLost(FocusEvent e) {
+				onFocusLost(e);
+			}
+		});
 		addComponentListener(new ComponentAdapter() {
 			public void componentResized(ComponentEvent e) {
 				onComponentResized(e);
@@ -133,6 +145,14 @@ public class JNumberLine extends JComponent {
 		});
 	}
 	
+	private void onFocusLost(FocusEvent e) {
+		repaint();
+	}
+
+	private void onFocusGained(FocusEvent e) {
+		repaint();
+	}
+
 	private void onKeyPressed(KeyEvent e) {
 		if (isEnabled()) {
 			switch (e.getKeyCode()) {
@@ -438,6 +458,20 @@ public class JNumberLine extends JComponent {
 		this.disabledTextColor = disabledTextColor;
 	}
 
+	/**
+	 * @return the focusOutlineColor
+	 */
+	public Color getFocusOutlineColor() {
+		return focusOutlineColor;
+	}
+
+	/**
+	 * @param focusOutlineColor the focusOutlineColor to set
+	 */
+	public void setFocusOutlineColor(Color focusOutlineColor) {
+		this.focusOutlineColor = focusOutlineColor;
+	}
+
 	public void setValue(double value) {
 		this.value = value;
 		
@@ -507,6 +541,10 @@ public class JNumberLine extends JComponent {
 		g.fillRect(0, 0, d.width - 1, d.height - 1);
 		g.setColor(isEnabled() ? borderColor : disabledBorderColor);
 		g.drawRect(0, 0, d.width - 1, d.height - 1);
+		if (hasFocus()) {
+			g.setColor(focusOutlineColor);
+			g.drawRect(1, 1, d.width - 3, d.height - 3);
+		}
 	}
 	
 	private void paintMark(Graphics g) {
