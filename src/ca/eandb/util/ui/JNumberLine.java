@@ -206,12 +206,12 @@ public class JNumberLine extends JComponent {
 	}
 
 	private void onMousePressed(MouseEvent e) {
+		requestFocusInWindow();
 		dragRefPoint = e.getPoint();
 	}
 
 	private void onMouseClicked(MouseEvent e) {
 		if (e.getButton() == MouseEvent.BUTTON1) {
-			requestFocusInWindow();
 			value = getValueForPixel(e.getX());
 			repaint();
 			fireStateChanged();
@@ -447,8 +447,13 @@ public class JNumberLine extends JComponent {
 	private void paintMark(Graphics g) {
 		int x = getXCoordinate(value);
 		int h = getHeight();
+		
 		g.setColor(markColor);
-		g.drawLine(x, 0, x, h - 1);
+		g.setXORMode(Color.WHITE);
+		g.fillPolygon(new int[] { x - 4, x + 4, x }, new int[] { 1, 1, 5 }, 3);
+		g.fillPolygon(new int[] { x - 5, x + 5, x }, new int[] { h - 1, h - 1, h - 6 }, 3);
+		g.setPaintMode();
+		g.drawLine(x, 5, x, h - 6);
 	}
 	
 	private void paintZeroMark(Graphics g) {
