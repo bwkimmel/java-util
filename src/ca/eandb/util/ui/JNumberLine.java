@@ -134,31 +134,33 @@ public class JNumberLine extends JComponent {
 	}
 	
 	private void onKeyPressed(KeyEvent e) {
-		switch (e.getKeyCode()) {
-		case KeyEvent.VK_LEFT:
-			{
-				double ti = getMinorTickIncrement();
-				double newValue = ti * Math.floor(Math.nextAfter(value, Double.NEGATIVE_INFINITY) / ti);
-				double dv = newValue - value;
-				minimumVisible += dv;
-				maximumVisible += dv;
-				value = newValue;
-				repaint();
-				fireStateChanged();
-				break;
-			}
-			
-		case KeyEvent.VK_RIGHT:
-			{
-				double ti = getMinorTickIncrement();
-				double newValue = ti * Math.ceil(Math.nextUp(value) / ti);
-				double dv = newValue - value;
-				minimumVisible += dv;
-				maximumVisible += dv;
-				value = newValue;
-				repaint();
-				fireStateChanged();
-				break;
+		if (isEnabled()) {
+			switch (e.getKeyCode()) {
+			case KeyEvent.VK_LEFT:
+				{
+					double ti = getMinorTickIncrement();
+					double newValue = ti * Math.floor(Math.nextAfter(value, Double.NEGATIVE_INFINITY) / ti);
+					double dv = newValue - value;
+					minimumVisible += dv;
+					maximumVisible += dv;
+					value = newValue;
+					repaint();
+					fireStateChanged();
+					break;
+				}
+				
+			case KeyEvent.VK_RIGHT:
+				{
+					double ti = getMinorTickIncrement();
+					double newValue = ti * Math.ceil(Math.nextUp(value) / ti);
+					double dv = newValue - value;
+					minimumVisible += dv;
+					maximumVisible += dv;
+					value = newValue;
+					repaint();
+					fireStateChanged();
+					break;
+				}
 			}
 		}
 	}
@@ -169,52 +171,59 @@ public class JNumberLine extends JComponent {
 	}
 
 	private void onMouseDragged(MouseEvent e) {
-		boolean button1 = (e.getModifiersEx() & MouseEvent.BUTTON1_DOWN_MASK) != 0;
-		boolean button3 = (e.getModifiersEx() & MouseEvent.BUTTON3_DOWN_MASK) != 0;
-		if (button1) {
-			int dx = e.getX() - dragRefPoint.x;
-			if (dx != 0) {
-				double dv = getPixelIncrement() * (double) dx;
-				minimumVisible -= dv;
-				maximumVisible -= dv;
-				value -= dv;
-				repaint();
-				fireStateChanged();
+		if (isEnabled()) {
+			boolean button1 = (e.getModifiersEx() & MouseEvent.BUTTON1_DOWN_MASK) != 0;
+			boolean button3 = (e.getModifiersEx() & MouseEvent.BUTTON3_DOWN_MASK) != 0;
+			if (button1) {
+				int dx = e.getX() - dragRefPoint.x;
+				if (dx != 0) {
+					double dv = getPixelIncrement() * (double) dx;
+					minimumVisible -= dv;
+					maximumVisible -= dv;
+					value -= dv;
+					repaint();
+					fireStateChanged();
+				}
+			} else if (button3) {
+				int x = e.getX();
+				int x0 = getXCoordinate(value);
+				if (Math.abs(x - x0) > 2) {
+					int rx = dragRefPoint.x;
+					double rv = getValueForPixel(rx);
+					double newIncr = Math.abs((rv - value) / (double) (x - x0));
+					int w = getWidth();
+					minimumVisible = value - newIncr * (double) x0;
+					maximumVisible = value + newIncr * (double) (w - 1 - x0);
+					repaint();
+					fireStateChanged();
+				}
 			}
-		} else if (button3) {
-			int x = e.getX();
-			int x0 = getXCoordinate(value);
-			if (Math.abs(x - x0) > 2) {
-				int rx = dragRefPoint.x;
-				double rv = getValueForPixel(rx);
-				double newIncr = Math.abs((rv - value) / (double) (x - x0));
-				int w = getWidth();
-				minimumVisible = value - newIncr * (double) x0;
-				maximumVisible = value + newIncr * (double) (w - 1 - x0);
-				repaint();
-				fireStateChanged();
-			}
+	
+			dragRefPoint = e.getPoint();
 		}
-
-		dragRefPoint = e.getPoint();
 	}
  
 	private void onMouseReleased(MouseEvent e) {
-		System.out.println("onMouseReleased");
 		dragRefPoint = null;
-		fireStateChanged();
+		if (isEnabled()) {
+			fireStateChanged();
+		}
 	}
 
 	private void onMousePressed(MouseEvent e) {
-		requestFocusInWindow();
-		dragRefPoint = e.getPoint();
+		if (isEnabled()) {
+			requestFocusInWindow();
+			dragRefPoint = e.getPoint();
+		}
 	}
 
 	private void onMouseClicked(MouseEvent e) {
-		if (e.getButton() == MouseEvent.BUTTON1) {
-			value = getValueForPixel(e.getX());
-			repaint();
-			fireStateChanged();
+		if (isEnabled()) {
+			if (e.getButton() == MouseEvent.BUTTON1) {
+				value = getValueForPixel(e.getX());
+				repaint();
+				fireStateChanged();
+			}
 		}
 	}
 	
