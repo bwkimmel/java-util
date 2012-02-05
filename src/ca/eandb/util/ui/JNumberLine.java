@@ -31,12 +31,18 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JComponent;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 /**
  * @author brad
@@ -57,18 +63,48 @@ public class JNumberLine extends JComponent {
 	
 	private Color borderColor = Color.BLACK;
 	
-	private double value = Math.PI;
-
-	private double minimumVisible = -10.0;
+	private Color textColor = Color.BLACK;
 	
-	private double maximumVisible = 10.0;
+	private Color disabledBackgroundColor = Color.LIGHT_GRAY;
+	
+	private Color disabledBorderColor = Color.GRAY;
+	
+	private Color disabledTickColor = Color.GRAY;
+	
+	private Color disabledTextColor = Color.DARK_GRAY;
+	
+	private double value;
+
+	private double minimumVisible;
+	
+	private double maximumVisible;
 	
 	private Point dragRefPoint = null;
+	
+	private List<ChangeListener> changeListeners = new ArrayList<ChangeListener>();
+	
+	public JNumberLine() {
+		this(-10, 10, 0);
+	}
 	
 	/**
 	 * 
 	 */
-	public JNumberLine() {
+	public JNumberLine(double minimumVisible, double maximumVisible, double value) {
+		if (!(minimumVisible <= value && value <= maximumVisible)) {
+			throw new IllegalArgumentException("value not in range");
+		}
+		if (minimumVisible >= maximumVisible) {
+			throw new IllegalArgumentException("minimumVisible >= maximumVisible");
+		}
+		
+		this.minimumVisible = minimumVisible;
+		this.maximumVisible = maximumVisible;
+		this.value = value;
+		
+		setFocusable(true);
+		setMinimumSize(new Dimension(100, 25));
+		setPreferredSize(new Dimension(200, 25));
 		addComponentListener(new ComponentAdapter() {
 			public void componentResized(ComponentEvent e) {
 				onComponentResized(e);
@@ -90,16 +126,51 @@ public class JNumberLine extends JComponent {
 				onMouseClicked(e);
 			}
 		});
+		addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent e) {
+				onKeyPressed(e);
+			}
+		});
+	}
+	
+	private void onKeyPressed(KeyEvent e) {
+		switch (e.getKeyCode()) {
+		case KeyEvent.VK_LEFT:
+			{
+				double ti = getMinorTickIncrement();
+				double newValue = ti * Math.floor(Math.nextAfter(value, Double.NEGATIVE_INFINITY) / ti);
+				double dv = newValue - value;
+				minimumVisible += dv;
+				maximumVisible += dv;
+				value = newValue;
+				repaint();
+				fireStateChanged();
+				break;
+			}
+			
+		case KeyEvent.VK_RIGHT:
+			{
+				double ti = getMinorTickIncrement();
+				double newValue = ti * Math.ceil(Math.nextUp(value) / ti);
+				double dv = newValue - value;
+				minimumVisible += dv;
+				maximumVisible += dv;
+				value = newValue;
+				repaint();
+				fireStateChanged();
+				break;
+			}
+		}
 	}
 
-	protected void onComponentResized(ComponentEvent e) {
+	private void onComponentResized(ComponentEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	private void onMouseDragged(MouseEvent e) {
 		boolean button1 = (e.getModifiersEx() & MouseEvent.BUTTON1_DOWN_MASK) != 0;
-		boolean button2 = (e.getModifiersEx() & MouseEvent.BUTTON3_DOWN_MASK) != 0;
+		boolean button3 = (e.getModifiersEx() & MouseEvent.BUTTON3_DOWN_MASK) != 0;
 		if (button1) {
 			int dx = e.getX() - dragRefPoint.x;
 			if (dx != 0) {
@@ -108,9 +179,9 @@ public class JNumberLine extends JComponent {
 				maximumVisible -= dv;
 				value -= dv;
 				repaint();
-				System.out.println(value);
+				fireStateChanged();
 			}
-		} else if (button2) {
+		} else if (button3) {
 			int x = e.getX();
 			int x0 = getXCoordinate(value);
 			if (Math.abs(x - x0) > 2) {
@@ -121,6 +192,7 @@ public class JNumberLine extends JComponent {
 				minimumVisible = value - newIncr * (double) x0;
 				maximumVisible = value + newIncr * (double) (w - 1 - x0);
 				repaint();
+				fireStateChanged();
 			}
 		}
 
@@ -130,6 +202,7 @@ public class JNumberLine extends JComponent {
 	private void onMouseReleased(MouseEvent e) {
 		System.out.println("onMouseReleased");
 		dragRefPoint = null;
+		fireStateChanged();
 	}
 
 	private void onMousePressed(MouseEvent e) {
@@ -138,9 +211,200 @@ public class JNumberLine extends JComponent {
 
 	private void onMouseClicked(MouseEvent e) {
 		if (e.getButton() == MouseEvent.BUTTON1) {
+			requestFocusInWindow();
 			value = getValueForPixel(e.getX());
 			repaint();
+			fireStateChanged();
 		}
+	}
+	
+	public void addChangeListener(ChangeListener l) {
+		changeListeners.add(l);
+	}
+	
+	protected void fireStateChanged() {
+		ChangeEvent e = new ChangeEvent(this);
+		for (ChangeListener l : changeListeners) {
+			l.stateChanged(e);
+		}
+	}
+	
+	/**
+	 * @return the backgroundColor
+	 */
+	public Color getBackgroundColor() {
+		return backgroundColor;
+	}
+
+	/**
+	 * @param backgroundColor the backgroundColor to set
+	 */
+	public void setBackgroundColor(Color backgroundColor) {
+		this.backgroundColor = backgroundColor;
+		repaint();
+	}
+
+	/**
+	 * @return the tickColor
+	 */
+	public Color getTickColor() {
+		return tickColor;
+	}
+
+	/**
+	 * @param tickColor the tickColor to set
+	 */
+	public void setTickColor(Color tickColor) {
+		this.tickColor = tickColor;
+		repaint();
+	}
+
+	/**
+	 * @return the markColor
+	 */
+	public Color getMarkColor() {
+		return markColor;
+	}
+
+	/**
+	 * @param markColor the markColor to set
+	 */
+	public void setMarkColor(Color markColor) {
+		this.markColor = markColor;
+		repaint();
+	}
+
+	/**
+	 * @return the zeroMarkColor
+	 */
+	public Color getZeroMarkColor() {
+		return zeroMarkColor;
+	}
+
+	/**
+	 * @param zeroMarkColor the zeroMarkColor to set
+	 */
+	public void setZeroMarkColor(Color zeroMarkColor) {
+		this.zeroMarkColor = zeroMarkColor;
+		repaint();
+	}
+
+	/**
+	 * @return the borderColor
+	 */
+	public Color getBorderColor() {
+		return borderColor;
+	}
+
+	/**
+	 * @param borderColor the borderColor to set
+	 */
+	public void setBorderColor(Color borderColor) {
+		this.borderColor = borderColor;
+		repaint();
+	}
+
+	/**
+	 * @return the textColor
+	 */
+	public Color getTextColor() {
+		return textColor;
+	}
+
+	/**
+	 * @param textColor the textColor to set
+	 */
+	public void setTextColor(Color textColor) {
+		this.textColor = textColor;
+		repaint();
+	}
+
+	/**
+	 * @return the minimumVisible
+	 */
+	public double getMinimumVisible() {
+		return minimumVisible;
+	}
+
+	/**
+	 * @param minimumVisible the minimumVisible to set
+	 */
+	public void setMinimumVisible(double minimumVisible) {
+		if (minimumVisible >= maximumVisible) {
+			throw new IllegalArgumentException("Invalid minimum visible");
+		}
+		if (value <= minimumVisible) {
+			throw new IllegalArgumentException("Value is outside new range");
+		}
+		this.minimumVisible = minimumVisible;
+		repaint();
+	}
+
+	/**
+	 * @return the maximumVisible
+	 */
+	public double getMaximumVisible() {
+		return maximumVisible;
+	}
+
+	/**
+	 * @param maximumVisible the maximumVisible to set
+	 */
+	public void setMaximumVisible(double maximumVisible) {
+		if (minimumVisible >= maximumVisible) {
+			throw new IllegalArgumentException("Invalid maximum visible");
+		}
+		if (value >= maximumVisible) {
+			throw new IllegalArgumentException("Value is outside new range");
+		}
+		this.maximumVisible = maximumVisible;
+		repaint();
+	}
+	
+	public void setVisibleRange(double minimumVisible, double maximumVisible) {
+		if (minimumVisible >= maximumVisible) {
+			throw new IllegalArgumentException("Invalid visible range");
+		}
+		if (value >= maximumVisible || value <= minimumVisible) {
+			throw new IllegalArgumentException("Value is outside new range");
+		}
+		this.minimumVisible = minimumVisible;
+		this.maximumVisible = maximumVisible;
+		repaint();
+	}
+
+	public void setValue(double value) {
+		this.value = value;
+		
+		double q1 = minimumVisible + 0.25 * (maximumVisible - minimumVisible);
+		double q3 = minimumVisible + 0.75 * (maximumVisible - minimumVisible);
+		if (value < q1 || value > q3) {
+			double q2 = minimumVisible + 0.5 * (maximumVisible - minimumVisible);
+			double dv = value - q2;
+			minimumVisible += dv;
+			maximumVisible += dv;
+		}
+		repaint();
+	}
+	
+	public double getValue() {
+		double pi = getPixelIncrement();
+		int digits = 1 - (int) Math.ceil(Math.log10(3.0 * pi));
+		double roundTo = Math.pow(10.0, -digits);
+		return roundTo * Math.round(value / roundTo);
+	}
+	
+	public String getValueAsString() {
+		double pi = getPixelIncrement();
+		int digits = 1 - (int) Math.ceil(Math.log10(3.0 * pi));
+		double roundTo = Math.pow(10.0, -digits);
+		double v = roundTo * Math.round(value / roundTo);
+		String fmt = String.format("%%.%df", Math.max(digits, 0));
+		return String.format(fmt, v);
+	}
+	
+	public boolean getValueIsAdjusting() {
+		return dragRefPoint != null;
 	}
 
 	/* (fnon-Javadoc)
@@ -157,20 +421,12 @@ public class JNumberLine extends JComponent {
 		paintTicks(g);
 		paintZeroMark(g);
 		paintMark(g);
-		
-		g.setColor(Color.BLACK);
-
-		double pi = getPixelIncrement();
-		double v = value;
-		int digits = 1 - (int) Math.ceil(Math.log10(3.0 * pi));
-		if (digits < 0) {
-			double roundTo = Math.pow(10.0, -digits);
-			v = roundTo * Math.round(v / roundTo);
-			digits = 0;
-		}
-		String fmt = String.format("%%.%df", digits);
-		String label = String.format(fmt, v);
-//		String label = Double.toString(value);
+		paintText(g);
+	}
+	
+	private void paintText(Graphics g) {
+		g.setColor(isEnabled() ? textColor : disabledTextColor);
+		String label = getValueAsString();
 		Rectangle2D rect = g.getFontMetrics().getStringBounds(label, g);
 
 		double w = rect.getWidth();
@@ -178,15 +434,13 @@ public class JNumberLine extends JComponent {
 		double w0 = (double) getWidth();
 		double h0 = (double) getHeight();
 		g.drawString(label, (int) Math.floor(w0 - w) - 2, (int) Math.round((h0 + h) / 2.0));
-		
-		
 	}
 	
 	private void paintBackground(Graphics g) {
 		Dimension d = getSize();
-		g.setColor(backgroundColor);
+		g.setColor(isEnabled() ? backgroundColor : disabledBackgroundColor);
 		g.fillRect(0, 0, d.width - 1, d.height - 1);
-		g.setColor(borderColor);
+		g.setColor(isEnabled() ? borderColor : disabledBorderColor);
 		g.drawRect(0, 0, d.width - 1, d.height - 1);
 	}
 	
@@ -207,7 +461,7 @@ public class JNumberLine extends JComponent {
 	}
 	
 	private void paintTicks(Graphics g) {
-		g.setColor(tickColor);
+		g.setColor(isEnabled() ? tickColor : disabledTickColor);
 		
 		double tickIncr = getMinorTickIncrement();
 		Dimension d = getSize();
