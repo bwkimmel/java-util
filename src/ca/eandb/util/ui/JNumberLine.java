@@ -58,6 +58,10 @@ public class JNumberLine extends JComponent {
 	private static final int MAX_PRECISION = 13;
 	
 	private static final int MARK_RADIUS = 5;
+	
+	private static final double MIN_REL_MARK_POS = 0.1;
+	
+	private static final double MAX_REL_MARK_POS = 0.9;
 
 	private Color backgroundColor = Color.WHITE;
 	
@@ -203,8 +207,8 @@ public class JNumberLine extends JComponent {
 				boolean stateChanged = false;
 				if (draggingMark) {
 					double pi = getPixelIncrement();
-					double q1 = minimumVisible + 0.25 * (maximumVisible - minimumVisible);
-					double q3 = minimumVisible + 0.75 * (maximumVisible - minimumVisible);
+					double q1 = minimumVisible + MIN_REL_MARK_POS * (maximumVisible - minimumVisible);
+					double q3 = minimumVisible + MAX_REL_MARK_POS * (maximumVisible - minimumVisible);
 					int q1x = getXCoordinate(q1);
 					int q3x = getXCoordinate(q3);
 					int dx = e.getX() - Math.min(Math.max(dragRefPoint.x, q1x), q3x);
@@ -516,8 +520,8 @@ public class JNumberLine extends JComponent {
 	public void setValue(double value) {
 		this.value = value;
 		
-		double q1 = minimumVisible + 0.25 * (maximumVisible - minimumVisible);
-		double q3 = minimumVisible + 0.75 * (maximumVisible - minimumVisible);
+		double q1 = minimumVisible + MIN_REL_MARK_POS * (maximumVisible - minimumVisible);
+		double q3 = minimumVisible + MAX_REL_MARK_POS * (maximumVisible - minimumVisible);
 		if (value < q1 || value > q3) {
 			double q2 = minimumVisible + 0.5 * (maximumVisible - minimumVisible);
 			double dv = value - q2;
