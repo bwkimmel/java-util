@@ -56,6 +56,8 @@ public class JNumberLine extends JComponent {
 	private static final long serialVersionUID = 6382523327122484024L;
 	
 	private static final int MAX_PRECISION = 13;
+	
+	private static final int MARK_RADIUS = 5;
 
 	private Color backgroundColor = Color.WHITE;
 	
@@ -86,6 +88,10 @@ public class JNumberLine extends JComponent {
 	private double maximumVisible;
 	
 	private Point dragRefPoint = null;
+	
+	private boolean draggingMark = false;
+	
+	private int dragOffset = 0;
 	
 	private List<ChangeListener> changeListeners = new ArrayList<ChangeListener>();
 	
@@ -135,9 +141,6 @@ public class JNumberLine extends JComponent {
 			}
 			public void mouseReleased(MouseEvent e) {
 				onMouseReleased(e);
-			}
-			public void mouseClicked(MouseEvent e) {
-				onMouseClicked(e);
 			}
 		});
 		addKeyListener(new KeyAdapter() {
@@ -199,10 +202,35 @@ public class JNumberLine extends JComponent {
 			if (button1) {
 				int dx = e.getX() - dragRefPoint.x;
 				if (dx != 0) {
-					double dv = getPixelIncrement() * (double) dx;
-					minimumVisible -= dv;
-					maximumVisible -= dv;
-					value -= dv;
+					double pi = getPixelIncrement();
+					if (draggingMark) {
+						double q1 = minimumVisible + 0.25 * (maximumVisible - minimumVisible);
+						double q3 = minimumVisible + 0.75 * (maximumVisible - minimumVisible);
+						int q1x = getXCoordinate(q1);
+						int q3x = getXCoordinate(q3);
+						dx = e.getX() - Math.min(Math.max(dragRefPoint.x, q1x), q3x);
+						double dv = pi * (double) dx;
+						double nv = value + dv;
+						int nx = getXCoordinate(nv);
+						if (nx < q1x) {
+							dv = -pi * Math.log10(1.0 + (double) (q1x - nx));
+							minimumVisible += dv;
+							maximumVisible += dv;
+							value += dv;
+						} else if (nx > q3x) {
+							dv = pi * Math.log10(1.0 + (double) (nx - q3x));
+							minimumVisible += dv;
+							maximumVisible += dv;
+							value += dv;
+						} else {
+							value = nv;
+						}
+					} else {
+						double dv = pi * (double) dx;
+						minimumVisible -= dv;
+						maximumVisible -= dv;
+						value -= dv;
+					}
 					repaint();
 					fireStateChanged();
 				}
@@ -235,6 +263,7 @@ public class JNumberLine extends JComponent {
  
 	private void onMouseReleased(MouseEvent e) {
 		dragRefPoint = null;
+		draggingMark = false;
 		if (isEnabled()) {
 			fireStateChanged();
 		}
@@ -244,16 +273,10 @@ public class JNumberLine extends JComponent {
 		if (isEnabled()) {
 			requestFocusInWindow();
 			dragRefPoint = e.getPoint();
-		}
-	}
-
-	private void onMouseClicked(MouseEvent e) {
-		if (isEnabled()) {
-			if (e.getButton() == MouseEvent.BUTTON1) {
-				value = getValueForPixel(e.getX());
-				repaint();
-				fireStateChanged();
-			}
+			int x = this.getXCoordinate(value);
+			dragOffset = x - dragRefPoint.x;
+			draggingMark = (e.getButton() == MouseEvent.BUTTON1)
+					&& (Math.abs(dragOffset) <= MARK_RADIUS);
 		}
 	}
 	
