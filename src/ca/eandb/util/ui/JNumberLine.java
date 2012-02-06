@@ -200,15 +200,15 @@ public class JNumberLine extends JComponent {
 			boolean button1 = (e.getModifiersEx() & MouseEvent.BUTTON1_DOWN_MASK) != 0;
 			boolean button3 = (e.getModifiersEx() & MouseEvent.BUTTON3_DOWN_MASK) != 0;
 			if (button1) {
-				int dx = e.getX() - dragRefPoint.x;
-				if (dx != 0) {
+				boolean stateChanged = false;
+				if (draggingMark) {
 					double pi = getPixelIncrement();
-					if (draggingMark) {
-						double q1 = minimumVisible + 0.25 * (maximumVisible - minimumVisible);
-						double q3 = minimumVisible + 0.75 * (maximumVisible - minimumVisible);
-						int q1x = getXCoordinate(q1);
-						int q3x = getXCoordinate(q3);
-						dx = e.getX() - Math.min(Math.max(dragRefPoint.x, q1x), q3x);
+					double q1 = minimumVisible + 0.25 * (maximumVisible - minimumVisible);
+					double q3 = minimumVisible + 0.75 * (maximumVisible - minimumVisible);
+					int q1x = getXCoordinate(q1);
+					int q3x = getXCoordinate(q3);
+					int dx = e.getX() - Math.min(Math.max(dragRefPoint.x, q1x), q3x);
+					if (dx != 0) {
 						double dv = pi * (double) dx;
 						double nv = value + dv;
 						int nx = getXCoordinate(nv);
@@ -225,12 +225,20 @@ public class JNumberLine extends JComponent {
 						} else {
 							value = nv;
 						}
-					} else {
+						stateChanged = true;
+					}
+				} else {
+					double pi = getPixelIncrement();
+					int dx = e.getX() - dragRefPoint.x;
+					if (dx != 0) {
 						double dv = pi * (double) dx;
 						minimumVisible -= dv;
 						maximumVisible -= dv;
 						value -= dv;
+						stateChanged = true;
 					}
+				}
+				if (stateChanged) {
 					repaint();
 					fireStateChanged();
 				}
