@@ -54,6 +54,8 @@ public class JNumberLine extends JComponent {
 	
 	/** Serialization version ID. */
 	private static final long serialVersionUID = 6382523327122484024L;
+	
+	private static final int MAX_PRECISION = 13;
 
 	private Color backgroundColor = Color.WHITE;
 	
@@ -212,10 +214,18 @@ public class JNumberLine extends JComponent {
 					double rv = getValueForPixel(rx);
 					double newIncr = Math.abs((rv - value) / (double) (x - x0));
 					int w = getWidth();
-					minimumVisible = value - newIncr * (double) x0;
-					maximumVisible = value + newIncr * (double) (w - 1 - x0);
-					repaint();
-					fireStateChanged();
+					double newMinimumVisible = value - newIncr * (double) x0;
+					double newMaximumVisible = value + newIncr * (double) (w - 1 - x0);
+					double pi = (newMaximumVisible - newMinimumVisible) / (double) w;
+					double scale = Math.max(Math.abs(maximumVisible), Math.abs(minimumVisible));
+					int precision = (int) Math.ceil(Math.log10(scale)) - (int) Math.ceil(Math.log10(3.0 * pi)); //-13
+
+					if (precision <= MAX_PRECISION) {
+						minimumVisible = newMinimumVisible;
+						maximumVisible = newMaximumVisible;
+						repaint();
+						fireStateChanged();
+					}						
 				}
 			}
 	
