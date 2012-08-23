@@ -80,6 +80,13 @@ public final class DummyProgressMonitor implements ProgressMonitor {
 	public boolean isCancelPending() {
 		return false;
 	}
+	
+	/* (non-Javadoc)
+	 * @see ca.eandb.util.progress.ProgressMonitor#addCancelListener(ca.eandb.util.progress.CancelListener)
+	 */
+	public void addCancelListener(CancelListener listener) {
+		/* nothing to do. */
+	}
 
 	/**
 	 * Creates a new <code>DummyProgressMonitor</code>.  This constructor is

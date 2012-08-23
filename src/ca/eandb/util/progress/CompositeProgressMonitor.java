@@ -49,6 +49,7 @@ public final class CompositeProgressMonitor implements ProgressMonitor {
 	 */
 	public CompositeProgressMonitor addProgressMonitor(ProgressMonitor monitor) {
 		this.monitors.add(monitor);
+		monitor.addCancelListener(cancelListeners);
 		return this;
 	}
 
@@ -74,6 +75,14 @@ public final class CompositeProgressMonitor implements ProgressMonitor {
 		for (ProgressMonitor monitor : this.monitors) {
 			monitor.notifyCancelled();
 		}
+	}
+
+	/* (non-Javadoc)
+	 * @see ca.eandb.util.progress.ProgressMonitor#addCancelListener(ca.eandb.util.progress.CancelListener)
+	 */
+	@Override
+	public void addCancelListener(CancelListener listener) {
+		cancelListeners.addCancelListener(listener);
 	}
 
 	/* (non-Javadoc)
@@ -150,5 +159,12 @@ public final class CompositeProgressMonitor implements ProgressMonitor {
 	 * that make up this <code>CompositeProgressMonitor</code>.
 	 */
 	private final Collection<ProgressMonitor> monitors = new HashSet<ProgressMonitor>();
+	
+	/**
+	 * The <code>CancelListener</code> to notify if any of the child
+	 * <code>ProgressMonitor</code>s wish to request that the operation be
+	 * cancelled.
+	 */
+	private final CompositeCancelListener cancelListeners = new CompositeCancelListener();
 
 }

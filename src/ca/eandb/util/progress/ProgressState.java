@@ -61,6 +61,12 @@ public class ProgressState implements ProgressMonitor {
 
 	/** The title of this <code>ProgressMonitor</code>. */
 	private final String title;
+	
+	/**
+	 * The <code>CancelListener</code> to be notified if the operation is to be
+	 * cancelled.
+	 */
+	private final CompositeCancelListener cancelListeners = new CompositeCancelListener();
 
 	/**
 	 * Creates a new <code>ProgressState</code>.
@@ -146,6 +152,7 @@ public class ProgressState implements ProgressMonitor {
 	 */
 	public void setCancelPending() {
 		cancelPending = true;
+		cancelListeners.cancelRequested();
 	}
 
 	/* (non-Javadoc)
@@ -153,6 +160,13 @@ public class ProgressState implements ProgressMonitor {
 	 */
 	public boolean isCancelPending() {
 		return cancelPending;
+	}
+	
+	/* (non-Javadoc)
+	 * @see ca.eandb.util.progress.ProgressMonitor#addCancelListener(ca.eandb.util.progress.CancelListener)
+	 */
+	public void addCancelListener(CancelListener listener) {
+		cancelListeners.addCancelListener(listener);
 	}
 
 	/* (non-Javadoc)

@@ -50,6 +50,13 @@ public final class PermanentProgressMonitor implements ProgressMonitor {
 	public boolean isCancelPending() {
 		return monitor.isCancelPending();
 	}
+	
+	/* (non-Javadoc)
+	 * @see ca.eandb.util.progress.ProgressMonitor#addCancelListener(ca.eandb.util.progress.CancelListener)
+	 */
+	public void addCancelListener(CancelListener listener) {
+		monitor.addCancelListener(listener);
+	}
 
 	/* (non-Javadoc)
 	 * @see ca.eandb.util.progress.ProgressMonitor#notifyCancelled()

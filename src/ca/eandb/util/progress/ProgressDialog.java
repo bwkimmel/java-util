@@ -122,6 +122,7 @@ public class ProgressDialog extends javax.swing.JDialog implements ProgressMonit
 	 */
 	private synchronized void setCancelPending() {
 		this.cancelPending = true;
+		cancelListeners.cancelRequested();
 	}
 
 	/* (non-Javadoc)
@@ -129,6 +130,13 @@ public class ProgressDialog extends javax.swing.JDialog implements ProgressMonit
 	 */
 	public synchronized boolean isCancelPending() {
 		return this.cancelPending;
+	}
+	
+	/* (non-Javadoc)
+	 * @see ca.eandb.util.progress.ProgressMonitor#addCancelListener(ca.eandb.util.progress.CancelListener)
+	 */
+	public synchronized void addCancelListener(CancelListener listener) {
+		cancelListeners.addCancelListener(listener);
 	}
 
 	/* (non-Javadoc)
@@ -254,6 +262,12 @@ public class ProgressDialog extends javax.swing.JDialog implements ProgressMonit
 
 	/** The text describing the progress of the operation. */
 	private String progressText = "";
+	
+	/**
+	 * The <code>CancelListener</code> to notify if operation is to be
+	 * cancelled.
+	 */
+	private CompositeCancelListener cancelListeners = new CompositeCancelListener();
 
 	/** Serialization version. */
 	private static final long serialVersionUID = -8886817308462948089L;
