@@ -52,6 +52,27 @@ public final class ConsoleProgressMonitor implements ProgressMonitor {
 		this.length = length;
 	}
 
+	/**
+	 * Initializes the progress monitor to use a progress bar of the
+	 * default length and specified status.
+	 * @param status The initial status of the progress bar.
+	 */
+	public ConsoleProgressMonitor(String status) {
+		this.status = status;
+		this.length = DEFAULT_PROGRESS_BAR_LENGTH;
+	}
+
+	/**
+	 * Initializes the progress monitor to use a progress bar of the
+	 * specified length and status.
+	 * @param status The initial status of the progress bar.
+	 * @param length The length of the progress bar.
+	 */
+	public ConsoleProgressMonitor(String status, int length) {
+		this.status = status;
+		this.length = length;
+	}
+
 	/* (non-Javadoc)
 	 * @see ca.eandb.util.progress.ProgressMonitor#notifyCancelled()
 	 */
