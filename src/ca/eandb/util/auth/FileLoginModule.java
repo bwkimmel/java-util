@@ -30,7 +30,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 
@@ -49,20 +48,14 @@ import ca.eandb.util.StringUtil;
  * The file must be formatted as follows.  There should be one line for each
  * user.  The line should have the form:
  *
- * name:password[:role1...:rolen]
+ * name:password:salt:[:role1...:rolen]
  *
  * @author Brad Kimmel
  */
 public final class FileLoginModule extends AbstractLoginModule {
 
-	/** The default digest algorithm for storing hashed passwords. */
-	private static final String DEFAULT_DIGEST_ALGORITHM = "MD5";
-
 	/** The <code>File</code> in which passwords are stored. */
 	private File passwordFile = null;
-
-	/** The digest algorithm to use for storing hashed passwords. */
-	private String digestAlgorithm = DEFAULT_DIGEST_ALGORITHM;
 
 	/* (non-Javadoc)
 	 * @see ca.eandb.util.auth.AbstractLoginModule#initialize(java.util.Map, java.util.Map)
@@ -71,12 +64,6 @@ public final class FileLoginModule extends AbstractLoginModule {
 	protected void initialize(Map<String, ?> sharedState, Map<String, ?> options) {
 		String fileName = (String) options.get("file");
 		passwordFile = new File(fileName);
-
-		if (options.containsKey("digestAlgorithm")) {
-			digestAlgorithm = (String) options.get("digestAlgorithm");
-		} else {
-			digestAlgorithm = DEFAULT_DIGEST_ALGORITHM;
-		}
 	}
 
 	/* (non-Javadoc)
@@ -85,6 +72,7 @@ public final class FileLoginModule extends AbstractLoginModule {
 	public boolean login() throws LoginException {
 		NameCallback user = new NameCallback("Login:");
 		PasswordCallback pass = new PasswordCallback("Password:", false);
+		PasswordEncryptionService enc = new PasswordEncryptionService();
 
 		try {
 			callback(user, pass);
@@ -94,13 +82,12 @@ public final class FileLoginModule extends AbstractLoginModule {
 			while (reader.ready()) {
 				String[] fields = reader.readLine().split(":");
 				if (fields[0].equals(user.getName())) {
-					MessageDigest alg = MessageDigest.getInstance(digestAlgorithm);
 					String loginPassword = new String(pass.getPassword());
-					byte[] loginDigest = alg.digest(loginPassword.getBytes());
+					byte[] salt = StringUtil.hexToByteArray(fields[2]);
 					byte[] realDigest = StringUtil.hexToByteArray(fields[1]);
-					if (MessageDigest.isEqual(loginDigest, realDigest)) {
+					if (enc.authenticate(loginPassword, realDigest, salt)) {
 						addPrincipal(new UserPrincipal(fields[0]));
-						for (int i = 2; i < fields.length; i++) {
+						for (int i = 3; i < fields.length; i++) {
 							addPrincipal(new RolePrincipal(fields[i]));
 						}
 						return true;
@@ -114,8 +101,6 @@ public final class FileLoginModule extends AbstractLoginModule {
 			/* nothing to do. */
 		} catch (UnsupportedCallbackException e) {
 			/* nothing to do. */
-		} catch (NoSuchAlgorithmException e) {
-			throw new RuntimeException(e);
 		}
 
 		throw new FailedLoginException();
