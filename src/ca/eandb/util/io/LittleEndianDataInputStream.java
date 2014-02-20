@@ -37,13 +37,13 @@ import java.io.InputStream;
  */
 public final class LittleEndianDataInputStream extends InputStream implements
 		DataInput {
-	
+
 	/** The <code>InputStream</code> to read from. */
 	private final DataInputStream inner;
-	
+
 	/** Temporary work buffer to hold data. */
 	private final byte[] work = new byte[8];
-	
+
 	/**
 	 * Creates a new <code>LittleEndianDataInputStream</code>.
 	 * @param inner The <code>InputStream</code> to read from.
@@ -110,8 +110,13 @@ public final class LittleEndianDataInputStream extends InputStream implements
 	 */
 	@Override
 	public void readFully(byte[] b, int off, int len) throws IOException {
-		if (inner.read(b, off, len) < len) {
-			throw new EOFException();
+		while (len > 0) {
+			int read = inner.read(b, off, len);
+			if (read <= 0) {
+				throw new EOFException();
+			}
+			off += read;
+			len -= read;
 		}
 	}
 
@@ -267,7 +272,5 @@ public final class LittleEndianDataInputStream extends InputStream implements
 	public long skip(long n) throws IOException {
 		return inner.skip(n);
 	}
-	
-	
 
 }
