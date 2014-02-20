@@ -136,6 +136,7 @@ public final class LittleEndianDataInputStream extends InputStream implements
 	 * @see java.io.DataInput#readLine()
 	 */
 	@Override
+	@Deprecated
 	public String readLine() throws IOException {
 		return inner.readLine();
 	}
