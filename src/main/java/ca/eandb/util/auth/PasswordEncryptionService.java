@@ -39,7 +39,7 @@ import ca.eandb.util.UnexpectedException;
 /**
  * Implements one-way hashes for passwords.  Based on
  * <a href="http://www.javacodegeeks.com/2012/05/secure-password-storage-donts-dos-and.html">Secure
- * Password Storage – Don’ts, dos and a Java example</a>.
+ * Password Storage Donts, dos and a Java example</a>.
 
  * @author Brad Kimmel
  */
