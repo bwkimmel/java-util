@@ -54,56 +54,56 @@ import ca.eandb.util.StringUtil;
  */
 public final class FileLoginModule extends AbstractLoginModule {
 
-	/** The <code>File</code> in which passwords are stored. */
-	private File passwordFile = null;
+  /** The <code>File</code> in which passwords are stored. */
+  private File passwordFile = null;
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.auth.AbstractLoginModule#initialize(java.util.Map, java.util.Map)
-	 */
-	@Override
-	protected void initialize(Map<String, ?> sharedState, Map<String, ?> options) {
-		String fileName = (String) options.get("file");
-		passwordFile = new File(fileName);
-	}
+  /* (non-Javadoc)
+   * @see ca.eandb.util.auth.AbstractLoginModule#initialize(java.util.Map, java.util.Map)
+   */
+  @Override
+  protected void initialize(Map<String, ?> sharedState, Map<String, ?> options) {
+    String fileName = (String) options.get("file");
+    passwordFile = new File(fileName);
+  }
 
-	/* (non-Javadoc)
-	 * @see javax.security.auth.spi.LoginModule#login()
-	 */
-	public boolean login() throws LoginException {
-		NameCallback user = new NameCallback("Login:");
-		PasswordCallback pass = new PasswordCallback("Password:", false);
-		PasswordEncryptionService enc = new PasswordEncryptionService();
+  /* (non-Javadoc)
+   * @see javax.security.auth.spi.LoginModule#login()
+   */
+  public boolean login() throws LoginException {
+    NameCallback user = new NameCallback("Login:");
+    PasswordCallback pass = new PasswordCallback("Password:", false);
+    PasswordEncryptionService enc = new PasswordEncryptionService();
 
-		try {
-			callback(user, pass);
+    try {
+      callback(user, pass);
 
-			BufferedReader reader = new BufferedReader(new FileReader(passwordFile));
+      BufferedReader reader = new BufferedReader(new FileReader(passwordFile));
 
-			while (reader.ready()) {
-				String[] fields = reader.readLine().split(":");
-				if (fields[0].equals(user.getName())) {
-					String loginPassword = new String(pass.getPassword());
-					byte[] salt = StringUtil.hexToByteArray(fields[2]);
-					byte[] realDigest = StringUtil.hexToByteArray(fields[1]);
-					if (enc.authenticate(loginPassword, realDigest, salt)) {
-						addPrincipal(new UserPrincipal(fields[0]));
-						for (int i = 3; i < fields.length; i++) {
-							addPrincipal(new RolePrincipal(fields[i]));
-						}
-						return true;
-					}
-					break;
-				}
-			}
-		} catch (FileNotFoundException e) {
-			throw new RuntimeException(e);
-		} catch (IOException e) {
-			/* nothing to do. */
-		} catch (UnsupportedCallbackException e) {
-			/* nothing to do. */
-		}
+      while (reader.ready()) {
+        String[] fields = reader.readLine().split(":");
+        if (fields[0].equals(user.getName())) {
+          String loginPassword = new String(pass.getPassword());
+          byte[] salt = StringUtil.hexToByteArray(fields[2]);
+          byte[] realDigest = StringUtil.hexToByteArray(fields[1]);
+          if (enc.authenticate(loginPassword, realDigest, salt)) {
+            addPrincipal(new UserPrincipal(fields[0]));
+            for (int i = 3; i < fields.length; i++) {
+              addPrincipal(new RolePrincipal(fields[i]));
+            }
+            return true;
+          }
+          break;
+        }
+      }
+    } catch (FileNotFoundException e) {
+      throw new RuntimeException(e);
+    } catch (IOException e) {
+      /* nothing to do. */
+    } catch (UnsupportedCallbackException e) {
+      /* nothing to do. */
+    }
 
-		throw new FailedLoginException();
-	}
+    throw new FailedLoginException();
+  }
 
 }

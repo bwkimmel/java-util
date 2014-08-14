@@ -32,72 +32,72 @@ package ca.eandb.util.progress;
  */
 public final class PermanentProgressMonitor implements ProgressMonitor {
 
-	/** The <code>ProgressMonitor</code> to decorate. */
-	private final ProgressMonitor monitor;
+  /** The <code>ProgressMonitor</code> to decorate. */
+  private final ProgressMonitor monitor;
 
-	/**
-	 * Creates a new <code>PermanentProgressMonitor</code>.  Descendants of
-	 * this <code>ProgressMonitor</code> will not be made permanent.
-	 * @param monitor The <code>ProgressMonitor</code> to decorate.
-	 */
-	public PermanentProgressMonitor(ProgressMonitor monitor) {
-		this.monitor = monitor;
-	}
+  /**
+   * Creates a new <code>PermanentProgressMonitor</code>.  Descendants of
+   * this <code>ProgressMonitor</code> will not be made permanent.
+   * @param monitor The <code>ProgressMonitor</code> to decorate.
+   */
+  public PermanentProgressMonitor(ProgressMonitor monitor) {
+    this.monitor = monitor;
+  }
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.progress.ProgressMonitor#isCancelPending()
-	 */
-	public boolean isCancelPending() {
-		return monitor.isCancelPending();
-	}
-	
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.progress.ProgressMonitor#addCancelListener(ca.eandb.util.progress.CancelListener)
-	 */
-	public void addCancelListener(CancelListener listener) {
-		monitor.addCancelListener(listener);
-	}
+  /* (non-Javadoc)
+   * @see ca.eandb.util.progress.ProgressMonitor#isCancelPending()
+   */
+  public boolean isCancelPending() {
+    return monitor.isCancelPending();
+  }
+  
+  /* (non-Javadoc)
+   * @see ca.eandb.util.progress.ProgressMonitor#addCancelListener(ca.eandb.util.progress.CancelListener)
+   */
+  public void addCancelListener(CancelListener listener) {
+    monitor.addCancelListener(listener);
+  }
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.progress.ProgressMonitor#notifyCancelled()
-	 */
-	public void notifyCancelled() {
-		monitor.notifyIndeterminantProgress();
-	}
+  /* (non-Javadoc)
+   * @see ca.eandb.util.progress.ProgressMonitor#notifyCancelled()
+   */
+  public void notifyCancelled() {
+    monitor.notifyIndeterminantProgress();
+  }
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.progress.ProgressMonitor#notifyComplete()
-	 */
-	public void notifyComplete() {
-		monitor.notifyProgress(1.0);
-	}
+  /* (non-Javadoc)
+   * @see ca.eandb.util.progress.ProgressMonitor#notifyComplete()
+   */
+  public void notifyComplete() {
+    monitor.notifyProgress(1.0);
+  }
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.progress.ProgressMonitor#notifyIndeterminantProgress()
-	 */
-	public boolean notifyIndeterminantProgress() {
-		return monitor.notifyIndeterminantProgress();
-	}
+  /* (non-Javadoc)
+   * @see ca.eandb.util.progress.ProgressMonitor#notifyIndeterminantProgress()
+   */
+  public boolean notifyIndeterminantProgress() {
+    return monitor.notifyIndeterminantProgress();
+  }
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.progress.ProgressMonitor#notifyProgress(int, int)
-	 */
-	public boolean notifyProgress(int value, int maximum) {
-		return monitor.notifyProgress(value, maximum);
-	}
+  /* (non-Javadoc)
+   * @see ca.eandb.util.progress.ProgressMonitor#notifyProgress(int, int)
+   */
+  public boolean notifyProgress(int value, int maximum) {
+    return monitor.notifyProgress(value, maximum);
+  }
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.progress.ProgressMonitor#notifyProgress(double)
-	 */
-	public boolean notifyProgress(double progress) {
-		return monitor.notifyProgress(progress);
-	}
+  /* (non-Javadoc)
+   * @see ca.eandb.util.progress.ProgressMonitor#notifyProgress(double)
+   */
+  public boolean notifyProgress(double progress) {
+    return monitor.notifyProgress(progress);
+  }
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.progress.ProgressMonitor#notifyStatusChanged(java.lang.String)
-	 */
-	public void notifyStatusChanged(String status) {
-		monitor.notifyStatusChanged(status);
-	}
+  /* (non-Javadoc)
+   * @see ca.eandb.util.progress.ProgressMonitor#notifyStatusChanged(java.lang.String)
+   */
+  public void notifyStatusChanged(String status) {
+    monitor.notifyStatusChanged(status);
+  }
 
 }

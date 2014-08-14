@@ -33,21 +33,21 @@ import java.util.Queue;
  */
 public class LongFieldOption<T> extends AbstractFieldOption<T> {
 
-	/**
-	 * Creates a new <code>LongFieldOption</code>.
-	 * @param fieldName The name of the field to assign to in the application
-	 * 		state object.
-	 */
-	public LongFieldOption(String fieldName) {
-		super(fieldName);
-	}
+  /**
+   * Creates a new <code>LongFieldOption</code>.
+   * @param fieldName The name of the field to assign to in the application
+   *     state object.
+   */
+  public LongFieldOption(String fieldName) {
+    super(fieldName);
+  }
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.args.AbstractFieldOption#getOptionValue(java.util.Queue)
-	 */
-	@Override
-	protected Object getOptionValue(Queue<String> argq) {
-		return Long.parseLong(argq.remove());
-	}
+  /* (non-Javadoc)
+   * @see ca.eandb.util.args.AbstractFieldOption#getOptionValue(java.util.Queue)
+   */
+  @Override
+  protected Object getOptionValue(Queue<String> argq) {
+    return Long.parseLong(argq.remove());
+  }
 
 }

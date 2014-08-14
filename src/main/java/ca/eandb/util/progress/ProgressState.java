@@ -32,191 +32,191 @@ package ca.eandb.util.progress;
  */
 public class ProgressState implements ProgressMonitor {
 
-	/** Indicates if the task should be cancelled. */
-	private boolean cancelPending = false;
+  /** Indicates if the task should be cancelled. */
+  private boolean cancelPending = false;
 
-	/**
-	 * Indicates if the task being monitored has acknowledged that it is to be
-	 * cancelled.
-	 */
-	private boolean cancelled = false;
+  /**
+   * Indicates if the task being monitored has acknowledged that it is to be
+   * cancelled.
+   */
+  private boolean cancelled = false;
 
-	/** Indicates if the task being monitored is complete. */
-	private boolean complete = false;
+  /** Indicates if the task being monitored is complete. */
+  private boolean complete = false;
 
-	/** Indicates if the progress is indeterminant. */
-	private boolean indeterminant = true;
+  /** Indicates if the progress is indeterminant. */
+  private boolean indeterminant = true;
 
-	/** The number of work units involved in the task being monitored. */
-	private int maximum = 0;
+  /** The number of work units involved in the task being monitored. */
+  private int maximum = 0;
 
-	/** The number of completed work units. */
-	private int value = 0;
+  /** The number of completed work units. */
+  private int value = 0;
 
-	/** The fraction of the task being monitored that is completed. */
-	private double progress = 0.0;
+  /** The fraction of the task being monitored that is completed. */
+  private double progress = 0.0;
 
-	/** The status of the task being monitored. */
-	private String status = "";
+  /** The status of the task being monitored. */
+  private String status = "";
 
-	/** The title of this <code>ProgressMonitor</code>. */
-	private final String title;
-	
-	/**
-	 * The <code>CancelListener</code> to be notified if the operation is to be
-	 * cancelled.
-	 */
-	private final CompositeCancelListener cancelListeners = new CompositeCancelListener();
+  /** The title of this <code>ProgressMonitor</code>. */
+  private final String title;
+  
+  /**
+   * The <code>CancelListener</code> to be notified if the operation is to be
+   * cancelled.
+   */
+  private final CompositeCancelListener cancelListeners = new CompositeCancelListener();
 
-	/**
-	 * Creates a new <code>ProgressState</code>.
-	 * @param title The title of this <code>ProgressMonitor</code>.
-	 */
-	public ProgressState(String title) {
-		this.title = title;
-	}
+  /**
+   * Creates a new <code>ProgressState</code>.
+   * @param title The title of this <code>ProgressMonitor</code>.
+   */
+  public ProgressState(String title) {
+    this.title = title;
+  }
 
-	/**
-	 * Creates a new <code>ProgressState</code>.
-	 */
-	public ProgressState() {
-		this("");
-	}
+  /**
+   * Creates a new <code>ProgressState</code>.
+   */
+  public ProgressState() {
+    this("");
+  }
 
-	/**
-	 * Gets the title of this <code>ProgressState</code>.
-	 * @return The title of this <code>ProgressState</code>.
-	 */
-	public String getTitle() {
-		return title;
-	}
+  /**
+   * Gets the title of this <code>ProgressState</code>.
+   * @return The title of this <code>ProgressState</code>.
+   */
+  public String getTitle() {
+    return title;
+  }
 
-	/**
-	 * Gets a value indicating if the task has cancelled.
-	 * @return A value indicating if the task has cancelled.
-	 */
-	public boolean isCancelled() {
-		return cancelled;
-	}
+  /**
+   * Gets a value indicating if the task has cancelled.
+   * @return A value indicating if the task has cancelled.
+   */
+  public boolean isCancelled() {
+    return cancelled;
+  }
 
-	/**
-	 * Gets a value indicating if the task is complete.
-	 * @return A value indicating if the task is complete.
-	 */
-	public boolean isComplete() {
-		return complete;
-	}
+  /**
+   * Gets a value indicating if the task is complete.
+   * @return A value indicating if the task is complete.
+   */
+  public boolean isComplete() {
+    return complete;
+  }
 
-	/**
-	 * Gets a value indicating if the progress is indeterminant.
-	 * @return A value indicating if the progress is indeterminant.
-	 */
-	public boolean isIndeterminant() {
-		return indeterminant;
-	}
+  /**
+   * Gets a value indicating if the progress is indeterminant.
+   * @return A value indicating if the progress is indeterminant.
+   */
+  public boolean isIndeterminant() {
+    return indeterminant;
+  }
 
-	/**
-	 * Gets the total number of work units.
-	 * @return The total number of work units.
-	 */
-	public int getMaximum() {
-		return maximum;
-	}
+  /**
+   * Gets the total number of work units.
+   * @return The total number of work units.
+   */
+  public int getMaximum() {
+    return maximum;
+  }
 
-	/**
-	 * Gets the number of work units completed.
-	 * @return The number of work units completed.
-	 */
-	public int getValue() {
-		return value;
-	}
+  /**
+   * Gets the number of work units completed.
+   * @return The number of work units completed.
+   */
+  public int getValue() {
+    return value;
+  }
 
-	/**
-	 * Gets the fraction of the task completed.
-	 * @return The fraction of the task completed.
-	 */
-	public double getProgress() {
-		return progress;
-	}
+  /**
+   * Gets the fraction of the task completed.
+   * @return The fraction of the task completed.
+   */
+  public double getProgress() {
+    return progress;
+  }
 
-	/**
-	 * Gets the status of the task.
-	 * @return The status of the task.
-	 */
-	public String getStatus() {
-		return status;
-	}
+  /**
+   * Gets the status of the task.
+   * @return The status of the task.
+   */
+  public String getStatus() {
+    return status;
+  }
 
-	/**
-	 * Tells the task that this progress is monitoring that it should abort.
-	 */
-	public void setCancelPending() {
-		cancelPending = true;
-		cancelListeners.cancelRequested();
-	}
+  /**
+   * Tells the task that this progress is monitoring that it should abort.
+   */
+  public void setCancelPending() {
+    cancelPending = true;
+    cancelListeners.cancelRequested();
+  }
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.progress.ProgressMonitor#isCancelPending()
-	 */
-	public boolean isCancelPending() {
-		return cancelPending;
-	}
-	
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.progress.ProgressMonitor#addCancelListener(ca.eandb.util.progress.CancelListener)
-	 */
-	public void addCancelListener(CancelListener listener) {
-		cancelListeners.addCancelListener(listener);
-	}
+  /* (non-Javadoc)
+   * @see ca.eandb.util.progress.ProgressMonitor#isCancelPending()
+   */
+  public boolean isCancelPending() {
+    return cancelPending;
+  }
+  
+  /* (non-Javadoc)
+   * @see ca.eandb.util.progress.ProgressMonitor#addCancelListener(ca.eandb.util.progress.CancelListener)
+   */
+  public void addCancelListener(CancelListener listener) {
+    cancelListeners.addCancelListener(listener);
+  }
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.progress.ProgressMonitor#notifyCancelled()
-	 */
-	public void notifyCancelled() {
-		cancelled = true;
-	}
+  /* (non-Javadoc)
+   * @see ca.eandb.util.progress.ProgressMonitor#notifyCancelled()
+   */
+  public void notifyCancelled() {
+    cancelled = true;
+  }
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.progress.ProgressMonitor#notifyComplete()
-	 */
-	public void notifyComplete() {
-		complete = true;
-	}
+  /* (non-Javadoc)
+   * @see ca.eandb.util.progress.ProgressMonitor#notifyComplete()
+   */
+  public void notifyComplete() {
+    complete = true;
+  }
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.progress.ProgressMonitor#notifyIndeterminantProgress()
-	 */
-	public boolean notifyIndeterminantProgress() {
-		indeterminant = true;
-		return !cancelPending;
-	}
+  /* (non-Javadoc)
+   * @see ca.eandb.util.progress.ProgressMonitor#notifyIndeterminantProgress()
+   */
+  public boolean notifyIndeterminantProgress() {
+    indeterminant = true;
+    return !cancelPending;
+  }
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.progress.ProgressMonitor#notifyProgress(int, int)
-	 */
-	public boolean notifyProgress(int value, int maximum) {
-		this.indeterminant = false;
-		this.value = value;
-		this.maximum = maximum;
-		this.progress = (double) value / (double) maximum;
-		return !cancelPending;
-	}
+  /* (non-Javadoc)
+   * @see ca.eandb.util.progress.ProgressMonitor#notifyProgress(int, int)
+   */
+  public boolean notifyProgress(int value, int maximum) {
+    this.indeterminant = false;
+    this.value = value;
+    this.maximum = maximum;
+    this.progress = (double) value / (double) maximum;
+    return !cancelPending;
+  }
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.progress.ProgressMonitor#notifyProgress(double)
-	 */
-	public boolean notifyProgress(double progress) {
-		this.indeterminant = false;
-		this.value = this.maximum = 0;
-		this.progress = progress;
-		return !cancelPending;
-	}
+  /* (non-Javadoc)
+   * @see ca.eandb.util.progress.ProgressMonitor#notifyProgress(double)
+   */
+  public boolean notifyProgress(double progress) {
+    this.indeterminant = false;
+    this.value = this.maximum = 0;
+    this.progress = progress;
+    return !cancelPending;
+  }
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.progress.ProgressMonitor#notifyStatusChanged(java.lang.String)
-	 */
-	public void notifyStatusChanged(String status) {
-		this.status = status;
-	}
+  /* (non-Javadoc)
+   * @see ca.eandb.util.progress.ProgressMonitor#notifyStatusChanged(java.lang.String)
+   */
+  public void notifyStatusChanged(String status) {
+    this.status = status;
+  }
 
 }

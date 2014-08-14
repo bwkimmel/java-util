@@ -32,13 +32,13 @@ package ca.eandb.util.progress;
  */
 public interface ProgressMonitorFactory {
 
-	/**
-	 * Creates a new <code>ProgressMonitor</code>.
-	 * @param title The title to use to describe the new
-	 * 		<code>ProgressMonitor</code>.
-	 * @return The new <code>ProgressMonitor</code>.
-	 * @see ProgressMonitor
-	 */
-	ProgressMonitor createProgressMonitor(String title);
+  /**
+   * Creates a new <code>ProgressMonitor</code>.
+   * @param title The title to use to describe the new
+   *     <code>ProgressMonitor</code>.
+   * @return The new <code>ProgressMonitor</code>.
+   * @see ProgressMonitor
+   */
+  ProgressMonitor createProgressMonitor(String title);
 
 }

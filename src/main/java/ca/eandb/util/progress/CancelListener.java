@@ -33,10 +33,10 @@ package ca.eandb.util.progress;
  */
 public interface CancelListener {
 
-	/**
-	 * Called to indicate that the <code>ProgressMonitor</code> is requesting
-	 * that the operation be cancelled.
-	 */
-	void cancelRequested();
-	
+  /**
+   * Called to indicate that the <code>ProgressMonitor</code> is requesting
+   * that the operation be cancelled.
+   */
+  void cancelRequested();
+  
 }

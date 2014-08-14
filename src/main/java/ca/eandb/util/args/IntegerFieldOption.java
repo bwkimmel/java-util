@@ -33,21 +33,21 @@ import java.util.Queue;
  */
 public class IntegerFieldOption<T> extends AbstractFieldOption<T> {
 
-	/**
-	 * Creates a new <code>IntegerFieldOption</code>.
-	 * @param fieldName The name of the field to assign to in the application
-	 * 		state object.
-	 */
-	public IntegerFieldOption(String fieldName) {
-		super(fieldName);
-	}
+  /**
+   * Creates a new <code>IntegerFieldOption</code>.
+   * @param fieldName The name of the field to assign to in the application
+   *     state object.
+   */
+  public IntegerFieldOption(String fieldName) {
+    super(fieldName);
+  }
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.args.AbstractFieldOption#getOptionValue(java.util.Queue)
-	 */
-	@Override
-	protected Object getOptionValue(Queue<String> argq) {
-		return Integer.parseInt(argq.remove());
-	}
+  /* (non-Javadoc)
+   * @see ca.eandb.util.args.AbstractFieldOption#getOptionValue(java.util.Queue)
+   */
+  @Override
+  protected Object getOptionValue(Queue<String> argq) {
+    return Integer.parseInt(argq.remove());
+  }
 
 }

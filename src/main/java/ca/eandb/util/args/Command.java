@@ -33,12 +33,12 @@ import java.util.Queue;
  */
 public interface Command<T> {
 
-	/**
-	 * Handles command line arguments.
-	 * @param argq A <code>Queue</code> containing the command line options yet
-	 * 		to be processed.
-	 * @param state The application state object.
-	 */
-	void process(Queue<String> argq, T state);
+  /**
+   * Handles command line arguments.
+   * @param argq A <code>Queue</code> containing the command line options yet
+   *     to be processed.
+   * @param state The application state object.
+   */
+  void process(Queue<String> argq, T state);
 
 }

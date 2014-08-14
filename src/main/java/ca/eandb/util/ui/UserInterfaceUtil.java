@@ -35,39 +35,39 @@ import javax.swing.event.TreeModelListener;
  */
 public final class UserInterfaceUtil {
 
-	/**
-	 * Default constructor.  This constructor is private because this is a
-	 * utility class.
-	 */
-	private UserInterfaceUtil() {}
+  /**
+   * Default constructor.  This constructor is private because this is a
+   * utility class.
+   */
+  private UserInterfaceUtil() {}
 
-	/**
-	 * Adds a <code>TreeModelListener</code> that will automatically expand
-	 * the tree as new nodes are inserted.
-	 * @param tree The <code>JTree</code>.
-	 */
-	public static void enableAutoExpansion(final JTree tree) {
+  /**
+   * Adds a <code>TreeModelListener</code> that will automatically expand
+   * the tree as new nodes are inserted.
+   * @param tree The <code>JTree</code>.
+   */
+  public static void enableAutoExpansion(final JTree tree) {
 
-		tree.getModel().addTreeModelListener(new TreeModelListener() {
+    tree.getModel().addTreeModelListener(new TreeModelListener() {
 
-			public void treeNodesChanged(TreeModelEvent e) {
-				// nothing to do
-			}
+      public void treeNodesChanged(TreeModelEvent e) {
+        // nothing to do
+      }
 
-			public void treeNodesInserted(TreeModelEvent e) {
-				tree.expandPath(e.getTreePath());
-			}
+      public void treeNodesInserted(TreeModelEvent e) {
+        tree.expandPath(e.getTreePath());
+      }
 
-			public void treeNodesRemoved(TreeModelEvent e) {
-				// nothing to do
-			}
+      public void treeNodesRemoved(TreeModelEvent e) {
+        // nothing to do
+      }
 
-			public void treeStructureChanged(TreeModelEvent e) {
-				// nothing to do
-			}
+      public void treeStructureChanged(TreeModelEvent e) {
+        // nothing to do
+      }
 
-		});
+    });
 
-	}
+  }
 
 }

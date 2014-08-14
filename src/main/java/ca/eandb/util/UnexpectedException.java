@@ -39,42 +39,42 @@ package ca.eandb.util;
  */
 public class UnexpectedException extends RuntimeException {
 
-	/**
-	 * Serialization version ID.
-	 */
-	private static final long serialVersionUID = 5836524376615051737L;
+  /**
+   * Serialization version ID.
+   */
+  private static final long serialVersionUID = 5836524376615051737L;
 
-	/**
-	 * Creates a new <code>UnexpectedException</code>.
-	 */
-	public UnexpectedException() {
-		super();
-	}
+  /**
+   * Creates a new <code>UnexpectedException</code>.
+   */
+  public UnexpectedException() {
+    super();
+  }
 
-	/**
-	 * Creates a new <code>UnexpectedException</code>.
-	 * @param message The detailed message describing the condition.
-	 * @param cause The cause of the <code>UnexpectedException</code>.
-	 */
-	public UnexpectedException(String message, Throwable cause) {
-		super(message, cause);
-	}
+  /**
+   * Creates a new <code>UnexpectedException</code>.
+   * @param message The detailed message describing the condition.
+   * @param cause The cause of the <code>UnexpectedException</code>.
+   */
+  public UnexpectedException(String message, Throwable cause) {
+    super(message, cause);
+  }
 
-	/**
-	 * Creates a new <code>UnexpectedException</code>.
-	 * @param message The detailed message describing the condition.
-	 */
-	public UnexpectedException(String message) {
-		super(message);
-	}
+  /**
+   * Creates a new <code>UnexpectedException</code>.
+   * @param message The detailed message describing the condition.
+   */
+  public UnexpectedException(String message) {
+    super(message);
+  }
 
-	/**
-	 * Creates a new <code>UnexpectedException</code>.
-	 * @param cause The cause of the <code>UnexpectedException</code>.
-	 */
-	public UnexpectedException(Throwable cause) {
-		super(cause);
-	}
+  /**
+   * Creates a new <code>UnexpectedException</code>.
+   * @param cause The cause of the <code>UnexpectedException</code>.
+   */
+  public UnexpectedException(Throwable cause) {
+    super(cause);
+  }
 
 
 }

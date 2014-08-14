@@ -33,28 +33,28 @@ import java.util.List;
  * @author Brad Kimmel
  */
 public final class CompositeCancelListener implements CancelListener {
-	
-	/** The <code>List</code> of child <code>CancelListener</code>s. */
-	private final List<CancelListener> children = new ArrayList<CancelListener>();
-	
-	/**
-	 * Adds a child <code>CancelListener</code>.
-	 * @param listener The <code>CancelListener</code> to add.
-	 * @return A reference to this <code>CompositeCancelListener</code>.
-	 */
-	public CompositeCancelListener addCancelListener(CancelListener listener) {
-		children.add(listener);
-		return this;
-	}
+  
+  /** The <code>List</code> of child <code>CancelListener</code>s. */
+  private final List<CancelListener> children = new ArrayList<CancelListener>();
+  
+  /**
+   * Adds a child <code>CancelListener</code>.
+   * @param listener The <code>CancelListener</code> to add.
+   * @return A reference to this <code>CompositeCancelListener</code>.
+   */
+  public CompositeCancelListener addCancelListener(CancelListener listener) {
+    children.add(listener);
+    return this;
+  }
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.progress.CancelListener#cancelRequested()
-	 */
-	@Override
-	public void cancelRequested() {
-		for (CancelListener child : children) {
-			child.cancelRequested();
-		}
-	}
+  /* (non-Javadoc)
+   * @see ca.eandb.util.progress.CancelListener#cancelRequested()
+   */
+  @Override
+  public void cancelRequested() {
+    for (CancelListener child : children) {
+      child.cancelRequested();
+    }
+  }
 
 }

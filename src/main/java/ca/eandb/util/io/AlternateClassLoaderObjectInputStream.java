@@ -36,29 +36,29 @@ import java.io.ObjectStreamClass;
  * @author Brad Kimmel
  */
 public final class AlternateClassLoaderObjectInputStream extends
-		ObjectInputStream {
+    ObjectInputStream {
 
-	/** The <code>ClassLoader</code> to use. */
-	private final ClassLoader loader;
+  /** The <code>ClassLoader</code> to use. */
+  private final ClassLoader loader;
 
-	/**
-	 * Creates a new <code>AlternateClassLoaderObjectInputStream</code>.
-	 * @param in The <code>InputStream</code> to read from.
-	 * @throws IOException The <code>ClassLoader</code> to use.
-	 */
-	public AlternateClassLoaderObjectInputStream(InputStream in, ClassLoader loader)
-			throws IOException {
-		super(in);
-		this.loader = loader;
-	}
+  /**
+   * Creates a new <code>AlternateClassLoaderObjectInputStream</code>.
+   * @param in The <code>InputStream</code> to read from.
+   * @throws IOException The <code>ClassLoader</code> to use.
+   */
+  public AlternateClassLoaderObjectInputStream(InputStream in, ClassLoader loader)
+      throws IOException {
+    super(in);
+    this.loader = loader;
+  }
 
-	/* (non-Javadoc)
-	 * @see java.io.ObjectInputStream#resolveClass(java.io.ObjectStreamClass)
-	 */
-	@Override
-	protected Class<?> resolveClass(ObjectStreamClass desc) throws IOException,
-			ClassNotFoundException {
-		return Class.forName(desc.getName(), true, loader);
-	}
+  /* (non-Javadoc)
+   * @see java.io.ObjectInputStream#resolveClass(java.io.ObjectStreamClass)
+   */
+  @Override
+  protected Class<?> resolveClass(ObjectStreamClass desc) throws IOException,
+      ClassNotFoundException {
+    return Class.forName(desc.getName(), true, loader);
+  }
 
 }

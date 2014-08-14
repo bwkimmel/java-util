@@ -34,31 +34,31 @@ import java.util.Queue;
  */
 public final class UnrecognizedCommand implements Command<Object> {
 
-	private static UnrecognizedCommand instance;
+  private static UnrecognizedCommand instance;
 
-	/**
-	 *
-	 */
-	private UnrecognizedCommand() {
-		/* nothing to do */
-	}
+  /**
+   *
+   */
+  private UnrecognizedCommand() {
+    /* nothing to do */
+  }
 
-	public static Command<Object> getInstance() {
-		if (instance == null) {
-			instance = new UnrecognizedCommand();
-		}
-		return instance;
-	}
+  public static Command<Object> getInstance() {
+    if (instance == null) {
+      instance = new UnrecognizedCommand();
+    }
+    return instance;
+  }
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.args.Command#process(java.util.Queue, java.lang.Object)
-	 */
-	public void process(Queue<String> argq, Object state) {
-		String command = argq.peek();
-		if (command != null) {
-			System.err.print("Unrecognzied command: ");
-			System.err.println(command);
-		}
-	}
+  /* (non-Javadoc)
+   * @see ca.eandb.util.args.Command#process(java.util.Queue, java.lang.Object)
+   */
+  public void process(Queue<String> argq, Object state) {
+    String command = argq.peek();
+    if (command != null) {
+      System.err.print("Unrecognzied command: ");
+      System.err.println(command);
+    }
+  }
 
 }

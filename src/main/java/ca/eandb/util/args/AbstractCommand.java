@@ -35,20 +35,20 @@ import java.util.Queue;
  */
 public abstract class AbstractCommand<T> implements Command<T> {
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.args.Command#process(java.util.Queue, java.lang.Object)
-	 */
-	public final void process(Queue<String> argq, T state) {
-		String[] args = argq.toArray(new String[argq.size()]);
-		argq.clear();
-		run(args, state);
-	}
+  /* (non-Javadoc)
+   * @see ca.eandb.util.args.Command#process(java.util.Queue, java.lang.Object)
+   */
+  public final void process(Queue<String> argq, T state) {
+    String[] args = argq.toArray(new String[argq.size()]);
+    argq.clear();
+    run(args, state);
+  }
 
-	/**
-	 * Executes the command.
-	 * @param args The command line arguments for this command.
-	 * @param state The application options.
-	 */
-	protected abstract void run(String[] args, T state);
+  /**
+   * Executes the command.
+   * @param args The command line arguments for this command.
+   * @param state The application options.
+   */
+  protected abstract void run(String[] args, T state);
 
 }

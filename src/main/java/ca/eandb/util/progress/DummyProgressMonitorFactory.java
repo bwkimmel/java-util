@@ -32,38 +32,38 @@ package ca.eandb.util.progress;
  * @author Brad Kimmel
  */
 public final class DummyProgressMonitorFactory implements
-		ProgressMonitorFactory {
+    ProgressMonitorFactory {
 
-	/** The single instance of <code>DummyProgressMonitorFactory</code> */
-	private static DummyProgressMonitorFactory instance = null;
+  /** The single instance of <code>DummyProgressMonitorFactory</code> */
+  private static DummyProgressMonitorFactory instance = null;
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.progress.ProgressMonitorFactory#createProgressMonitor(java.lang.String)
-	 */
-	public ProgressMonitor createProgressMonitor(String title) {
-		return DummyProgressMonitor.getInstance();
-	}
+  /* (non-Javadoc)
+   * @see ca.eandb.util.progress.ProgressMonitorFactory#createProgressMonitor(java.lang.String)
+   */
+  public ProgressMonitor createProgressMonitor(String title) {
+    return DummyProgressMonitor.getInstance();
+  }
 
-	/**
-	 * Creates a new <code>DummyProgressMonitorFactory</code>.  This
-	 * constructor is private because this class is a singleton.
-	 */
-	private DummyProgressMonitorFactory() {
-		// nothing to do.
-	}
+  /**
+   * Creates a new <code>DummyProgressMonitorFactory</code>.  This
+   * constructor is private because this class is a singleton.
+   */
+  private DummyProgressMonitorFactory() {
+    // nothing to do.
+  }
 
-	/**
-	 * Gets the single instance of <code>DummyProgressMonitorFactory</code>.
-	 * @return The single instance of <code>DummyProgressMonitorFactory</code>.
-	 */
-	public static DummyProgressMonitorFactory getInstance() {
+  /**
+   * Gets the single instance of <code>DummyProgressMonitorFactory</code>.
+   * @return The single instance of <code>DummyProgressMonitorFactory</code>.
+   */
+  public static DummyProgressMonitorFactory getInstance() {
 
-		if (instance == null) {
-			instance = new DummyProgressMonitorFactory();
-		}
+    if (instance == null) {
+      instance = new DummyProgressMonitorFactory();
+    }
 
-		return instance;
+    return instance;
 
-	}
+  }
 
 }

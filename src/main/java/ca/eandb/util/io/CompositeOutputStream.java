@@ -38,67 +38,67 @@ import java.util.List;
  */
 public class CompositeOutputStream extends OutputStream {
 
-	/** The <code>List</code> of child <code>OutputStream</code>s. */
-	private final List<OutputStream> children = new ArrayList<OutputStream>();
-	
-	/**
-	 * Adds a child <code>OutputStream</code>.
-	 * @param child The <code>OutputStream</code> to add.
-	 * @return This instance.
-	 */
-	public final CompositeOutputStream addChild(OutputStream child) {
-		children.add(child);
-		return this;
-	}
-	
-	/* (non-Javadoc)
-	 * @see java.io.OutputStream#close()
-	 */
-	@Override
-	public void close() throws IOException {
-		for (OutputStream child : children) {
-			child.close();
-		}
-	}
+  /** The <code>List</code> of child <code>OutputStream</code>s. */
+  private final List<OutputStream> children = new ArrayList<OutputStream>();
+  
+  /**
+   * Adds a child <code>OutputStream</code>.
+   * @param child The <code>OutputStream</code> to add.
+   * @return This instance.
+   */
+  public final CompositeOutputStream addChild(OutputStream child) {
+    children.add(child);
+    return this;
+  }
+  
+  /* (non-Javadoc)
+   * @see java.io.OutputStream#close()
+   */
+  @Override
+  public void close() throws IOException {
+    for (OutputStream child : children) {
+      child.close();
+    }
+  }
 
-	/* (non-Javadoc)
-	 * @see java.io.OutputStream#flush()
-	 */
-	@Override
-	public void flush() throws IOException {
-		for (OutputStream child : children) {
-			child.flush();
-		}
-	}
+  /* (non-Javadoc)
+   * @see java.io.OutputStream#flush()
+   */
+  @Override
+  public void flush() throws IOException {
+    for (OutputStream child : children) {
+      child.flush();
+    }
+  }
 
-	/* (non-Javadoc)
-	 * @see java.io.OutputStream#write(byte[], int, int)
-	 */
-	@Override
-	public void write(byte[] b, int off, int len) throws IOException {
-		for (OutputStream child : children) {
-			child.write(b, off, len);
-		}
-	}
+  /* (non-Javadoc)
+   * @see java.io.OutputStream#write(byte[], int, int)
+   */
+  @Override
+  public void write(byte[] b, int off, int len) throws IOException {
+    for (OutputStream child : children) {
+      child.write(b, off, len);
+    }
+  }
 
-	/* (non-Javadoc)
-	 * @see java.io.OutputStream#write(byte[])
-	 */
-	@Override
-	public void write(byte[] b) throws IOException {
-		for (OutputStream child : children) {
-			child.write(b);
-		}
-	}
+  /* (non-Javadoc)
+   * @see java.io.OutputStream#write(byte[])
+   */
+  @Override
+  public void write(byte[] b) throws IOException {
+    for (OutputStream child : children) {
+      child.write(b);
+    }
+  }
 
-	/* (non-Javadoc)
-	 * @see java.io.OutputStream#write(int)
-	 */
-	@Override
-	public void write(int b) throws IOException {
-		for (OutputStream child : children) {
-			child.write(b);
-		}
-	}
+  /* (non-Javadoc)
+   * @see java.io.OutputStream#write(int)
+   */
+  @Override
+  public void write(int b) throws IOException {
+    for (OutputStream child : children) {
+      child.write(b);
+    }
+  }
 
 }

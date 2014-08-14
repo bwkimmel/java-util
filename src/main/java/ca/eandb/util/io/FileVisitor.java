@@ -36,13 +36,13 @@ import java.io.File;
  */
 public interface FileVisitor {
 
-	/**
-	 * Visits a <code>File</code> while walking a directory tree.
-	 * @param file The <code>File</code> being visited.
-	 * @return A value indicating whether the tree walk should continue.
-	 * @see FileUtil#postOrderTraversal(File, FileVisitor)
-	 * @see FileUtil#preOrderTraversal(File, FileVisitor)
-	 */
-	boolean visit(File file) throws Exception;
+  /**
+   * Visits a <code>File</code> while walking a directory tree.
+   * @param file The <code>File</code> being visited.
+   * @return A value indicating whether the tree walk should continue.
+   * @see FileUtil#postOrderTraversal(File, FileVisitor)
+   * @see FileUtil#preOrderTraversal(File, FileVisitor)
+   */
+  boolean visit(File file) throws Exception;
 
 }

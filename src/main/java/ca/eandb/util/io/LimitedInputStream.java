@@ -36,100 +36,100 @@ import java.io.InputStream;
  */
 public final class LimitedInputStream extends InputStream {
 
-	/** The <code>InputStream</code> to read from. */
-	private final InputStream inner;
-	
-	/** The number of bytes remaining in the stream. */
-	private int remaining;
-	
-	/**
-	 * Creates a new <code>LimitedInputStream</code>.
-	 * @param size The number of bytes available to be read.
-	 * @param inner The <code>InputStream</code> to read from.
-	 */
-	public LimitedInputStream(int size, InputStream inner) {
-		this.inner = inner;
-		this.remaining = size;
-	}
-	
-	/* (non-Javadoc)
-	 * @see java.io.InputStream#read()
-	 */
-	@Override
-	public int read() throws IOException {
-		if (remaining > 0) {
-			remaining--;
-			return inner.read();
-		} else {
-			return -1;
-		}
-	}
+  /** The <code>InputStream</code> to read from. */
+  private final InputStream inner;
+  
+  /** The number of bytes remaining in the stream. */
+  private int remaining;
+  
+  /**
+   * Creates a new <code>LimitedInputStream</code>.
+   * @param size The number of bytes available to be read.
+   * @param inner The <code>InputStream</code> to read from.
+   */
+  public LimitedInputStream(int size, InputStream inner) {
+    this.inner = inner;
+    this.remaining = size;
+  }
+  
+  /* (non-Javadoc)
+   * @see java.io.InputStream#read()
+   */
+  @Override
+  public int read() throws IOException {
+    if (remaining > 0) {
+      remaining--;
+      return inner.read();
+    } else {
+      return -1;
+    }
+  }
 
-	/* (non-Javadoc)
-	 * @see java.io.InputStream#available()
-	 */
-	@Override
-	public int available() throws IOException {
-		return Math.min(remaining, inner.available());
-	}
+  /* (non-Javadoc)
+   * @see java.io.InputStream#available()
+   */
+  @Override
+  public int available() throws IOException {
+    return Math.min(remaining, inner.available());
+  }
 
-	/* (non-Javadoc)
-	 * @see java.io.InputStream#close()
-	 */
-	@Override
-	public void close() throws IOException {
-		inner.close();
-	}
+  /* (non-Javadoc)
+   * @see java.io.InputStream#close()
+   */
+  @Override
+  public void close() throws IOException {
+    inner.close();
+  }
 
-	/* (non-Javadoc)
-	 * @see java.io.InputStream#read(byte[], int, int)
-	 */
-	@Override
-	public int read(byte[] b, int off, int len) throws IOException {
-		int bytes = inner.read(b, off, Math.min(len, remaining));
-		if (bytes > 0) {
-			remaining -= bytes;
-		}
-		return bytes;
-	}
+  /* (non-Javadoc)
+   * @see java.io.InputStream#read(byte[], int, int)
+   */
+  @Override
+  public int read(byte[] b, int off, int len) throws IOException {
+    int bytes = inner.read(b, off, Math.min(len, remaining));
+    if (bytes > 0) {
+      remaining -= bytes;
+    }
+    return bytes;
+  }
 
-	/* (non-Javadoc)
-	 * @see java.io.InputStream#read(byte[])
-	 */
-	@Override
-	public int read(byte[] b) throws IOException {
-		return read(b, 0, b.length);
-	}
+  /* (non-Javadoc)
+   * @see java.io.InputStream#read(byte[])
+   */
+  @Override
+  public int read(byte[] b) throws IOException {
+    return read(b, 0, b.length);
+  }
 
-	/* (non-Javadoc)
-	 * @see java.io.InputStream#skip(long)
-	 */
-	@Override
-	public long skip(long n) throws IOException {
-		return n > 0 ? (long) inner.skip(Math.min(n, remaining)) : 0;
-	}
-	
-	/**
-	 * Gets the number of bytes remaining.
-	 * @return The number of bytes remaining.
-	 */
-	public int remaining() {
-		return remaining;
-	}
-	
-	/**
-	 * Skips over the remainder of the available bytes.
-	 * @throws IOException
-	 */
-	public void moveToEnd() throws IOException {
-		int bytes;
-		while (remaining > 0) {
-			bytes = (int) inner.skip(remaining);
-			if (bytes < 0) {
-				break;
-			}
-			remaining -= bytes;
-		}
-	}
+  /* (non-Javadoc)
+   * @see java.io.InputStream#skip(long)
+   */
+  @Override
+  public long skip(long n) throws IOException {
+    return n > 0 ? (long) inner.skip(Math.min(n, remaining)) : 0;
+  }
+  
+  /**
+   * Gets the number of bytes remaining.
+   * @return The number of bytes remaining.
+   */
+  public int remaining() {
+    return remaining;
+  }
+  
+  /**
+   * Skips over the remainder of the available bytes.
+   * @throws IOException
+   */
+  public void moveToEnd() throws IOException {
+    int bytes;
+    while (remaining > 0) {
+      bytes = (int) inner.skip(remaining);
+      if (bytes < 0) {
+        break;
+      }
+      remaining -= bytes;
+    }
+  }
 
 }

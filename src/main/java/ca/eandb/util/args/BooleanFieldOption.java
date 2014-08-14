@@ -35,21 +35,21 @@ import java.util.Queue;
  */
 public class BooleanFieldOption<T> extends AbstractFieldOption<T> {
 
-	/**
-	 * Creates a new <code>BooleanFieldOption</code>.
-	 * @param fieldName The name of the field to assign to in the application
-	 * 		state object.
-	 */
-	public BooleanFieldOption(String fieldName) {
-		super(fieldName);
-	}
+  /**
+   * Creates a new <code>BooleanFieldOption</code>.
+   * @param fieldName The name of the field to assign to in the application
+   *     state object.
+   */
+  public BooleanFieldOption(String fieldName) {
+    super(fieldName);
+  }
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.args.AbstractFieldOption#getOptionValue(java.util.Queue)
-	 */
-	@Override
-	protected Object getOptionValue(Queue<String> argq) {
-		return true;
-	}
+  /* (non-Javadoc)
+   * @see ca.eandb.util.args.AbstractFieldOption#getOptionValue(java.util.Queue)
+   */
+  @Override
+  protected Object getOptionValue(Queue<String> argq) {
+    return true;
+  }
 
 }

@@ -37,101 +37,101 @@ import java.io.ObjectInputStream;
  */
 public final class InputArchive implements Archive {
 
-	/** The <code>ObjectInput</code> to be read from. */
-	private final ObjectInput input;
+  /** The <code>ObjectInput</code> to be read from. */
+  private final ObjectInput input;
 
-	/**
-	 * Creates a new <code>InputArchive</code>.
-	 * @param input The <code>ObjectInput</code> to be read from.
-	 */
-	public InputArchive(ObjectInput input) {
-		this.input = input;
-	}
+  /**
+   * Creates a new <code>InputArchive</code>.
+   * @param input The <code>ObjectInput</code> to be read from.
+   */
+  public InputArchive(ObjectInput input) {
+    this.input = input;
+  }
 
-	/**
-	 * Creates an <code>InputArchive</code> that reads from the provided
-	 * <code>InputStream</code>.
-	 * @param stream The <code>InputStream</code> to be read from.
-	 * @return The new <code>InputArchive</code>.
-	 * @throws IOException If an <code>ObjectInputStream</code> could not be
-	 * 		instantiated for the provided <code>InputStream</code>.
-	 */
-	public static InputArchive fromInputStream(InputStream stream) throws IOException {
-		if (stream instanceof ObjectInput) {
-			return new InputArchive((ObjectInput) stream);
-		} else {
-			return new InputArchive(new ObjectInputStream(stream));
-		}
-	}
+  /**
+   * Creates an <code>InputArchive</code> that reads from the provided
+   * <code>InputStream</code>.
+   * @param stream The <code>InputStream</code> to be read from.
+   * @return The new <code>InputArchive</code>.
+   * @throws IOException If an <code>ObjectInputStream</code> could not be
+   *     instantiated for the provided <code>InputStream</code>.
+   */
+  public static InputArchive fromInputStream(InputStream stream) throws IOException {
+    if (stream instanceof ObjectInput) {
+      return new InputArchive((ObjectInput) stream);
+    } else {
+      return new InputArchive(new ObjectInputStream(stream));
+    }
+  }
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.io.Archive#archiveBoolean(boolean)
-	 */
-	public boolean archiveBoolean(boolean value) throws IOException {
-		return input.readBoolean();
-	}
+  /* (non-Javadoc)
+   * @see ca.eandb.util.io.Archive#archiveBoolean(boolean)
+   */
+  public boolean archiveBoolean(boolean value) throws IOException {
+    return input.readBoolean();
+  }
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.io.Archive#archiveByte(byte)
-	 */
-	public byte archiveByte(byte value) throws IOException {
-		return input.readByte();
-	}
+  /* (non-Javadoc)
+   * @see ca.eandb.util.io.Archive#archiveByte(byte)
+   */
+  public byte archiveByte(byte value) throws IOException {
+    return input.readByte();
+  }
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.io.Archive#archiveChar(char)
-	 */
-	public char archiveChar(char value) throws IOException {
-		return input.readChar();
-	}
+  /* (non-Javadoc)
+   * @see ca.eandb.util.io.Archive#archiveChar(char)
+   */
+  public char archiveChar(char value) throws IOException {
+    return input.readChar();
+  }
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.io.Archive#archiveDouble(double)
-	 */
-	public double archiveDouble(double value) throws IOException {
-		return input.readDouble();
-	}
+  /* (non-Javadoc)
+   * @see ca.eandb.util.io.Archive#archiveDouble(double)
+   */
+  public double archiveDouble(double value) throws IOException {
+    return input.readDouble();
+  }
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.io.Archive#archiveFloat(float)
-	 */
-	public float archiveFloat(float value) throws IOException {
-		return input.readFloat();
-	}
+  /* (non-Javadoc)
+   * @see ca.eandb.util.io.Archive#archiveFloat(float)
+   */
+  public float archiveFloat(float value) throws IOException {
+    return input.readFloat();
+  }
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.io.Archive#archiveInt(int)
-	 */
-	public int archiveInt(int value) throws IOException {
-		return input.readInt();
-	}
+  /* (non-Javadoc)
+   * @see ca.eandb.util.io.Archive#archiveInt(int)
+   */
+  public int archiveInt(int value) throws IOException {
+    return input.readInt();
+  }
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.io.Archive#archiveLong(long)
-	 */
-	public long archiveLong(long value) throws IOException {
-		return input.readLong();
-	}
+  /* (non-Javadoc)
+   * @see ca.eandb.util.io.Archive#archiveLong(long)
+   */
+  public long archiveLong(long value) throws IOException {
+    return input.readLong();
+  }
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.io.Archive#archiveObject(java.lang.Object)
-	 */
-	public Object archiveObject(Object value) throws IOException, ClassNotFoundException {
-		return input.readObject();
-	}
+  /* (non-Javadoc)
+   * @see ca.eandb.util.io.Archive#archiveObject(java.lang.Object)
+   */
+  public Object archiveObject(Object value) throws IOException, ClassNotFoundException {
+    return input.readObject();
+  }
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.io.Archive#archiveShort(short)
-	 */
-	public short archiveShort(short value) throws IOException {
-		return input.readShort();
-	}
+  /* (non-Javadoc)
+   * @see ca.eandb.util.io.Archive#archiveShort(short)
+   */
+  public short archiveShort(short value) throws IOException {
+    return input.readShort();
+  }
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.io.Archive#archiveUTF(java.lang.String)
-	 */
-	public String archiveUTF(String value) throws IOException {
-		return input.readUTF();
-	}
+  /* (non-Javadoc)
+   * @see ca.eandb.util.io.Archive#archiveUTF(java.lang.String)
+   */
+  public String archiveUTF(String value) throws IOException {
+    return input.readUTF();
+  }
 
 }

@@ -36,40 +36,40 @@ import javax.swing.JTextArea;
  */
 public final class TextAreaStream extends OutputStream {
 
-	/** The <code>JTextArea</code> to write to. */
-	private final JTextArea textArea;
+  /** The <code>JTextArea</code> to write to. */
+  private final JTextArea textArea;
 
-	/**
-	 * Creates a new <code>TextAreaStream</code>.
-	 * @param textArea The <code>JTextArea</code> to write to.
-	 */
-	public TextAreaStream(JTextArea textArea) {
-		super();
-		this.textArea = textArea;
-	}
+  /**
+   * Creates a new <code>TextAreaStream</code>.
+   * @param textArea The <code>JTextArea</code> to write to.
+   */
+  public TextAreaStream(JTextArea textArea) {
+    super();
+    this.textArea = textArea;
+  }
 
-	/* (non-Javadoc)
-	 * @see java.io.OutputStream#write(byte[], int, int)
-	 */
-	@Override
-	public void write(byte[] b, int off, int len) throws IOException {
-		textArea.append(new String(b, off, len));
-	}
+  /* (non-Javadoc)
+   * @see java.io.OutputStream#write(byte[], int, int)
+   */
+  @Override
+  public void write(byte[] b, int off, int len) throws IOException {
+    textArea.append(new String(b, off, len));
+  }
 
-	/* (non-Javadoc)
-	 * @see java.io.OutputStream#write(byte[])
-	 */
-	@Override
-	public void write(byte[] b) throws IOException {
-		textArea.append(new String(b));
-	}
+  /* (non-Javadoc)
+   * @see java.io.OutputStream#write(byte[])
+   */
+  @Override
+  public void write(byte[] b) throws IOException {
+    textArea.append(new String(b));
+  }
 
-	/* (non-Javadoc)
-	 * @see java.io.OutputStream#write(int)
-	 */
-	@Override
-	public void write(int b) throws IOException {
-		textArea.append(new String(new byte[]{ (byte) b }));
-	}
+  /* (non-Javadoc)
+   * @see java.io.OutputStream#write(int)
+   */
+  @Override
+  public void write(int b) throws IOException {
+    textArea.append(new String(new byte[]{ (byte) b }));
+  }
 
 }

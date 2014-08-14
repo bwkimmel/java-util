@@ -36,11 +36,11 @@ import java.nio.ByteBuffer;
  */
 public interface ClassLoaderStrategy {
 
-	/**
-	 * Obtains the class definition for a given binary class name.
-	 * @param name The binary name of the class whose class definition to load.
-	 * @return The class definition.
-	 */
-	ByteBuffer getClassDefinition(String name);
+  /**
+   * Obtains the class definition for a given binary class name.
+   * @param name The binary name of the class whose class definition to load.
+   * @return The class definition.
+   */
+  ByteBuffer getClassDefinition(String name);
 
 }

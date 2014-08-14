@@ -33,7 +33,7 @@ import java.rmi.RemoteException;
  *
  */
 public interface ClassLoaderService extends Remote {
-	
-	byte[] getClassDefinition(String name) throws RemoteException;
+  
+  byte[] getClassDefinition(String name) throws RemoteException;
 
 }

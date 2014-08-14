@@ -39,97 +39,97 @@ import ca.eandb.util.ui.renderer.ProgressBarRenderer;
  * @author Brad Kimmel
  */
 public final class ProgressPanel extends JPanel implements
-		ProgressMonitorFactory {
+    ProgressMonitorFactory {
 
-	/**
-	 * Serialization version ID.
-	 */
-	private static final long serialVersionUID = 3445300405526898766L;
+  /**
+   * Serialization version ID.
+   */
+  private static final long serialVersionUID = 3445300405526898766L;
 
-	/** The <code>JScrollPane</code> to use to scroll around the table. */
-	private JScrollPane scrollPane = null;
+  /** The <code>JScrollPane</code> to use to scroll around the table. */
+  private JScrollPane scrollPane = null;
 
-	/**
-	 * The <code>JTable</code> displaying the progress for the individual
-	 * <code>ProgressMonitor</code>s.
-	 */
-	private JTable table = null;
+  /**
+   * The <code>JTable</code> displaying the progress for the individual
+   * <code>ProgressMonitor</code>s.
+   */
+  private JTable table = null;
 
-	/**
-	 * The <code>ProgressTableModel</code> for this table.
-	 */
-	private ProgressTableModel model = null;
+  /**
+   * The <code>ProgressTableModel</code> for this table.
+   */
+  private ProgressTableModel model = null;
 
-	/**
-	 * This is the default constructor
-	 */
-	public ProgressPanel() {
-		super();
-		initialize();
-	}
+  /**
+   * This is the default constructor
+   */
+  public ProgressPanel() {
+    super();
+    initialize();
+  }
 
-	/**
-	 * This method initializes this
-	 *
-	 * @return void
-	 */
-	private void initialize() {
-		this.setSize(300, 200);
-		this.setLayout(new BorderLayout());
-		this.add(getScrollPane(), BorderLayout.CENTER);
-	}
+  /**
+   * This method initializes this
+   *
+   * @return void
+   */
+  private void initialize() {
+    this.setSize(300, 200);
+    this.setLayout(new BorderLayout());
+    this.add(getScrollPane(), BorderLayout.CENTER);
+  }
 
-	/**
-	 * This method initializes scrollPane
-	 *
-	 * @return javax.swing.JScrollPane
-	 */
-	private JScrollPane getScrollPane() {
-		if (scrollPane == null) {
-			scrollPane = new JScrollPane();
-			scrollPane.setViewportView(getTable());
-		}
-		return scrollPane;
-	}
+  /**
+   * This method initializes scrollPane
+   *
+   * @return javax.swing.JScrollPane
+   */
+  private JScrollPane getScrollPane() {
+    if (scrollPane == null) {
+      scrollPane = new JScrollPane();
+      scrollPane.setViewportView(getTable());
+    }
+    return scrollPane;
+  }
 
-	/**
-	 * This method initializes table
-	 *
-	 * @return javax.swing.JTable
-	 */
-	private JTable getTable() {
-		if (table == null) {
-			table = new JTable();
-			table.setModel(getModel());
-			ProgressBarRenderer.applyTo(table);
-		}
-		return table;
-	}
+  /**
+   * This method initializes table
+   *
+   * @return javax.swing.JTable
+   */
+  private JTable getTable() {
+    if (table == null) {
+      table = new JTable();
+      table.setModel(getModel());
+      ProgressBarRenderer.applyTo(table);
+    }
+    return table;
+  }
 
-	/**
-	 * This method initializes model
-	 *
-	 * @return ca.eandb.util.progress.ProgressTableModel
-	 */
-	private ProgressTableModel getModel() {
-		if (model == null) {
-			model = new ProgressTableModel();
-		}
-		return model;
-	}
+  /**
+   * This method initializes model
+   *
+   * @return ca.eandb.util.progress.ProgressTableModel
+   */
+  private ProgressTableModel getModel() {
+    if (model == null) {
+      model = new ProgressTableModel();
+    }
+    return model;
+  }
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.progress.ProgressMonitorFactory#createProgressMonitor(java.lang.String)
-	 */
-	public ProgressMonitor createProgressMonitor(String title) {
-		return getModel().createProgressMonitor(title);
-	}
+  /* (non-Javadoc)
+   * @see ca.eandb.util.progress.ProgressMonitorFactory#createProgressMonitor(java.lang.String)
+   */
+  public ProgressMonitor createProgressMonitor(String title) {
+    return getModel().createProgressMonitor(title);
+  }
 
-	/**
-	 * Removes all <code>ProgressMonitor</code>s from the table.
-	 */
-	public void clear() {
-		getModel().clear();
-	}
+  /**
+   * Removes all <code>ProgressMonitor</code>s from the table.
+   */
+  public void clear() {
+    getModel().clear();
+  }
 
 }

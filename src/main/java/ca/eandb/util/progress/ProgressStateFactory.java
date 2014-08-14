@@ -36,43 +36,43 @@ import java.util.List;
  */
 public class ProgressStateFactory implements ProgressMonitorFactory {
 
-	/**
-	 * The <code>List</code> of <code>ProgressState</code>s created by this
-	 * factory.
-	 */
-	private final List<ProgressState> states;
+  /**
+   * The <code>List</code> of <code>ProgressState</code>s created by this
+   * factory.
+   */
+  private final List<ProgressState> states;
 
-	/**
-	 * Creates a <code>ProgressStateFactory</code>.
-	 * @param states The <code>List</code> to add created
-	 * 		<code>ProgressState</code>s to.
-	 */
-	public ProgressStateFactory(List<ProgressState> states) {
-		this.states = states;
-	}
+  /**
+   * Creates a <code>ProgressStateFactory</code>.
+   * @param states The <code>List</code> to add created
+   *     <code>ProgressState</code>s to.
+   */
+  public ProgressStateFactory(List<ProgressState> states) {
+    this.states = states;
+  }
 
-	/**
-	 * Creates a <code>ProgressStateFactory</code>.
-	 */
-	public ProgressStateFactory() {
-		this(new ArrayList<ProgressState>());
-	}
+  /**
+   * Creates a <code>ProgressStateFactory</code>.
+   */
+  public ProgressStateFactory() {
+    this(new ArrayList<ProgressState>());
+  }
 
-	/**
-	 * Gets the list of <code>ProgressState</code>s created by this factory.
-	 * @return The list of <code>ProgressState</code>s created by this factory.
-	 */
-	public final List<ProgressState> getProgressStates() {
-		return states;
-	}
+  /**
+   * Gets the list of <code>ProgressState</code>s created by this factory.
+   * @return The list of <code>ProgressState</code>s created by this factory.
+   */
+  public final List<ProgressState> getProgressStates() {
+    return states;
+  }
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.progress.ProgressMonitorFactory#createProgressMonitor(java.lang.String)
-	 */
-	public ProgressMonitor createProgressMonitor(String title) {
-		ProgressState state = new ProgressState(title);
-		states.add(state);
-		return state;
-	}
+  /* (non-Javadoc)
+   * @see ca.eandb.util.progress.ProgressMonitorFactory#createProgressMonitor(java.lang.String)
+   */
+  public ProgressMonitor createProgressMonitor(String title) {
+    ProgressState state = new ProgressState(title);
+    states.add(state);
+    return state;
+  }
 
 }

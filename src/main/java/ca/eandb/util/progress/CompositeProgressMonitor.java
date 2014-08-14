@@ -40,131 +40,131 @@ import java.util.HashSet;
  */
 public final class CompositeProgressMonitor implements ProgressMonitor {
 
-	/**
-	 * Adds a <code>ProgressMonitor</code> to the collection.
-	 * @param monitor The <code>ProgressMonitor</code> to add to the
-	 * 		collection.
-	 * @return This <code>CompositeProgressMonitor</code> is returns so that
-	 * 		calls to this method may be chained.
-	 */
-	public CompositeProgressMonitor addProgressMonitor(ProgressMonitor monitor) {
-		this.monitors.add(monitor);
-		monitor.addCancelListener(cancelListeners);
-		return this;
-	}
+  /**
+   * Adds a <code>ProgressMonitor</code> to the collection.
+   * @param monitor The <code>ProgressMonitor</code> to add to the
+   *     collection.
+   * @return This <code>CompositeProgressMonitor</code> is returns so that
+   *     calls to this method may be chained.
+   */
+  public CompositeProgressMonitor addProgressMonitor(ProgressMonitor monitor) {
+    this.monitors.add(monitor);
+    monitor.addCancelListener(cancelListeners);
+    return this;
+  }
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.progress.ProgressMonitor#isCancelPending()
-	 */
-	public boolean isCancelPending() {
+  /* (non-Javadoc)
+   * @see ca.eandb.util.progress.ProgressMonitor#isCancelPending()
+   */
+  public boolean isCancelPending() {
 
-		for (ProgressMonitor monitor : this.monitors) {
-			if (monitor.isCancelPending()) {
-				return true;
-			}
-		}
+    for (ProgressMonitor monitor : this.monitors) {
+      if (monitor.isCancelPending()) {
+        return true;
+      }
+    }
 
-		return false;
+    return false;
 
-	}
+  }
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.progress.ProgressMonitor#notifyCancelled()
-	 */
-	public void notifyCancelled() {
-		for (ProgressMonitor monitor : this.monitors) {
-			monitor.notifyCancelled();
-		}
-	}
+  /* (non-Javadoc)
+   * @see ca.eandb.util.progress.ProgressMonitor#notifyCancelled()
+   */
+  public void notifyCancelled() {
+    for (ProgressMonitor monitor : this.monitors) {
+      monitor.notifyCancelled();
+    }
+  }
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.progress.ProgressMonitor#addCancelListener(ca.eandb.util.progress.CancelListener)
-	 */
-	@Override
-	public void addCancelListener(CancelListener listener) {
-		cancelListeners.addCancelListener(listener);
-	}
+  /* (non-Javadoc)
+   * @see ca.eandb.util.progress.ProgressMonitor#addCancelListener(ca.eandb.util.progress.CancelListener)
+   */
+  @Override
+  public void addCancelListener(CancelListener listener) {
+    cancelListeners.addCancelListener(listener);
+  }
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.progress.ProgressMonitor#notifyComplete()
-	 */
-	public void notifyComplete() {
-		for (ProgressMonitor monitor : this.monitors) {
-			monitor.notifyComplete();
-		}
-	}
+  /* (non-Javadoc)
+   * @see ca.eandb.util.progress.ProgressMonitor#notifyComplete()
+   */
+  public void notifyComplete() {
+    for (ProgressMonitor monitor : this.monitors) {
+      monitor.notifyComplete();
+    }
+  }
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.progress.ProgressMonitor#notifyIndeterminantProgress()
-	 */
-	public boolean notifyIndeterminantProgress() {
+  /* (non-Javadoc)
+   * @see ca.eandb.util.progress.ProgressMonitor#notifyIndeterminantProgress()
+   */
+  public boolean notifyIndeterminantProgress() {
 
-		boolean result = true;
+    boolean result = true;
 
-		for (ProgressMonitor monitor : this.monitors) {
-			if (!monitor.notifyIndeterminantProgress()) {
-				result = false;
-			}
-		}
+    for (ProgressMonitor monitor : this.monitors) {
+      if (!monitor.notifyIndeterminantProgress()) {
+        result = false;
+      }
+    }
 
-		return result;
+    return result;
 
-	}
+  }
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.progress.ProgressMonitor#notifyProgress(int, int)
-	 */
-	public boolean notifyProgress(int value, int maximum) {
+  /* (non-Javadoc)
+   * @see ca.eandb.util.progress.ProgressMonitor#notifyProgress(int, int)
+   */
+  public boolean notifyProgress(int value, int maximum) {
 
-		boolean result = true;
+    boolean result = true;
 
-		for (ProgressMonitor monitor : this.monitors) {
-			if (!monitor.notifyProgress(value, maximum)) {
-				result = false;
-			}
-		}
+    for (ProgressMonitor monitor : this.monitors) {
+      if (!monitor.notifyProgress(value, maximum)) {
+        result = false;
+      }
+    }
 
-		return result;
+    return result;
 
-	}
+  }
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.progress.ProgressMonitor#notifyProgress(double)
-	 */
-	public boolean notifyProgress(double progress) {
+  /* (non-Javadoc)
+   * @see ca.eandb.util.progress.ProgressMonitor#notifyProgress(double)
+   */
+  public boolean notifyProgress(double progress) {
 
-		boolean result = true;
+    boolean result = true;
 
-		for (ProgressMonitor monitor : this.monitors) {
-			if (!monitor.notifyProgress(progress)) {
-				result = false;
-			}
-		}
+    for (ProgressMonitor monitor : this.monitors) {
+      if (!monitor.notifyProgress(progress)) {
+        result = false;
+      }
+    }
 
-		return result;
+    return result;
 
-	}
+  }
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.progress.ProgressMonitor#notifyStatusChanged(java.lang.String)
-	 */
-	public void notifyStatusChanged(String status) {
-		for (ProgressMonitor monitor : this.monitors) {
-			monitor.notifyStatusChanged(status);
-		}
-	}
+  /* (non-Javadoc)
+   * @see ca.eandb.util.progress.ProgressMonitor#notifyStatusChanged(java.lang.String)
+   */
+  public void notifyStatusChanged(String status) {
+    for (ProgressMonitor monitor : this.monitors) {
+      monitor.notifyStatusChanged(status);
+    }
+  }
 
-	/**
-	 * The <code>Collection</code> of individual <code>ProgressMonitor</code>s
-	 * that make up this <code>CompositeProgressMonitor</code>.
-	 */
-	private final Collection<ProgressMonitor> monitors = new HashSet<ProgressMonitor>();
-	
-	/**
-	 * The <code>CancelListener</code> to notify if any of the child
-	 * <code>ProgressMonitor</code>s wish to request that the operation be
-	 * cancelled.
-	 */
-	private final CompositeCancelListener cancelListeners = new CompositeCancelListener();
+  /**
+   * The <code>Collection</code> of individual <code>ProgressMonitor</code>s
+   * that make up this <code>CompositeProgressMonitor</code>.
+   */
+  private final Collection<ProgressMonitor> monitors = new HashSet<ProgressMonitor>();
+  
+  /**
+   * The <code>CancelListener</code> to notify if any of the child
+   * <code>ProgressMonitor</code>s wish to request that the operation be
+   * cancelled.
+   */
+  private final CompositeCancelListener cancelListeners = new CompositeCancelListener();
 
 }

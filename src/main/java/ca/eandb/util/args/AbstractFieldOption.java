@@ -39,41 +39,41 @@ import ca.eandb.util.UnexpectedException;
  */
 public abstract class AbstractFieldOption<T> implements Command<T> {
 
-	/** The name of the field to assign the option to. */
-	private final String fieldName;
+  /** The name of the field to assign the option to. */
+  private final String fieldName;
 
-	/**
-	 * Initializes this <code>AbstractFieldOption</code>.
-	 * @param fieldName The name of the field to assign the option to.
-	 */
-	public AbstractFieldOption(String fieldName) {
-		this.fieldName = fieldName;
-	}
+  /**
+   * Initializes this <code>AbstractFieldOption</code>.
+   * @param fieldName The name of the field to assign the option to.
+   */
+  public AbstractFieldOption(String fieldName) {
+    this.fieldName = fieldName;
+  }
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.args.Command#process(java.util.Queue, java.lang.Object)
-	 */
-	public final void process(Queue<String> argq, T state) {
-		try {
-			Field field = state.getClass().getField(fieldName);
-			Object value = getOptionValue(argq);
-			field.set(state, value);
-		} catch (NoSuchFieldException e) {
-			e.printStackTrace();
-			throw new UnexpectedException(e);
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-			throw new UnexpectedException(e);
-		}
-	}
+  /* (non-Javadoc)
+   * @see ca.eandb.util.args.Command#process(java.util.Queue, java.lang.Object)
+   */
+  public final void process(Queue<String> argq, T state) {
+    try {
+      Field field = state.getClass().getField(fieldName);
+      Object value = getOptionValue(argq);
+      field.set(state, value);
+    } catch (NoSuchFieldException e) {
+      e.printStackTrace();
+      throw new UnexpectedException(e);
+    } catch (IllegalAccessException e) {
+      e.printStackTrace();
+      throw new UnexpectedException(e);
+    }
+  }
 
-	/**
-	 * Obtains the value of the option using the following command line
-	 * parameters.
-	 * @param argq The <code>Queue</code> containing the following command line
-	 * 		parameters.
-	 * @return The value to assign to the option.
-	 */
-	protected abstract Object getOptionValue(Queue<String> argq);
+  /**
+   * Obtains the value of the option using the following command line
+   * parameters.
+   * @param argq The <code>Queue</code> containing the following command line
+   *     parameters.
+   * @return The value to assign to the option.
+   */
+  protected abstract Object getOptionValue(Queue<String> argq);
 
 }

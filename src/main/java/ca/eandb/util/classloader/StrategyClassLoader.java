@@ -37,57 +37,57 @@ import java.security.PrivilegedAction;
  */
 public class StrategyClassLoader extends ClassLoader {
 
-	/**
-	 * The <code>ClassLoaderStrategy</code> to use to obtain class definitions.
-	 */
-	private final ClassLoaderStrategy strategy;
+  /**
+   * The <code>ClassLoaderStrategy</code> to use to obtain class definitions.
+   */
+  private final ClassLoaderStrategy strategy;
 
-	/**
-	 * Creates a new <code>StrategyClassLoader</code>.
-	 * @param strategy The <code>ClassLoaderStrategy</code> to use to obtain
-	 * 		class definitions.
-	 */
-	public StrategyClassLoader(ClassLoaderStrategy strategy) {
-		this(strategy, null);
-	}
+  /**
+   * Creates a new <code>StrategyClassLoader</code>.
+   * @param strategy The <code>ClassLoaderStrategy</code> to use to obtain
+   *     class definitions.
+   */
+  public StrategyClassLoader(ClassLoaderStrategy strategy) {
+    this(strategy, null);
+  }
 
-	/**
-	 * Creates a new <code>StrategyClassLoader</code>.
-	 * @param strategy The <code>ClassLoaderStrategy</code> to use to obtain
-	 * 		class definitions.
-	 * @param parent The parent <code>ClassLoader</code>.
-	 */
-	public StrategyClassLoader(ClassLoaderStrategy strategy, ClassLoader parent) {
-		super(parent);
-		this.strategy = strategy;
-	}
+  /**
+   * Creates a new <code>StrategyClassLoader</code>.
+   * @param strategy The <code>ClassLoaderStrategy</code> to use to obtain
+   *     class definitions.
+   * @param parent The parent <code>ClassLoader</code>.
+   */
+  public StrategyClassLoader(ClassLoaderStrategy strategy, ClassLoader parent) {
+    super(parent);
+    this.strategy = strategy;
+  }
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.ClassLoader#findClass(java.lang.String)
-	 */
-	@Override
-	protected Class<?> findClass(final String name) throws ClassNotFoundException {
+  /*
+   * (non-Javadoc)
+   * @see java.lang.ClassLoader#findClass(java.lang.String)
+   */
+  @Override
+  protected Class<?> findClass(final String name) throws ClassNotFoundException {
 
-		ByteBuffer def = AccessController.doPrivileged(new PrivilegedAction<ByteBuffer>() {
-			public ByteBuffer run() {
-				return strategy.getClassDefinition(name);
-			}
-		});
+    ByteBuffer def = AccessController.doPrivileged(new PrivilegedAction<ByteBuffer>() {
+      public ByteBuffer run() {
+        return strategy.getClassDefinition(name);
+      }
+    });
 
-		if (def != null) {
+    if (def != null) {
 
-			Class<?> result = super.defineClass(name, def, null);
+      Class<?> result = super.defineClass(name, def, null);
 
-			if (result != null) {
-				super.resolveClass(result);
-				return result;
-			}
+      if (result != null) {
+        super.resolveClass(result);
+        return result;
+      }
 
-		}
+    }
 
-		throw new ClassNotFoundException(name);
+    throw new ClassNotFoundException(name);
 
-	}
+  }
 
 }

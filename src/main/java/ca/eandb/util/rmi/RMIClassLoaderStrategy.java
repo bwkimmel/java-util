@@ -44,53 +44,53 @@ import ca.eandb.util.classloader.ClassLoaderStrategy;
  */
 public final class RMIClassLoaderStrategy implements ClassLoaderStrategy {
 
-	private final ClassLoaderService service;
-	
-	public RMIClassLoaderStrategy() throws RemoteException, NotBoundException {
-		this(getClassLoaderService());
-	}
+  private final ClassLoaderService service;
+  
+  public RMIClassLoaderStrategy() throws RemoteException, NotBoundException {
+    this(getClassLoaderService());
+  }
 
-	public RMIClassLoaderStrategy(URL baseUrl) throws RemoteException, NotBoundException {
-		this(getClassLoaderService(baseUrl));
-	}
+  public RMIClassLoaderStrategy(URL baseUrl) throws RemoteException, NotBoundException {
+    this(getClassLoaderService(baseUrl));
+  }
 
-	public RMIClassLoaderStrategy(ClassLoaderService service) {
-		this.service = service;
-	}
-	
-	public static ClassLoaderService getClassLoaderService() throws RemoteException, NotBoundException {
-		try {
-			BasicService basic = (BasicService) ServiceManager.lookup("javax.jnlp.BasicService");
-			return getClassLoaderService(basic.getCodeBase());
-		} catch (UnavailableServiceException e) {
-			throw new IllegalStateException("javax.jnlp.BasicService is required.", e);
-		}
-	}
-	
-	public static ClassLoaderService getClassLoaderService(URL baseUrl) throws RemoteException, NotBoundException {
-		Registry registry = LocateRegistry.getRegistry(baseUrl.getHost());
-		return (ClassLoaderService) registry.lookup("ClassLoaderService");
-	}
+  public RMIClassLoaderStrategy(ClassLoaderService service) {
+    this.service = service;
+  }
+  
+  public static ClassLoaderService getClassLoaderService() throws RemoteException, NotBoundException {
+    try {
+      BasicService basic = (BasicService) ServiceManager.lookup("javax.jnlp.BasicService");
+      return getClassLoaderService(basic.getCodeBase());
+    } catch (UnavailableServiceException e) {
+      throw new IllegalStateException("javax.jnlp.BasicService is required.", e);
+    }
+  }
+  
+  public static ClassLoaderService getClassLoaderService(URL baseUrl) throws RemoteException, NotBoundException {
+    Registry registry = LocateRegistry.getRegistry(baseUrl.getHost());
+    return (ClassLoaderService) registry.lookup("ClassLoaderService");
+  }
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.classloader.ClassLoaderStrategy#getClassDefinition(java.lang.String)
-	 */
-	public ByteBuffer getClassDefinition(String name) {
+  /* (non-Javadoc)
+   * @see ca.eandb.util.classloader.ClassLoaderStrategy#getClassDefinition(java.lang.String)
+   */
+  public ByteBuffer getClassDefinition(String name) {
 
-		try {
+    try {
 
-			byte[] def = service.getClassDefinition(name);
+      byte[] def = service.getClassDefinition(name);
 
-			if (def != null) {
-				return ByteBuffer.wrap(def);
-			}
+      if (def != null) {
+        return ByteBuffer.wrap(def);
+      }
 
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
+    } catch (RemoteException e) {
+      e.printStackTrace();
+    }
 
-		return null;
+    return null;
 
-	}
+  }
 
 }

@@ -37,32 +37,32 @@ import ca.eandb.util.ClassUtil;
  */
 public final class ClassLoaderServer implements ClassLoaderService {
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.rmi.ClassLoaderService#getClassDefinition(java.lang.String)
-	 */
-	public byte[] getClassDefinition(String name) throws RemoteException {
+  /* (non-Javadoc)
+   * @see ca.eandb.util.rmi.ClassLoaderService#getClassDefinition(java.lang.String)
+   */
+  public byte[] getClassDefinition(String name) throws RemoteException {
 
-		try {
+    try {
 
-			ByteArrayOutputStream out = new ByteArrayOutputStream();
-			Class<?> cl = Class.forName(name);
+      ByteArrayOutputStream out = new ByteArrayOutputStream();
+      Class<?> cl = Class.forName(name);
 
-			ClassUtil.writeClassToStream(cl, out);
+      ClassUtil.writeClassToStream(cl, out);
 
-			out.flush();
-			return out.toByteArray();
+      out.flush();
+      return out.toByteArray();
 
-		} catch (ClassNotFoundException e) {
+    } catch (ClassNotFoundException e) {
 
-			return null;
+      return null;
 
-		} catch (IOException e) {
+    } catch (IOException e) {
 
-			e.printStackTrace();
-			return null;
+      e.printStackTrace();
+      return null;
 
-		}
+    }
 
-	}
+  }
 
 }

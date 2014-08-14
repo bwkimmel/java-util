@@ -26,19 +26,19 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface ShellArgument {
 
-	/**
-	 * Gets the key that triggers the command.  If empty, the name of the
-	 * method or field that this <code>CommandArgument</code> is applied to
-	 * will be used.
-	 * @return The key that triggers the command.
-	 */
-	String value() default "";
+  /**
+   * Gets the key that triggers the command.  If empty, the name of the
+   * method or field that this <code>CommandArgument</code> is applied to
+   * will be used.
+   * @return The key that triggers the command.
+   */
+  String value() default "";
 
-	/**
-	 * Gets the string to use to prompt the user for input.  If empty, the
-	 * value used by {{@link #value()} will be used to prompt the user.
-	 * @return The string to use to prompt the user for input.
-	 */
-	String prompt() default "";
+  /**
+   * Gets the string to use to prompt the user for input.  If empty, the
+   * value used by {{@link #value()} will be used to prompt the user.
+   * @return The string to use to prompt the user for input.
+   */
+  String prompt() default "";
 
 }

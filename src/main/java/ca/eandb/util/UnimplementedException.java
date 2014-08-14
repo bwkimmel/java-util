@@ -32,43 +32,43 @@ package ca.eandb.util;
  */
 public final class UnimplementedException extends UnexpectedException {
 
-	/**
-	 * Serialization version ID.
-	 */
-	private static final long serialVersionUID = -9112158490754682865L;
+  /**
+   * Serialization version ID.
+   */
+  private static final long serialVersionUID = -9112158490754682865L;
 
-	/**
-	 * Creates a new <code>UnimplementedException</code>.
-	 */
-	public UnimplementedException() {
-		super("Not implemented");
-	}
+  /**
+   * Creates a new <code>UnimplementedException</code>.
+   */
+  public UnimplementedException() {
+    super("Not implemented");
+  }
 
-	/**
-	 * Creates a new <code>UnimplementedException</code>.
-	 * @param message A <code>String</code> describing the exceptional
-	 * 		condition.
-	 * @param cause The <code>Throwable</code> that caused this exception.
-	 */
-	public UnimplementedException(String message, Throwable cause) {
-		super(message, cause);
-	}
+  /**
+   * Creates a new <code>UnimplementedException</code>.
+   * @param message A <code>String</code> describing the exceptional
+   *     condition.
+   * @param cause The <code>Throwable</code> that caused this exception.
+   */
+  public UnimplementedException(String message, Throwable cause) {
+    super(message, cause);
+  }
 
-	/**
-	 * Creates a new <code>UnimplementedException</code>.
-	 * @param message A <code>String</code> describing the exceptional
-	 * 		condition.
-	 */
-	public UnimplementedException(String message) {
-		super(message);
-	}
+  /**
+   * Creates a new <code>UnimplementedException</code>.
+   * @param message A <code>String</code> describing the exceptional
+   *     condition.
+   */
+  public UnimplementedException(String message) {
+    super(message);
+  }
 
-	/**
-	 * Creates a new <code>UnimplementedException</code>.
-	 * @param cause The <code>Throwable</code> that caused this exception.
-	 */
-	public UnimplementedException(Throwable cause) {
-		super("Not implemented", cause);
-	}
+  /**
+   * Creates a new <code>UnimplementedException</code>.
+   * @param cause The <code>Throwable</code> that caused this exception.
+   */
+  public UnimplementedException(Throwable cause) {
+    super("Not implemented", cause);
+  }
 
 }

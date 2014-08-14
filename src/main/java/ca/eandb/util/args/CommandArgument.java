@@ -20,12 +20,12 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface CommandArgument {
 
-	/**
-	 * Gets the key that triggers the command.  If empty, the name of the
-	 * method or field that this <code>CommandArgument</code> is applied to
-	 * will be used.
-	 * @return The key that triggers the command.
-	 */
-	String value() default "";
+  /**
+   * Gets the key that triggers the command.  If empty, the name of the
+   * method or field that this <code>CommandArgument</code> is applied to
+   * will be used.
+   * @return The key that triggers the command.
+   */
+  String value() default "";
 
 }

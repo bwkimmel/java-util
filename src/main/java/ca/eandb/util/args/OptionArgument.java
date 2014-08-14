@@ -41,24 +41,24 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface OptionArgument {
 
-	/**
-	 * Gets the key that triggers the option.  That is, a command line argument
-	 * consisting of this value preceded by "--" will trigger the option.  If
-	 * this value is empty, the name of the field will be used.  This value
-	 * must be specified if this <code>OptionArgument</code> is applied to a
-	 * method parameter.
-	 * @return The key that triggers the option.
-	 */
-	String value() default "";
+  /**
+   * Gets the key that triggers the option.  That is, a command line argument
+   * consisting of this value preceded by "--" will trigger the option.  If
+   * this value is empty, the name of the field will be used.  This value
+   * must be specified if this <code>OptionArgument</code> is applied to a
+   * method parameter.
+   * @return The key that triggers the option.
+   */
+  String value() default "";
 
-	/**
-	 * The alternative short key that triggers the option.  A command line
-	 * argument consisting of this value preceded by "-" will trigger the
-	 * option.  If this value is zero, the first character of
-	 * <code>this.value()</code> will be used.
-	 * @return The alternative short key that triggers the option.
-	 * @see #value()
-	 */
-	char shortKey() default '\0';
+  /**
+   * The alternative short key that triggers the option.  A command line
+   * argument consisting of this value preceded by "-" will trigger the
+   * option.  If this value is zero, the first character of
+   * <code>this.value()</code> will be used.
+   * @return The alternative short key that triggers the option.
+   * @see #value()
+   */
+  char shortKey() default '\0';
 
 }

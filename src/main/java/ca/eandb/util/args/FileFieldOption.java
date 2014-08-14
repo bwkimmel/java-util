@@ -35,45 +35,45 @@ import java.util.Queue;
  */
 public class FileFieldOption<T> extends AbstractFieldOption<T> {
 
-	/**
-	 * A value indicating whether the file specified on the command line must
-	 * exist in the file system.
-	 */
-	private final boolean mustExist;
+  /**
+   * A value indicating whether the file specified on the command line must
+   * exist in the file system.
+   */
+  private final boolean mustExist;
 
-	/**
-	 * Creates a new <code>FileFieldOption</code>.
-	 * @param fieldName The name of the field to assign to in the application
-	 * 		state object.
-	 */
-	public FileFieldOption(String fieldName) {
-		this(fieldName, false);
-	}
+  /**
+   * Creates a new <code>FileFieldOption</code>.
+   * @param fieldName The name of the field to assign to in the application
+   *     state object.
+   */
+  public FileFieldOption(String fieldName) {
+    this(fieldName, false);
+  }
 
-	/**
-	 * Creates a new <code>FileFieldOption</code>.
-	 * @param fieldName The name of the field to assign to in the application
-	 * 		state object.
-	 * @param mustExist A value indicating whether the file specified on the
-	 * 		command line must exist in the file system.
-	 */
-	public FileFieldOption(String fieldName, boolean mustExist) {
-		super(fieldName);
-		this.mustExist = mustExist;
-	}
+  /**
+   * Creates a new <code>FileFieldOption</code>.
+   * @param fieldName The name of the field to assign to in the application
+   *     state object.
+   * @param mustExist A value indicating whether the file specified on the
+   *     command line must exist in the file system.
+   */
+  public FileFieldOption(String fieldName, boolean mustExist) {
+    super(fieldName);
+    this.mustExist = mustExist;
+  }
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.args.AbstractFieldOption#getOptionValue(java.util.Queue)
-	 */
-	@Override
-	protected Object getOptionValue(Queue<String> argq) {
-		String name = argq.remove();
-		File file = new File(name);
-		if (mustExist && !file.isFile()) {
-			System.err.println("File does not exist: '" + name + "'");
-			System.exit(1);
-		}
-		return file;
-	}
+  /* (non-Javadoc)
+   * @see ca.eandb.util.args.AbstractFieldOption#getOptionValue(java.util.Queue)
+   */
+  @Override
+  protected Object getOptionValue(Queue<String> argq) {
+    String name = argq.remove();
+    File file = new File(name);
+    if (mustExist && !file.isFile()) {
+      System.err.println("File does not exist: '" + name + "'");
+      System.exit(1);
+    }
+    return file;
+  }
 
 }

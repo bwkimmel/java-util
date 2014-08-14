@@ -36,42 +36,42 @@ import java.util.Collection;
  */
 public final class CompositeClassLoaderStrategy implements ClassLoaderStrategy {
 
-	/** The collection of <code>ClassLoaderStrategy</code>s to search. */
-	private final ClassLoaderStrategy[] strategies;
+  /** The collection of <code>ClassLoaderStrategy</code>s to search. */
+  private final ClassLoaderStrategy[] strategies;
 
-	/**
-	 * Creates a new <code>CompositeClassLoaderStrategy</code>.
-	 * @param strategies The <code>Collection</code> of
-	 * 		<code>ClassLoaderStrategy</code>s to search.
-	 */
-	public CompositeClassLoaderStrategy(Collection<ClassLoaderStrategy> strategies) {
-		this(strategies.toArray(new ClassLoaderStrategy[strategies.size()]));
-	}
+  /**
+   * Creates a new <code>CompositeClassLoaderStrategy</code>.
+   * @param strategies The <code>Collection</code> of
+   *     <code>ClassLoaderStrategy</code>s to search.
+   */
+  public CompositeClassLoaderStrategy(Collection<ClassLoaderStrategy> strategies) {
+    this(strategies.toArray(new ClassLoaderStrategy[strategies.size()]));
+  }
 
-	/**
-	 * Creates a new <code>CompositeClassLoaderStrategy</code>.
-	 * @param strategies The collection of <code>ClassLoaderStrategy</code>s to
-	 * 		search.
-	 */
-	private CompositeClassLoaderStrategy(ClassLoaderStrategy[] strategies) {
-		this.strategies = strategies;
-	}
+  /**
+   * Creates a new <code>CompositeClassLoaderStrategy</code>.
+   * @param strategies The collection of <code>ClassLoaderStrategy</code>s to
+   *     search.
+   */
+  private CompositeClassLoaderStrategy(ClassLoaderStrategy[] strategies) {
+    this.strategies = strategies;
+  }
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.classloader.ClassLoaderStrategy#getClassDefinition(java.lang.String)
-	 */
-	public ByteBuffer getClassDefinition(String name) {
+  /* (non-Javadoc)
+   * @see ca.eandb.util.classloader.ClassLoaderStrategy#getClassDefinition(java.lang.String)
+   */
+  public ByteBuffer getClassDefinition(String name) {
 
-		ByteBuffer def;
+    ByteBuffer def;
 
-		for (ClassLoaderStrategy strategy : strategies) {
-			if ((def = strategy.getClassDefinition(name)) != null) {
-				return def;
-			}
-		}
+    for (ClassLoaderStrategy strategy : strategies) {
+      if ((def = strategy.getClassDefinition(name)) != null) {
+        return def;
+      }
+    }
 
-		return null;
+    return null;
 
-	}
+  }
 
 }

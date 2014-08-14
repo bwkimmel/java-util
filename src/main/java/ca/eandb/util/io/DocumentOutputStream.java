@@ -40,92 +40,92 @@ import ca.eandb.util.UnexpectedException;
  */
 public class DocumentOutputStream extends OutputStream {
 
-	/** The <code>Document</code> to write to. */
-	private final Document document;
+  /** The <code>Document</code> to write to. */
+  private final Document document;
 
-	/**
-	 * The <code>AttributeSet</code> to apply to the text written to the
-	 * <code>Document</code>.
-	 */
-	private AttributeSet attributes = null;
+  /**
+   * The <code>AttributeSet</code> to apply to the text written to the
+   * <code>Document</code>.
+   */
+  private AttributeSet attributes = null;
 
-	/**
-	 * Creates a new <code>DocumentOutputStream</code>.
-	 * @param document The <code>Document</code> to write to.
-	 */
-	public DocumentOutputStream(Document document) {
-		this(document, null);
-	}
+  /**
+   * Creates a new <code>DocumentOutputStream</code>.
+   * @param document The <code>Document</code> to write to.
+   */
+  public DocumentOutputStream(Document document) {
+    this(document, null);
+  }
 
-	/**
-	 * Creates a new <code>DocumentOutputStream</code>.
-	 * @param document The <code>Document</code> to write to.
-	 * @param attributes The <code>AttributeSet</code> to apply to the text
-	 * 		written to the <code>Document</code>.
-	 */
-	public DocumentOutputStream(Document document, AttributeSet attributes) {
-		this.document = document;
-		this.attributes = attributes;
-	}
+  /**
+   * Creates a new <code>DocumentOutputStream</code>.
+   * @param document The <code>Document</code> to write to.
+   * @param attributes The <code>AttributeSet</code> to apply to the text
+   *     written to the <code>Document</code>.
+   */
+  public DocumentOutputStream(Document document, AttributeSet attributes) {
+    this.document = document;
+    this.attributes = attributes;
+  }
 
-	/**
-	 * Sets the <code>AttributeSet</code> to apply to the text written to the
-	 * <code>Document</code>.
-	 * @param attributes The <code>AttributeSet</code> to apply to the text
-	 * 		written to the <code>Document</code>.
-	 */
-	public void setAttributeSet(AttributeSet attributes) {
-		this.attributes = attributes;
-	}
+  /**
+   * Sets the <code>AttributeSet</code> to apply to the text written to the
+   * <code>Document</code>.
+   * @param attributes The <code>AttributeSet</code> to apply to the text
+   *     written to the <code>Document</code>.
+   */
+  public void setAttributeSet(AttributeSet attributes) {
+    this.attributes = attributes;
+  }
 
-	/**
-	 * Gets the <code>AttributeSet</code> to apply to the text written to the
-	 * <code>Document</code>.
-	 * @return The <code>AttributeSet</code> to apply to the text written to
-	 * 		the <code>Document</code>.
-	 */
-	public AttributeSet getAttributeSet() {
-		return attributes;
-	}
+  /**
+   * Gets the <code>AttributeSet</code> to apply to the text written to the
+   * <code>Document</code>.
+   * @return The <code>AttributeSet</code> to apply to the text written to
+   *     the <code>Document</code>.
+   */
+  public AttributeSet getAttributeSet() {
+    return attributes;
+  }
 
-	/* (non-Javadoc)
-	 * @see java.io.OutputStream#write(byte[], int, int)
-	 */
-	@Override
-	public void write(byte[] b, int off, int len) {
-		write(new String(b, off, len));
-	}
+  /* (non-Javadoc)
+   * @see java.io.OutputStream#write(byte[], int, int)
+   */
+  @Override
+  public void write(byte[] b, int off, int len) {
+    write(new String(b, off, len));
+  }
 
-	/* (non-Javadoc)
-	 * @see java.io.OutputStream#write(byte[])
-	 */
-	@Override
-	public void write(byte[] b) {
-		write(b, 0, b.length);
-	}
+  /* (non-Javadoc)
+   * @see java.io.OutputStream#write(byte[])
+   */
+  @Override
+  public void write(byte[] b) {
+    write(b, 0, b.length);
+  }
 
-	/* (non-Javadoc)
-	 * @see java.io.OutputStream#write(int)
-	 */
-	@Override
-	public void write(int b) {
-		write(new byte[] { (byte) b });
-	}
+  /* (non-Javadoc)
+   * @see java.io.OutputStream#write(int)
+   */
+  @Override
+  public void write(int b) {
+    write(new byte[] { (byte) b });
+  }
 
-	/**
-	 * Writes a <code>String</code> to the <code>Document</code> using the
-	 * current attribute set.
-	 * @param s The <code>String</code> to write to the document.
-	 */
-	private void write(String s) {
-		synchronized (document) {
-			int offset = document.getLength();
-			try {
-				document.insertString(offset, s, attributes);
-			} catch (BadLocationException e) {
-				throw new UnexpectedException(e);
-			}
-		}
-	}
+  /**
+   * Writes a <code>String</code> to the <code>Document</code> using the
+   * current attribute set.
+   * @param s The <code>String</code> to write to the document.
+   */
+  private void write(String s) {
+    synchronized (document) {
+      int offset = document.getLength();
+      try {
+        document.insertString(offset, s, attributes);
+      } catch (BadLocationException e) {
+        throw new UnexpectedException(e);
+      }
+    }
+  }
 
 }

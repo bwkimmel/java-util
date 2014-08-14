@@ -33,22 +33,22 @@ import java.security.Principal;
  */
 public final class UserPrincipal implements Principal {
 
-	/** The name of the user. */
-	private final String name;
+  /** The name of the user. */
+  private final String name;
 
-	/**
-	 * Creates a new <code>UserPrincipal</code>.
-	 * @param name The name of the user.
-	 */
-	public UserPrincipal(String name) {
-		this.name = name;
-	}
+  /**
+   * Creates a new <code>UserPrincipal</code>.
+   * @param name The name of the user.
+   */
+  public UserPrincipal(String name) {
+    this.name = name;
+  }
 
-	/* (non-Javadoc)
-	 * @see java.security.Principal#getName()
-	 */
-	public String getName() {
-		return name;
-	}
+  /* (non-Javadoc)
+   * @see java.security.Principal#getName()
+   */
+  public String getName() {
+    return name;
+  }
 
 }

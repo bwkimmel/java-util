@@ -32,85 +32,85 @@ package ca.eandb.util.progress;
  */
 public final class DummyProgressMonitor implements ProgressMonitor {
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.progress.ProgressMonitor#notifyCancelled()
-	 */
-	public void notifyCancelled() {
-		// do nothing
-	}
+  /* (non-Javadoc)
+   * @see ca.eandb.util.progress.ProgressMonitor#notifyCancelled()
+   */
+  public void notifyCancelled() {
+    // do nothing
+  }
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.progress.ProgressMonitor#notifyComplete()
-	 */
-	public void notifyComplete() {
-		// do nothing
-	}
+  /* (non-Javadoc)
+   * @see ca.eandb.util.progress.ProgressMonitor#notifyComplete()
+   */
+  public void notifyComplete() {
+    // do nothing
+  }
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.progress.ProgressMonitor#notifyProgress(int, int)
-	 */
-	public boolean notifyProgress(int value, int maximum) {
-		return true;
-	}
+  /* (non-Javadoc)
+   * @see ca.eandb.util.progress.ProgressMonitor#notifyProgress(int, int)
+   */
+  public boolean notifyProgress(int value, int maximum) {
+    return true;
+  }
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.progress.ProgressMonitor#notifyProgress(double)
-	 */
-	public boolean notifyProgress(double progress) {
-		return true;
-	}
+  /* (non-Javadoc)
+   * @see ca.eandb.util.progress.ProgressMonitor#notifyProgress(double)
+   */
+  public boolean notifyProgress(double progress) {
+    return true;
+  }
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.progress.ProgressMonitor#notifyIndeterminantProgress()
-	 */
-	public boolean notifyIndeterminantProgress() {
-		return true;
-	}
+  /* (non-Javadoc)
+   * @see ca.eandb.util.progress.ProgressMonitor#notifyIndeterminantProgress()
+   */
+  public boolean notifyIndeterminantProgress() {
+    return true;
+  }
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.progress.ProgressMonitor#notifyStatusChanged(java.lang.String)
-	 */
-	public void notifyStatusChanged(String status) {
-		// do nothing
-	}
+  /* (non-Javadoc)
+   * @see ca.eandb.util.progress.ProgressMonitor#notifyStatusChanged(java.lang.String)
+   */
+  public void notifyStatusChanged(String status) {
+    // do nothing
+  }
 
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.progress.ProgressMonitor#isCancelPending()
-	 */
-	public boolean isCancelPending() {
-		return false;
-	}
-	
-	/* (non-Javadoc)
-	 * @see ca.eandb.util.progress.ProgressMonitor#addCancelListener(ca.eandb.util.progress.CancelListener)
-	 */
-	public void addCancelListener(CancelListener listener) {
-		/* nothing to do. */
-	}
+  /* (non-Javadoc)
+   * @see ca.eandb.util.progress.ProgressMonitor#isCancelPending()
+   */
+  public boolean isCancelPending() {
+    return false;
+  }
+  
+  /* (non-Javadoc)
+   * @see ca.eandb.util.progress.ProgressMonitor#addCancelListener(ca.eandb.util.progress.CancelListener)
+   */
+  public void addCancelListener(CancelListener listener) {
+    /* nothing to do. */
+  }
 
-	/**
-	 * Creates a new <code>DummyProgressMonitor</code>.  This constructor is
-	 * private because this class is a singleton.
-	 */
-	private DummyProgressMonitor() {
-		// nothing to do.
-	}
+  /**
+   * Creates a new <code>DummyProgressMonitor</code>.  This constructor is
+   * private because this class is a singleton.
+   */
+  private DummyProgressMonitor() {
+    // nothing to do.
+  }
 
-	/**
-	 * Gets the single instance of <code>DummyProgressMonitor</code>.
-	 * @return The single instance of <code>DummyProgressMonitor</code>.
-	 */
-	public static DummyProgressMonitor getInstance() {
+  /**
+   * Gets the single instance of <code>DummyProgressMonitor</code>.
+   * @return The single instance of <code>DummyProgressMonitor</code>.
+   */
+  public static DummyProgressMonitor getInstance() {
 
-		if (instance == null) {
-			instance = new DummyProgressMonitor();
-		}
+    if (instance == null) {
+      instance = new DummyProgressMonitor();
+    }
 
-		return instance;
+    return instance;
 
-	}
+  }
 
-	/** The single instance of <code>DummyProgressMonitor</code>. */
-	private static DummyProgressMonitor instance = null;
+  /** The single instance of <code>DummyProgressMonitor</code>. */
+  private static DummyProgressMonitor instance = null;
 
 }
