@@ -46,6 +46,7 @@
           <noJekyll>true</noJekyll>
           <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory>
           <includes><include>**/*</include></includes>
+          <merge>true</merge>
           <repositoryName>mvn-repo</repositoryName>
           <repositoryOwner>bwkimmel</repositoryOwner>
         </configuration>
