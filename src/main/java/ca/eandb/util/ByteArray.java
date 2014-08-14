@@ -217,7 +217,7 @@ public final class ByteArray extends AbstractList<Byte> implements
   public Byte set(int index, Byte element) {
     return set(index, element.byteValue());
   }
-  
+
   /**
    * Sets a range of elements of this array.
    *
@@ -317,7 +317,7 @@ public final class ByteArray extends AbstractList<Byte> implements
   public boolean add(Byte e) {
     return add(e.byteValue());
   }
-  
+
   /**
    * Appends a range of values to the end of this array.
    *

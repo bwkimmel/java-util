@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2008 Bradley W. Kimmel
- * 
+ *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -9,10 +9,10 @@
  * copies of the Software, and to permit persons to whom the
  * Software is furnished to do so, subject to the following
  * conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
  * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,17 +31,17 @@ import java.io.InputStream;
 /**
  * An <code>InputStream</code> decorator that restricts the available data to
  * the specified number of bytes.
- * 
+ *
  * @author Brad Kimmel
  */
 public final class LimitedInputStream extends InputStream {
 
   /** The <code>InputStream</code> to read from. */
   private final InputStream inner;
-  
+
   /** The number of bytes remaining in the stream. */
   private int remaining;
-  
+
   /**
    * Creates a new <code>LimitedInputStream</code>.
    * @param size The number of bytes available to be read.
@@ -51,7 +51,7 @@ public final class LimitedInputStream extends InputStream {
     this.inner = inner;
     this.remaining = size;
   }
-  
+
   /* (non-Javadoc)
    * @see java.io.InputStream#read()
    */
@@ -108,7 +108,7 @@ public final class LimitedInputStream extends InputStream {
   public long skip(long n) throws IOException {
     return n > 0 ? (long) inner.skip(Math.min(n, remaining)) : 0;
   }
-  
+
   /**
    * Gets the number of bytes remaining.
    * @return The number of bytes remaining.
@@ -116,7 +116,7 @@ public final class LimitedInputStream extends InputStream {
   public int remaining() {
     return remaining;
   }
-  
+
   /**
    * Skips over the remainder of the available bytes.
    * @throws IOException

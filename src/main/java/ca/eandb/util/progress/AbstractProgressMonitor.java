@@ -79,7 +79,7 @@ public abstract class AbstractProgressMonitor implements ProgressMonitor {
   public boolean isCancelPending() {
     return false;
   }
-  
+
   /* (non-Javadoc)
    * @see ca.eandb.util.progress.ProgressMonitor#addCancelListener(ca.eandb.util.progress.CancelListener)
    */

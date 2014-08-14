@@ -74,7 +74,7 @@ public class ProgressDialog extends javax.swing.JDialog implements ProgressMonit
     });
 
     /** TODO: Redo using Java 5 supported classes. */
-    
+
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
@@ -98,7 +98,7 @@ public class ProgressDialog extends javax.swing.JDialog implements ProgressMonit
         .addComponent(cancelButton)
         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
-    
+
     pack();
   }// </editor-fold>//GEN-END:initComponents
 
@@ -131,7 +131,7 @@ public class ProgressDialog extends javax.swing.JDialog implements ProgressMonit
   public synchronized boolean isCancelPending() {
     return this.cancelPending;
   }
-  
+
   /* (non-Javadoc)
    * @see ca.eandb.util.progress.ProgressMonitor#addCancelListener(ca.eandb.util.progress.CancelListener)
    */
@@ -262,7 +262,7 @@ public class ProgressDialog extends javax.swing.JDialog implements ProgressMonit
 
   /** The text describing the progress of the operation. */
   private String progressText = "";
-  
+
   /**
    * The <code>CancelListener</code> to notify if operation is to be
    * cancelled.

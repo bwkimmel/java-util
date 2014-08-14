@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2008 Bradley W. Kimmel
- * 
+ *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -9,10 +9,10 @@
  * copies of the Software, and to permit persons to whom the
  * Software is furnished to do so, subject to the following
  * conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
  * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,14 +33,14 @@ import java.util.List;
 /**
  * An <code>OutputStream</code> that duplicates output to multiple child
  * <code>OutputStream</code>s.
- * 
+ *
  * @author Brad Kimmel
  */
 public class CompositeOutputStream extends OutputStream {
 
   /** The <code>List</code> of child <code>OutputStream</code>s. */
   private final List<OutputStream> children = new ArrayList<OutputStream>();
-  
+
   /**
    * Adds a child <code>OutputStream</code>.
    * @param child The <code>OutputStream</code> to add.
@@ -50,7 +50,7 @@ public class CompositeOutputStream extends OutputStream {
     children.add(child);
     return this;
   }
-  
+
   /* (non-Javadoc)
    * @see java.io.OutputStream#close()
    */

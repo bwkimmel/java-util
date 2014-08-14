@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2008 Bradley W. Kimmel
- * 
+ *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -9,10 +9,10 @@
  * copies of the Software, and to permit persons to whom the
  * Software is furnished to do so, subject to the following
  * conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
  * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -75,11 +75,11 @@ public final class PasswordEncryptionService {
         derivedKeyLength);
 
     try {
-      
+
       SecretKeyFactory f = SecretKeyFactory.getInstance(algorithm);
-  
+
       return f.generateSecret(spec).getEncoded();
-      
+
     } catch (InvalidKeySpecException e) {
       throw new UnexpectedException(e);
     } catch (NoSuchAlgorithmException e) {
@@ -91,15 +91,15 @@ public final class PasswordEncryptionService {
     try {
       // VERY important to use SecureRandom instead of just Random
       SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
-  
+
       // Generate a 8 byte (64 bit) salt as recommended by RSA PKCS5
       byte[] salt = new byte[8];
       random.nextBytes(salt);
-  
+
       return salt;
     } catch (NoSuchAlgorithmException e) {
       throw new UnexpectedException(e);
     }
   }
-  
+
 }

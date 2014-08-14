@@ -70,7 +70,7 @@ public final class SynchronizedProgressMonitor implements ProgressMonitor {
       return monitor.isCancelPending();
     }
   }
-  
+
   /* (non-Javadoc)
    * @see ca.eandb.util.progress.ProgressMonitor#addCancelListener(ca.eandb.util.progress.CancelListener)
    */

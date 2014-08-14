@@ -79,7 +79,7 @@ public interface ProgressMonitor {
    * @return A value indicating if cancellation of the operation is pending.
    */
   boolean isCancelPending();
-  
+
   /**
    * Register a <code>CancelListener</code> to be notified if the
    * <code>ProgressMonitor</code> is requesting that the operation be

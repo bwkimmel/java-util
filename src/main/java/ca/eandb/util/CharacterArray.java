@@ -237,7 +237,7 @@ public final class CharacterArray extends AbstractList<Character> implements
       elements[i] = items[j];
     }
   }
-  
+
   /**
    * Sets a range of elements of this array.
    *
@@ -334,7 +334,7 @@ public final class CharacterArray extends AbstractList<Character> implements
     }
     return items.length > 0;
   }
-  
+
   /**
    * Appends a range of values to the end of this array.
    *

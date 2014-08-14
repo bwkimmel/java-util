@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2008 Bradley W. Kimmel
- * 
+ *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -9,10 +9,10 @@
  * copies of the Software, and to permit persons to whom the
  * Software is furnished to do so, subject to the following
  * conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
  * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,11 +39,11 @@ import ca.eandb.util.io.StreamUtil;
  * @author Brad Kimmel
  */
 public final class ClassUtil {
-  
+
   /**
    * Gets the class name associated with a given resource name.  If the
    * full path to the resource is given, the fully qualified name is
-   * returned. 
+   * returned.
    * @param resourceName The name of the resource.
    * @return The name of the associated class.
    */
@@ -54,7 +54,7 @@ public final class ClassUtil {
     int len = resourceName.length();
     return resourceName.substring(0, len - 6).replace('/', '.');
   }
-  
+
   /**
    * Gets the resource name associated with a given class name.  If the fully
    * qualified class name is given, the full path to the resource is
@@ -106,7 +106,7 @@ public final class ClassUtil {
       throw new UnexpectedException(e);
     }
   }
-  
+
   /**
    * Gets the outer class (a class with no enclosing class) that contains the
    * given class.

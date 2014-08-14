@@ -159,7 +159,7 @@ public final class CompositeProgressMonitor implements ProgressMonitor {
    * that make up this <code>CompositeProgressMonitor</code>.
    */
   private final Collection<ProgressMonitor> monitors = new HashSet<ProgressMonitor>();
-  
+
   /**
    * The <code>CancelListener</code> to notify if any of the child
    * <code>ProgressMonitor</code>s wish to request that the operation be

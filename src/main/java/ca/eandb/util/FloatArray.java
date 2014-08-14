@@ -235,7 +235,7 @@ public final class FloatArray extends AbstractList<Float> implements
       elements[i] = items[j];
     }
   }
-  
+
   /**
    * Sets a range of elements of this array.
    *
@@ -332,7 +332,7 @@ public final class FloatArray extends AbstractList<Float> implements
     }
     return items.length > 0;
   }
-  
+
   /**
    * Appends a range of values to the end of this array.
    *

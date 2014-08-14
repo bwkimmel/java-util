@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2008 Bradley W. Kimmel
- * 
+ *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -9,10 +9,10 @@
  * copies of the Software, and to permit persons to whom the
  * Software is furnished to do so, subject to the following
  * conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
  * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -45,7 +45,7 @@ import ca.eandb.util.classloader.ClassLoaderStrategy;
 public final class RMIClassLoaderStrategy implements ClassLoaderStrategy {
 
   private final ClassLoaderService service;
-  
+
   public RMIClassLoaderStrategy() throws RemoteException, NotBoundException {
     this(getClassLoaderService());
   }
@@ -57,7 +57,7 @@ public final class RMIClassLoaderStrategy implements ClassLoaderStrategy {
   public RMIClassLoaderStrategy(ClassLoaderService service) {
     this.service = service;
   }
-  
+
   public static ClassLoaderService getClassLoaderService() throws RemoteException, NotBoundException {
     try {
       BasicService basic = (BasicService) ServiceManager.lookup("javax.jnlp.BasicService");
@@ -66,7 +66,7 @@ public final class RMIClassLoaderStrategy implements ClassLoaderStrategy {
       throw new IllegalStateException("javax.jnlp.BasicService is required.", e);
     }
   }
-  
+
   public static ClassLoaderService getClassLoaderService(URL baseUrl) throws RemoteException, NotBoundException {
     Registry registry = LocateRegistry.getRegistry(baseUrl.getHost());
     return (ClassLoaderService) registry.lookup("ClassLoaderService");
