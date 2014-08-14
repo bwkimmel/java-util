@@ -19,6 +19,11 @@
       <email>intrepidca@gmail.com</email>
     </developer>
   </developers>
+  <scm>
+    <connection>scm:git:git@github.com:bwkimmel/java-util.git</connection>
+    <developerConnection>scm:git:git@github.com:bwkimmel/java-util.git</developerConnection>
+    <url>https://github.com/bwkimmel/java-util</url>
+  </scm>
 
   <distributionManagement>
     <repository>
