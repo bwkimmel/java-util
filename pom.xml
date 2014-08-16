@@ -6,6 +6,7 @@
   <groupId>ca.eandb.util</groupId>
   <artifactId>eandb-util</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <name>${project.groupId}:${project.artifactId}</name>
   <description>General purpose utility classes for Java.</description>
   <licenses>
     <license>
