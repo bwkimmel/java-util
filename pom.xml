@@ -8,6 +8,7 @@
   <version>0.2.1</version>
   <name>${project.groupId}:${project.artifactId}</name>
   <description>General purpose utility classes for Java.</description>
+  <url>http://util.eandb.ca</url>
   <licenses>
     <license>
       <name>MIT License</name>
