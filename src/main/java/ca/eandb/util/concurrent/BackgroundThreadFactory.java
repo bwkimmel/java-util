@@ -48,7 +48,7 @@ public final class BackgroundThreadFactory implements ThreadFactory {
    * @throws IllegalArgumentException if <code>inner</code> is null.
    */
   public BackgroundThreadFactory(ThreadFactory inner) throws IllegalArgumentException {
-    if (this.inner == null) {
+    if (inner == null) {
       throw new IllegalArgumentException("inner must not be null.");
     }
     this.inner = inner;
