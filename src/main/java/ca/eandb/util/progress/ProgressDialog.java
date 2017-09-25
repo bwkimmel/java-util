@@ -43,7 +43,13 @@ public class ProgressDialog extends javax.swing.JDialog implements ProgressMonit
     initComponents();
   }
 
-  /** Creates new form ProgressDialog */
+  /**
+   * Creates new form ProgressDialog.
+   *
+   * @param parent the {@code Frame} from which this dialog is displayed
+   * @param modal specifies whether this dialog blocks input to the top-level
+   *     frame
+   */
   public ProgressDialog(java.awt.Frame parent, boolean modal) {
     super(parent, modal);
     initComponents();

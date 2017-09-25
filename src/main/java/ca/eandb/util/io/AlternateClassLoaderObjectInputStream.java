@@ -44,7 +44,8 @@ public final class AlternateClassLoaderObjectInputStream extends
   /**
    * Creates a new <code>AlternateClassLoaderObjectInputStream</code>.
    * @param in The <code>InputStream</code> to read from.
-   * @throws IOException The <code>ClassLoader</code> to use.
+   * @param loader The <code>ClassLoader</code> to use.
+   * @throws IOException if the stream cannot be read from
    */
   public AlternateClassLoaderObjectInputStream(InputStream in, ClassLoader loader)
       throws IOException {

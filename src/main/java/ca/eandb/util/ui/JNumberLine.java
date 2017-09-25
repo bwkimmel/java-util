@@ -103,9 +103,6 @@ public class JNumberLine extends JComponent {
     this(-10, 10, 0);
   }
 
-  /**
-   *
-   */
   public JNumberLine(double minimumVisible, double maximumVisible, double value) {
     if (!(minimumVisible <= value && value <= maximumVisible)) {
       throw new IllegalArgumentException("value not in range");

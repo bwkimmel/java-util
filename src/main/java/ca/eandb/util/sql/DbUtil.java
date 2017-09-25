@@ -273,7 +273,6 @@ public final class DbUtil {
   /**
    * Runs a SQL query that inserts, updates, or deletes rows.
    * @param ds The <code>DataSource</code> against which to run the query.
-   * @param def The default value to return if the query returns no results.
    * @param query The SQL query to run.
    * @param param The parameters to the SQL query.
    * @return The number of rows affected by the query.
@@ -293,7 +292,6 @@ public final class DbUtil {
   /**
    * Runs a SQL query that inserts, updates, or deletes rows.
    * @param con The <code>Connection</code> against which to run the query.
-   * @param def The default value to return if the query returns no results.
    * @param query The SQL query to run.
    * @param param The parameters to the SQL query.
    * @return The number of rows affected by the query.
@@ -346,7 +344,7 @@ public final class DbUtil {
 
   /**
    * Closes a result set.  Any <code>SQLException</code>s thrown are ignored.
-   * @param con The <code>ResultSet</code> to close.  If this value is
+   * @param rs The <code>ResultSet</code> to close.  If this value is
    *     <code>null</code>, no action is performed.
    */
   public static void close(ResultSet rs) {
@@ -361,7 +359,7 @@ public final class DbUtil {
 
   /**
    * Closes a statement.  Any <code>SQLException</code>s thrown are ignored.
-   * @param con The <code>Statement</code> to close.  If this value is
+   * @param stmt The <code>Statement</code> to close.  If this value is
    *     <code>null</code>, no action is performed.
    */
   public static void close(Statement stmt) {
@@ -451,7 +449,7 @@ public final class DbUtil {
    * @param length The length to assign to data types for those types
    *     that require a length (e.g., <code>VARCHAR(n)</code>), or zero
    *     to indicate that no length is required.
-   * @param ds The <code>DataSource</code> for which to get the type name.
+   * @param con The <code>Connection</code> for which to get the type name.
    * @return The name of the type, or <code>null</code> if no such type
    *     exists.
    * @throws SQLException If an error occurs while communicating with the
@@ -510,8 +508,8 @@ public final class DbUtil {
    * @param length The length to assign to data types for those types
    *     that require a length (e.g., <code>VARCHAR(n)</code>), or zero
    *     to indicate that no length is required.
-   * @param rs The <code>ResultSet</code> containing the type information for
-   *     the database.  This must be obtained using
+   * @param typeInfo The <code>ResultSet</code> containing the type information
+   *     for the database.  This must be obtained using
    *     {@link java.sql.DatabaseMetaData#getTypeInfo()}.
    * @return The name of the type, or <code>null</code> if no such type
    *     exists.
