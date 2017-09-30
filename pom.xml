@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>ca.eandb.util</groupId>
   <artifactId>eandb-util</artifactId>
-  <version>0.2.2</version>
+  <version>0.2.3</version>
   <name>${project.groupId}:${project.artifactId}</name>
   <description>General purpose utility classes for Java.</description>
   <url>http://util.eandb.ca</url>
