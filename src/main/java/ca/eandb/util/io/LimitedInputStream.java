@@ -119,7 +119,8 @@ public final class LimitedInputStream extends InputStream {
 
   /**
    * Skips over the remainder of the available bytes.
-   * @throws IOException
+   * @throws IOException if an I/O error occurs while seeking within the inner
+   *     stream
    */
   public void moveToEnd() throws IOException {
     int bytes;

@@ -45,7 +45,7 @@ public interface Archive {
    * @return The value read from the data source if this
    *     <code>Archive</code> is for input, or <code>value</code> if this
    *     <code>Archive</code> is for output.
-   * @throws IOException
+   * @throws IOException if {@code value} could not be read or written
    */
   int archiveInt(int value) throws IOException;
 
@@ -61,7 +61,7 @@ public interface Archive {
    * @return The value read from the data source if this
    *     <code>Archive</code> is for input, or <code>value</code> if this
    *     <code>Archive</code> is for output.
-   * @throws IOException
+   * @throws IOException if {@code value} could not be read or written
    */
   boolean archiveBoolean(boolean value) throws IOException;
 
@@ -77,7 +77,10 @@ public interface Archive {
    * @return The value read from the data source if this
    *     <code>Archive</code> is for input, or <code>value</code> if this
    *     <code>Archive</code> is for output.
-   * @throws IOException
+   * @throws IOException if {@code value} could not be read or written
+   * @throws ClassNotFoundException if a class definition could not be found
+   *     while deserializing an object from this {@link Archive} (only applies
+   *     if this archive is in input mode).
    */
   Object archiveObject(Object value) throws IOException, ClassNotFoundException;
 
@@ -93,7 +96,7 @@ public interface Archive {
    * @return The value read from the data source if this
    *     <code>Archive</code> is for input, or <code>value</code> if this
    *     <code>Archive</code> is for output.
-   * @throws IOException
+   * @throws IOException if {@code value} could not be read or written
    */
   byte archiveByte(byte value) throws IOException;
 
@@ -109,7 +112,7 @@ public interface Archive {
    * @return The value read from the data source if this
    *     <code>Archive</code> is for input, or <code>value</code> if this
    *     <code>Archive</code> is for output.
-   * @throws IOException
+   * @throws IOException if {@code value} could not be read or written
    */
   char archiveChar(char value) throws IOException;
 
@@ -125,7 +128,7 @@ public interface Archive {
    * @return The value read from the data source if this
    *     <code>Archive</code> is for input, or <code>value</code> if this
    *     <code>Archive</code> is for output.
-   * @throws IOException
+   * @throws IOException if {@code value} could not be read or written
    */
   double archiveDouble(double value) throws IOException;
 
@@ -141,7 +144,7 @@ public interface Archive {
    * @return The value read from the data source if this
    *     <code>Archive</code> is for input, or <code>value</code> if this
    *     <code>Archive</code> is for output.
-   * @throws IOException
+   * @throws IOException if {@code value} could not be read or written
    */
   float archiveFloat(float value) throws IOException;
 
@@ -157,7 +160,7 @@ public interface Archive {
    * @return The value read from the data source if this
    *     <code>Archive</code> is for input, or <code>value</code> if this
    *     <code>Archive</code> is for output.
-   * @throws IOException
+   * @throws IOException if {@code value} could not be read or written
    */
   long archiveLong(long value) throws IOException;
 
@@ -173,7 +176,7 @@ public interface Archive {
    * @return The value read from the data source if this
    *     <code>Archive</code> is for input, or <code>value</code> if this
    *     <code>Archive</code> is for output.
-   * @throws IOException
+   * @throws IOException if {@code value} could not be read or written
    */
   short archiveShort(short value) throws IOException;
 
@@ -189,7 +192,7 @@ public interface Archive {
    * @return The value read from the data source if this
    *     <code>Archive</code> is for input, or <code>value</code> if this
    *     <code>Archive</code> is for output.
-   * @throws IOException
+   * @throws IOException if {@code value} could not be read or written
    */
   String archiveUTF(String value) throws IOException;
 

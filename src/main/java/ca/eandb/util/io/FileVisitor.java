@@ -40,6 +40,7 @@ public interface FileVisitor {
    * Visits a <code>File</code> while walking a directory tree.
    * @param file The <code>File</code> being visited.
    * @return A value indicating whether the tree walk should continue.
+   * @throws Exception if an error occurs while visiting the file
    * @see FileUtil#postOrderTraversal(File, FileVisitor)
    * @see FileUtil#preOrderTraversal(File, FileVisitor)
    */

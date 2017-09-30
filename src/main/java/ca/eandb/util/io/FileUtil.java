@@ -188,7 +188,8 @@ public final class FileUtil {
    *     <code>file</code> is an ancestor.
    * @return <code>true</code> if <code>ancestor</code> is equal to or an
    *     ancestor of <code>file</code>, <code>false</code> otherwise.
-   * @throws IOException
+   * @throws IOException if an error occurs in attempting to canonicalize
+   *     {@code file} or {@code ancestor}.
    */
   public static boolean isAncestor(File file, File ancestor) throws IOException {
     file = file.getCanonicalFile();
@@ -334,17 +335,17 @@ public final class FileUtil {
   }
 
   /**
-     * Returns the appropriate working directory for storing application data. The result of this method is platform
-     * dependant: On linux, it will return ~/applicationName, on windows, the working directory will be located in the
-     * user's application data folder. For Mac OS systems, the working directory will be placed in the proper location
-     * in "Library/Application Support".
-     * <p/>
-     * This method will also make sure that the working directory exists. When invoked, the directory and all required
-     * subfolders will be created.
-     *
-     * @param applicationName Name of the application, used to determine the working directory.
-     * @return the appropriate working directory for storing application data.
-     */
+   * Returns the appropriate working directory for storing application data. The result of this method is platform
+   * dependant: On linux, it will return ~/applicationName, on windows, the working directory will be located in the
+   * user's application data folder. For Mac OS systems, the working directory will be placed in the proper location
+   * in "Library/Application Support".
+   * <p>
+   * This method will also make sure that the working directory exists. When invoked, the directory and all required
+   * subfolders will be created.
+   *
+   * @param applicationName Name of the application, used to determine the working directory.
+   * @return the appropriate working directory for storing application data.
+   */
   public static File getApplicationDataDirectory(final String applicationName) {
         final String userHome = System.getProperty("user.home", ".");
         final File workingDirectory;

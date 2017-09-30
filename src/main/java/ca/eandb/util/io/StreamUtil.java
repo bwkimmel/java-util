@@ -42,7 +42,7 @@ public final class StreamUtil {
   /**
    * Reads a null-terminated string of bytes from the specified input stream.
    * @param in The <code>InputStream</code> to read from.
-   * @return The <code>String</string> read from the file.
+   * @return The <code>String</code> read from the file.
    * @throws IOException If an I/O error occurs
    * @throws EOFException If the end of the file is reached before a null
    *     byte is read.
@@ -54,7 +54,7 @@ public final class StreamUtil {
   /**
    * Reads a null-terminated string of bytes from the specified input.
    * @param in The <code>DataInput</code> to read from.
-   * @return The <code>String</string> read from the file.
+   * @return The <code>String</code> read from the file.
    * @throws IOException If an I/O error occurs
    * @throws EOFException If the end of the file is reached before a null
    *     byte is read.
